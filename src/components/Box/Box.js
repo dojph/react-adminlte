@@ -5,6 +5,7 @@ import Body from './Body';
 import Footer from './Footer';
 import PropTypes from 'prop-types';
 
+/** AdminLTE Box component. */
 class Box extends React.Component {
     constructor() {
         super();
@@ -26,7 +27,7 @@ class Box extends React.Component {
 
         const {children} = this.props;
 
-        if (children.constructor === Array) {
+        if (children && children.constructor === Array) {
             //find header
             header = children.find(item => item.type === Header);
 
@@ -60,7 +61,10 @@ class Box extends React.Component {
 }
 
 Box.propTypes = {
+    /** Box theme. See AdminLTE guide for a list of themes. */
     theme: PropTypes.string,
+
+    /** Set to true if box should be collapsible. */
     collapsible: PropTypes.bool
 };
 
