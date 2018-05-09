@@ -11,8 +11,13 @@ const treeViewMenuStyle = {
 class SidebarTree extends React.Component {
     constructor(props) {
         super(props);
+
+        // Check if there is an active child
+        const children = React.Children.toArray(props.children);
+        const activeChild = children.find(child => child.props.active);
+
         this.state = {
-            treeOpen: false
+            treeOpen: Boolean(activeChild)
         };
     }
 

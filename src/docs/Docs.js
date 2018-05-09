@@ -1,5 +1,5 @@
 import React from 'react';
-import Navigation from './Navigation';
+// eslint-disable-next-line
 import ComponentPage from './ComponentPage';
 import componentData from '../../config/componentData';
 
@@ -48,9 +48,9 @@ export default class Docs extends React.Component {
                         }
                     </SidebarTree>
                 </Layout.Sidebar>
-                <Layout.Content>
-                    Content
-                </Layout.Content>
+                <Layout.Body>
+                    <ComponentPage component={component}/>
+                </Layout.Body>
                 <Layout.Footer>
                     <strong>Copyright &copy; 2018 <a href="">Department of Justice</a>.</strong> All rights reserved.
                 </Layout.Footer>

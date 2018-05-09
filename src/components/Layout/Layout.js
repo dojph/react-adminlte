@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Sidebar = ({children}) => children || null;
 const Header = ({children}) => children || null;
-const Content = ({children}) => children || null;
+const Body = ({children}) => children || null;
 const Footer = ({children}) => children || null;
 
 class Layout extends React.Component {
@@ -11,7 +11,6 @@ class Layout extends React.Component {
         super(props);
         this.state = {
             sidebarCollapsed: false,
-            sidebarHeight: 0,
             innerHeight: 0
         };
     }
@@ -39,8 +38,8 @@ class Layout extends React.Component {
     }
 
     render() {
-        const {sidebarHeight, innerHeight} = this.state;
-        const contentHeight = (sidebarHeight - 50 > innerHeight - 101) ? sidebarHeight - 50 : innerHeight - 101;
+        const {innerHeight} = this.state;
+        const contentHeight = innerHeight - 101;
         const contentStyle = {
             minHeight: contentHeight,
             overflow: 'auto'
@@ -50,37 +49,39 @@ class Layout extends React.Component {
 
         const sidebar = children.find(item => item.type === Sidebar);
         const head = children.find(item => item.type === Header);
-        const content = children.find(item => item.type === Content);
+        const content = children.find(item => item.type === Body);
         const foot = children.find(item => item.type === Footer);
 
         return (
-            <div style={{minHeight: '100%'}}
+            <div style={{height: 'auto', minHeight: '100%'}}
                  className={this.props.skin + (this.state.sidebarCollapsed ? " sidebar-mini sidebar-collapse" : "")}>
-                <header className="main-header">
-                    <a href="" className="logo">
-                        <span className="logo-mini"><b>AL</b>T</span>
-                        <span className="logo-lg"><b>Admin</b>LTE</span>
-                    </a>
-                    <nav className="navbar navbar-static-top">
-                        <a href="" className="sidebar-toggle" onClick={this.handleCollapseClick} role="button">
-                            <span className="sr-only">Toggle Navigation</span>
+                <div style={{height: 'auto', minHeight: '100%'}} className="wrapper" >
+                    <header className="main-header">
+                        <a href="" className="logo">
+                            <span className="logo-mini"><b>AL</b>T</span>
+                            <span className="logo-lg"><b>Admin</b>LTE</span>
                         </a>
-                        {head}
-                    </nav>
-                </header>
-                <aside className="main-sidebar">
-                    <section className="sidebar">
-                        <ul className="sidebar-menu tree">
-                            {sidebar}
-                        </ul>
-                    </section>
-                </aside>
-                <div style={contentStyle} className="content-wrapper">
-                    {content}
+                        <nav className="navbar navbar-static-top">
+                            <a href="" className="sidebar-toggle" onClick={this.handleCollapseClick} role="button">
+                                <span className="sr-only">Toggle Navigation</span>
+                            </a>
+                            {head}
+                        </nav>
+                    </header>
+                    <aside className="main-sidebar">
+                        <section className="sidebar" style={{height: "auto"}}>
+                            <ul className="sidebar-menu tree">
+                                {sidebar}
+                            </ul>
+                        </section>
+                    </aside>
+                    <div style={contentStyle} className="content-wrapper">
+                        {content}
+                    </div>
+                    <footer className="main-footer">
+                        {foot}
+                    </footer>
                 </div>
-                <footer className="main-footer">
-                    {foot}
-                </footer>
             </div>
         );
     }
@@ -97,7 +98,7 @@ Layout.defaultProps = {
 
 Layout.Sidebar = Sidebar;
 Layout.Header = Header;
-Layout.Content = Content;
+Layout.Body = Body;
 Layout.Footer = Footer;
 
 export default Layout;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Content = ({children}) => children || null;
+const Body = ({children}) => children || null;
 
 class SidebarItem extends React.Component {
     handleClick = event => {
@@ -36,6 +36,6 @@ SidebarItem.defaultProps = {
     onClick: id => {}
 };
 
-SidebarItem.Content = Content;
+SidebarItem.Body = Body;
 
 export default SidebarItem;
