@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Sidebar from './Sidebar';
 
-const Sidebar = ({children}) => children || null;
+//const Sidebar = ({children}) => children || null;
 const Header = ({children}) => children || null;
 const Body = ({children}) => children || null;
 const Footer = ({children}) => children || null;
@@ -47,7 +48,12 @@ class Layout extends React.Component {
 
         const children = React.Children.toArray(this.props.children);
 
-        const sidebar = children.find(item => item.type === Sidebar);
+        let sidebar = children.find(item => item.type === Sidebar);
+        if(sidebar) {
+            sidebar = React.cloneElement(sidebar,
+                {sidebarCollapsed: this.state.sidebarCollapsed && window.innerWidth > 768})
+        }
+
         const head = children.find(item => item.type === Header);
         const content = children.find(item => item.type === Body);
         const foot = children.find(item => item.type === Footer);

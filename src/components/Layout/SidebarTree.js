@@ -31,7 +31,7 @@ class SidebarTree extends React.Component {
 
         const treeViewMenuStyle = {
             display: this.props.sidebarCollapsed ? 'none' : 'block',
-            backgroundColor: 'rgb(44, 59, 65)'
+            backgroundColor: '#2c3b41'
         };
 
         return (
@@ -39,15 +39,27 @@ class SidebarTree extends React.Component {
                 <a href="" onClick={this.toggleCollapse}>
                     {this.props.iconClass && <i className={this.props.iconClass}/>}
                     <span>{this.props.label}</span>
-                    <span className="pull-right-container">
-                        <i className="fa fa-angle-left pull-right"/>
-                    </span>
+                    {
+                        !this.props.sidebarCollapsed &&
+                        <span className="pull-right-container">
+                            <i className="fa fa-angle-left pull-right"/>
+                        </span>
+                    }
                 </a>
-                <SmoothCollapse expanded={this.state.treeOpen} heightTransition=".40s ease">
-                    <ul className="treeview-menu" style={treeViewMenuStyle}>
+                {
+                    !this.props.sidebarCollapsed &&
+                    <SmoothCollapse expanded={this.state.treeOpen} heightTransition=".40s ease">
+                        <ul className="treeview-menu" style={treeViewMenuStyle}>
+                            {items}
+                        </ul>
+                    </SmoothCollapse>
+                }
+                {
+                    this.props.sidebarCollapsed &&
+                    <ul className="treeview-menu">
                         {items}
                     </ul>
-                </SmoothCollapse>
+                }
             </li>
         );
     }
