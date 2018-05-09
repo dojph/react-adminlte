@@ -3,11 +3,6 @@ import PropTypes from 'prop-types';
 import SmoothCollapse from 'react-smooth-collapse';
 import SidebarItem from "doj-react-adminlte/Layout/SidebarItem";
 
-const treeViewMenuStyle = {
-    display: 'block',
-    backgroundColor: 'rgb(44, 59, 65)'
-};
-
 class SidebarTree extends React.Component {
     constructor(props) {
         super(props);
@@ -21,7 +16,7 @@ class SidebarTree extends React.Component {
         };
     }
 
-    handleClick = event => {
+    toggleCollapse = event => {
         event.preventDefault();
         this.setState({treeOpen: !this.state.treeOpen});
     };
@@ -34,9 +29,14 @@ class SidebarTree extends React.Component {
             (this.state.treeOpen ? " menu-open" : "") +
             (this.props.active || activeChild ? " active" : "");
 
+        const treeViewMenuStyle = {
+            display: this.props.sidebarCollapsed ? 'none' : 'block',
+            backgroundColor: 'rgb(44, 59, 65)'
+        };
+
         return (
             <li className={className}>
-                <a href="" onClick={this.handleClick}>
+                <a href="" onClick={this.toggleCollapse}>
                     {this.props.iconClass && <i className={this.props.iconClass}/>}
                     <span>{this.props.label}</span>
                     <span className="pull-right-container">
@@ -56,11 +56,13 @@ class SidebarTree extends React.Component {
 SidebarTree.propTypes = {
     iconClass: PropTypes.string,
     active: PropTypes.bool,
-    label: PropTypes.string.isRequired
+    label: PropTypes.string.isRequired,
+    sidebarCollapsed: PropTypes.bool
 };
 
 SidebarTree.defaultProps = {
-    active: false
+    active: false,
+    sidebarCollapsed: false
 };
 
 export default SidebarTree;

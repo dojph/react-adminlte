@@ -19,7 +19,7 @@ class Layout extends React.Component {
         this.setState({innerHeight: window.innerHeight});
     };
 
-    handleCollapseClick = event => {
+    toggleCollapse = event => {
         event.preventDefault();
         this.setState({sidebarCollapsed: !this.state.sidebarCollapsed});
     };
@@ -52,17 +52,24 @@ class Layout extends React.Component {
         const content = children.find(item => item.type === Body);
         const foot = children.find(item => item.type === Footer);
 
+        // Check if mobile
+        const collapsedClass = window.innerWidth > 768 ? " sidebar-collapse" : " sidebar-open";
+
+        const appName = this.props.appName || <span><b>Admin</b>LTE</span>;
+        const appNameShort = this.props.appNameShort || <span><b>AL</b>T</span>;
+
         return (
             <div style={{height: 'auto', minHeight: '100%'}}
-                 className={this.props.skin + (this.state.sidebarCollapsed ? " sidebar-mini sidebar-collapse" : "")}>
+                 className={this.props.skin + " sidebar-mini" +
+                 (this.state.sidebarCollapsed ? collapsedClass : "")}>
                 <div style={{height: 'auto', minHeight: '100%'}} className="wrapper" >
                     <header className="main-header">
                         <a href="" className="logo">
-                            <span className="logo-mini"><b>AL</b>T</span>
-                            <span className="logo-lg"><b>Admin</b>LTE</span>
+                            <span className="logo-mini">{appNameShort}</span>
+                            <span className="logo-lg">{appName}</span>
                         </a>
                         <nav className="navbar navbar-static-top">
-                            <a href="" className="sidebar-toggle" onClick={this.handleCollapseClick} role="button">
+                            <a href="" className="sidebar-toggle" onClick={this.toggleCollapse} role="button">
                                 <span className="sr-only">Toggle Navigation</span>
                             </a>
                             {head}
@@ -89,11 +96,17 @@ class Layout extends React.Component {
 
 Layout.propTypes = {
     /** AdminLTE skin to apply */
-    skin: PropTypes.string
+    skin: PropTypes.string,
+
+    /** Application name to display in the header */
+    appName: PropTypes.node,
+
+    /** Text to display when sidebar is collapsed */
+    appNameShort: PropTypes.node
 };
 
 Layout.defaultProps = {
-    skin: "skin-blue"
+    skin: "skin-blue",
 };
 
 Layout.Sidebar = Sidebar;
