@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Sidebar from './Sidebar';
+import NavMenu from './NavMenu';
 
 //const Sidebar = ({children}) => children || null;
 const Header = ({children}) => children || null;
@@ -55,6 +56,7 @@ class Layout extends React.Component {
         }
 
         const head = children.find(item => item.type === Header);
+        const navMenu = children.find(item => item.type === NavMenu);
         const content = children.find(item => item.type === Body);
         const foot = children.find(item => item.type === Footer);
 
@@ -79,6 +81,7 @@ class Layout extends React.Component {
                                 <span className="sr-only">Toggle Navigation</span>
                             </a>
                             {head}
+                            {navMenu}
                         </nav>
                     </header>
                     <aside className="main-sidebar">
@@ -117,6 +120,7 @@ Layout.defaultProps = {
 
 Layout.Sidebar = Sidebar;
 Layout.Header = Header;
+Layout.NavMenu = NavMenu;
 Layout.Body = Body;
 Layout.Footer = Footer;
 
