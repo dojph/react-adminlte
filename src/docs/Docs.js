@@ -1,13 +1,12 @@
 import React from 'react';
 // eslint-disable-next-line
 import ComponentPage from './ComponentPage';
-import componentData from '../../config/componentData';
+import componentData from '../../componentData';
 
 import Layout from 'doj-react-adminlte/Layout';
 import SidebarTree from "doj-react-adminlte/Layout/SidebarTree";
 import SidebarItem from "doj-react-adminlte/Layout/SidebarItem";
 import SidebarHeader from "doj-react-adminlte/Layout/SidebarHeader";
-import UserMenu from "doj-react-adminlte/Layout/UserMenu";
 
 export default class Docs extends React.Component {
     constructor(props) {
