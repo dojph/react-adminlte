@@ -1,7 +1,7 @@
 import React from 'react';
 import TabContainer from "doj-react-adminlte/TabContainer";
-import Tab from "../../../components/TabContainer/Tab";
-import TabUtilityButton from "../../../components/TabContainer/TabUtilityButton";
+import Tab from "doj-react-adminlte/TabContainer/Tab";
+import TabUtilityButton from "doj-react-adminlte/TabContainer/TabUtilityButton";
 
 export default class ExampleTabContainer extends React.Component {
     render() {
