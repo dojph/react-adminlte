@@ -9,14 +9,9 @@ class Modal extends React.Component {
     constructor(props) {
         super(props);
 
-        this.contentRef = null;
         this.state = {
             visible: props.show
         };
-    }
-
-    componentDidMount() {
-        document.addEventListener('mousedown', this.handleClickBackdrop);
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -32,15 +27,15 @@ class Modal extends React.Component {
         return null;
     }
 
-    handleClickBackdrop = event => {
+    handleClickBackdrop = () => {
         const {closeOnBackdropClick, onCloseClick} = this.props;
-        if(closeOnBackdropClick && this.state.visible && this.contentRef && !this.contentRef.contains(event.target)) {
+        if(closeOnBackdropClick && this.state.visible) {
             onCloseClick();
         }
     };
 
-    setContentRef = element => {
-        this.contentRef = element;
+    handleInnerClick = event => {
+        event.stopPropagation();
     };
 
     render() {
@@ -56,9 +51,9 @@ class Modal extends React.Component {
 
         return (
             this.state.visible &&
-            <div className={"modal" + (this.props.theme || '')}>
-                <div className="modal-dialog">
-                    <div className="modal-content" ref={this.setContentRef}>
+            <div className={"modal" + (this.props.theme || '')} onClick={this.handleClickBackdrop}>
+                <div className="modal-dialog" onClick={this.handleInnerClick}>
+                    <div className="modal-content">
                         {header}
                         {body}
                         {footer}
