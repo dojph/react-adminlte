@@ -12,7 +12,7 @@ class SidebarItem extends React.Component {
     render() {
         return (
             <li className={this.props.active ? "active" : undefined}>
-                <a href="" onClick={this.handleClick}>
+                <a href={this.props.path || ""} onClick={this.handleClick}>
                     {this.props.iconClass && <i className={this.props.iconClass} />}
                     <span>{this.props.label}</span>
                 </a>
@@ -23,6 +23,7 @@ class SidebarItem extends React.Component {
 
 SidebarItem.propTypes = {
     active: PropTypes.bool,
+    path: PropTypes.string,
     id: PropTypes.string,
     iconClass: PropTypes.string,
     label: PropTypes.string.isRequired,
