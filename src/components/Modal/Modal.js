@@ -1,45 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {CSSTransition} from 'react-transition-group';
 
 import ModalHeader from './ModalHeader';
 import ModalBody from './ModalBody';
 import ModalFooter from './ModalFooter';
 
+import './styles.css';
+
 class Modal extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            visible: props.show
-        };
-    }
-
-    static getDerivedStateFromProps(props, state) {
-        if(props.show && !state.visible) {
-            return {visible: true};
-        }
-
-        // TODO: this is temporary behavior
-        if(!props.show && state.visible) {
-            return {visible: false};
-        }
-
-        return null;
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        document.body.classList.toggle('modal-open', this.props.show && !prevState.visible);
-    }
-
     handleClickBackdrop = () => {
         const {closeOnBackdropClick, onCloseClick} = this.props;
-        if(closeOnBackdropClick && this.state.visible) {
+        if(closeOnBackdropClick) {
             onCloseClick();
         }
     };
 
     handleInnerClick = event => {
         event.stopPropagation();
+    };
+
+    handleEnter = () => {
+        document.body.classList.add('modal-open');
+    };
+
+    handleExited = () => {
+        document.body.classList.remove('modal-open');
     };
 
     render() {
@@ -54,16 +40,35 @@ class Modal extends React.Component {
         const footer = children.find(child => child.type === ModalFooter);
 
         return (
-            this.state.visible &&
-            <div className={"modal" + (this.props.theme || '')} onClick={this.handleClickBackdrop}>
-                <div className="modal-dialog" onClick={this.handleInnerClick}>
-                    <div className="modal-content">
-                        {header}
-                        {body}
-                        {footer}
-                    </div>
-                </div>
-            </div>
+            <CSSTransition
+                in={this.props.show}
+                timeout={150}
+                classNames="modal"
+                onEnter={this.handleEnter}
+                onExited={this.handleExited}
+                unmountOnExit
+            >
+                {
+                    state => (
+                        <div className={"modal " + (this.props.className || '')} onClick={this.handleClickBackdrop}>
+                            <CSSTransition
+                                in={(state === 'entering' || state === 'entered')}
+                                timeout={300}
+                                classNames={'modal-dialog'}
+                                unmountOnExit
+                            >
+                                <div className="modal-dialog" onClick={this.handleInnerClick}>
+                                    <div className="modal-content">
+                                        {header}
+                                        {body}
+                                        {footer}
+                                    </div>
+                                </div>
+                            </CSSTransition>
+                        </div>
+                    )
+                }
+            </CSSTransition>
         );
     }
 }
@@ -78,7 +83,7 @@ Modal.propTypes = {
     closeOnBackdropClick: PropTypes.bool,
     onCloseClick: PropTypes.func,
     show: PropTypes.bool,
-    theme: PropTypes.oneOf(['modal-info'])
+    className: PropTypes.string
 };
 
 Modal.Header = ModalHeader;
