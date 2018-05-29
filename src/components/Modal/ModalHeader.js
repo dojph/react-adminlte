@@ -22,7 +22,7 @@ class ModalHeader extends React.Component {
             <div className="modal-header">
                 {
                     this.props.closeButton &&
-                    <button type="button" style={closeStyle} aria-label="Close">
+                    <button type="button" style={closeStyle} onClick={this.props.onCloseClick} aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 }
@@ -33,11 +33,13 @@ class ModalHeader extends React.Component {
 }
 
 ModalHeader.defaultProps = {
-    closeButton: true
+    closeButton: true,
+    onCloseClick: () => {}
 };
 
 ModalHeader.propTypes = {
-    closeButton: PropTypes.bool
+    closeButton: PropTypes.bool,
+    onCloseClick: PropTypes.func,
 };
 
 export default ModalHeader;
