@@ -27,6 +27,10 @@ class Modal extends React.Component {
         return null;
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        document.body.classList.toggle('modal-open', this.props.show && !prevState.visible);
+    }
+
     handleClickBackdrop = () => {
         const {closeOnBackdropClick, onCloseClick} = this.props;
         if(closeOnBackdropClick && this.state.visible) {
