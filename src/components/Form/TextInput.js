@@ -1,18 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import helpBlockStyle from './helpBlockStyle';
 
 class TextInput extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            name: props.name
-        };
+        this.name = props.name;
     }
 
     handleChange = event => {
-        if(this.props.onChange) {
-            this.props.onChange(this.state.name, event.target.value);
-        }
+        this.props.onChange(this.name, event.target.value);
     };
 
     handleKeyUp = event => {
@@ -36,11 +33,11 @@ class TextInput extends React.Component {
         const value = this.props.value || "";
 
         // Check for form errors
-        const errors = this.props.errors[this.state.name] || [];
+        const errors = this.props.errors[this.name] || [];
         let errorList = null;
         if(errors.length > 0) {
             errorList =
-                <ul className='help-block'>
+                <ul className='help-block' style={helpBlockStyle}>
                     {errors.map((e, index) => <li key={index}><span>{e}</span></li>)}
                 </ul>;
         }
@@ -70,6 +67,7 @@ TextInput.defaultProps = {
     gridClass: "",
     feedbackIconLeft: false,
     maxLength: 50,
+    onChange: () => {},
     type: "text"
 };
 

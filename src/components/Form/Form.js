@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import TextInput from "./TextInput";
+import TextArea from "./TextArea";
 
 class Form extends React.Component {
     handleChange = (field, value) => {
@@ -16,7 +17,7 @@ class Form extends React.Component {
             child => {
                 let childProps = {};
                 if(React.isValidElement(child) && React.Component.prototype.isPrototypeOf(child.type.prototype) &&
-                    [TextInput].includes(child.type)) {
+                    [TextInput, TextArea].includes(child.type)) {
                     childProps = {...this.props, onChange: this.handleChange};
                 }
                 if(child && child.props) {
