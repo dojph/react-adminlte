@@ -66,7 +66,9 @@ TextArea.defaultProps = {
 };
 
 TextArea.propTypes = {
-    errors: PropTypes.object,
+    errors: PropTypes.objectOf(
+        PropTypes.arrayOf(PropTypes.string)
+    ),
     gridClass: PropTypes.string,
     label: PropTypes.string,
     maxLength: PropTypes.number,
