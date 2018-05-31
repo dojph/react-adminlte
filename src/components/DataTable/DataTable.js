@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import DataTableRow from "./DataTableRow";
+import styles from './styles.css';
 
 class DataTable extends React.Component {
     renderCell = (object, renderValue, index) => {
