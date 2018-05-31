@@ -4,21 +4,22 @@ import TextInput from "doj-react-adminlte/Form/TextInput";
 import TextArea from "doj-react-adminlte/Form/TextArea";
 import CalendarInput from "doj-react-adminlte/Form/CalendarInput";
 import SelectInput from "doj-react-adminlte/Form/SelectInput";
+import RadioGroup from "doj-react-adminlte/Form/RadioGroup";
 
 export default class extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: "",
-            password: "",
-            comments: "",
             birthdate: null,
             city: null,
+            coffee: null,
+            comments: "",
+            name: "",
+            password: "",
         };
     }
 
     handleChange = (name, value) => {
-        console.log(name, value);
         this.setState({[name]: value});
     };
 
@@ -30,6 +31,12 @@ export default class extends React.Component {
         const cityOptions = [
             { label: "Manila", value: "Manila" },
             { label: "Cebu", value: "Cebu" }
+        ];
+
+        const coffeeOptions = [
+            { label: "Kopiko", value: "Kopiko" },
+            { label: "Nescafe", value: "Nescafe" },
+            { label: "Others", value: "Others" }
         ];
 
         return (
@@ -55,6 +62,12 @@ export default class extends React.Component {
                 <div className="row">
                     <div className="col-xs-12">
                         <TextArea name="comments" value={this.state.comments} label="Comments" showCounter/>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-xs-12">
+                        <RadioGroup label="Coffee" name="coffee" value={this.state.coffee}
+                                    options={coffeeOptions} firstDefault/>
                     </div>
                 </div>
             </Form>
