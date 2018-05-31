@@ -16,8 +16,19 @@ class SidebarTree extends React.Component {
         };
     }
 
+    static getDerivedStateFromProps(props, state) {
+        if(props.openIndex >= 0 && props.openIndex !== props.index) {
+            return {
+                treeOpen: false
+            };
+        }
+
+        return null;
+    }
+
     toggleCollapse = event => {
         event.preventDefault();
+        this.props.onToggleCollapse(this.props.index, !this.state.treeOpen);
         this.setState({treeOpen: !this.state.treeOpen});
     };
 
@@ -48,7 +59,7 @@ class SidebarTree extends React.Component {
                 </a>
                 {
                     !this.props.sidebarCollapsed &&
-                    <SmoothCollapse expanded={this.state.treeOpen} heightTransition=".40s ease">
+                    <SmoothCollapse expanded={this.state.treeOpen} heightTransition=".50s ease">
                         <ul className="treeview-menu" style={treeViewMenuStyle}>
                             {items}
                         </ul>
@@ -65,16 +76,20 @@ class SidebarTree extends React.Component {
     }
 }
 
-SidebarTree.propTypes = {
-    iconClass: PropTypes.string,
-    active: PropTypes.bool,
-    label: PropTypes.string.isRequired,
-    sidebarCollapsed: PropTypes.bool
-};
-
 SidebarTree.defaultProps = {
     active: false,
+    onToggleCollapse: () => {},
     sidebarCollapsed: false
+};
+
+SidebarTree.propTypes = {
+    active: PropTypes.bool,
+    iconClass: PropTypes.string,
+    index: PropTypes.number,
+    openIndex: PropTypes.number,
+    label: PropTypes.string.isRequired,
+    onToggleCollapse: PropTypes.func,
+    sidebarCollapsed: PropTypes.bool
 };
 
 export default SidebarTree;
