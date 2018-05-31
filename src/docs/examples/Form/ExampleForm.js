@@ -8,6 +8,7 @@ import RadioGroup from "doj-react-adminlte/Form/RadioGroup";
 import SelectInput from "doj-react-adminlte/Form/SelectInput";
 import TextArea from "doj-react-adminlte/Form/TextArea";
 import TextInput from "doj-react-adminlte/Form/TextInput";
+import ValueButton from "doj-react-adminlte/ValueButton";
 
 export default class ExampleForm extends React.Component {
     constructor(props) {
@@ -88,6 +89,13 @@ export default class ExampleForm extends React.Component {
                 <div className="row">
                     <div className="col-xs-6">
                         <FileInput name="file" label="File Upload"/>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-xs-12">
+                        <ValueButton className="btn btn-primary">
+                            <i className="fa fa-save margin-r-5"/>Save
+                        </ValueButton>
                     </div>
                 </div>
             </Form>
