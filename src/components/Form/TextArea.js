@@ -29,13 +29,6 @@ class TextArea extends React.Component {
 
         // Check for form errors
         const errors = this.props.errors[this.name] || [];
-        let errorList = null;
-        if(errors.length > 0) {
-            errorList =
-                <ul className='help-block' style={helpBlockStyle}>
-                    { errors.map((e, index) => <li key={index}><span>{e}</span></li>) }
-                </ul>;
-        }
 
         return (
             <div className={"form-group " + (errors.length > 0 ? "has-error " : "") + (this.props.gridClass || "")}>
@@ -51,7 +44,12 @@ class TextArea extends React.Component {
                         </span>
                     }
                 </div>
-                {errorList}
+                {
+                    errors.length > 0 &&
+                    <ul className='help-block' style={helpBlockStyle}>
+                        { errors.map((e, index) => <li key={index}><span>{e}</span></li>) }
+                    </ul>
+                }
             </div>
         );
     }

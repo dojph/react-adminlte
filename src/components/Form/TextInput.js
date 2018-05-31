@@ -34,13 +34,6 @@ class TextInput extends React.Component {
 
         // Check for form errors
         const errors = this.props.errors[this.name] || [];
-        let errorList = null;
-        if(errors.length > 0) {
-            errorList =
-                <ul className='help-block' style={helpBlockStyle}>
-                    {errors.map((e, index) => <li key={index}><span>{e}</span></li>)}
-                </ul>;
-        }
 
         return (
             <div className={"form-group " + (errors.length > 0 ? "has-error " : "") + gridClass}>
@@ -55,7 +48,12 @@ class TextInput extends React.Component {
                     feedbackIconClass &&
                     <span className={feedbackIconClass + " form-control-feedback"}/>
                 }
-                { errorList }
+                {
+                    errors.length > 0 &&
+                    <ul className='help-block' style={helpBlockStyle}>
+                        {errors.map((e, index) => <li key={index}><span>{e}</span></li>)}
+                    </ul>
+                }
             </div>
         );
     }

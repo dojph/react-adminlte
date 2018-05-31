@@ -1,11 +1,13 @@
 import React from 'react';
-import Form from "doj-react-adminlte/Form";
-import TextInput from "doj-react-adminlte/Form/TextInput";
-import TextArea from "doj-react-adminlte/Form/TextArea";
+
 import CalendarInput from "doj-react-adminlte/Form/CalendarInput";
-import SelectInput from "doj-react-adminlte/Form/SelectInput";
-import RadioGroup from "doj-react-adminlte/Form/RadioGroup";
 import CheckBox from "doj-react-adminlte/Form/CheckBox";
+import FileInput from "../../../components/Form/FileInput";
+import Form from "doj-react-adminlte/Form";
+import RadioGroup from "doj-react-adminlte/Form/RadioGroup";
+import SelectInput from "doj-react-adminlte/Form/SelectInput";
+import TextArea from "doj-react-adminlte/Form/TextArea";
+import TextInput from "doj-react-adminlte/Form/TextInput";
 
 export default class ExampleForm extends React.Component {
     constructor(props) {
@@ -20,7 +22,8 @@ export default class ExampleForm extends React.Component {
             coffee: null,
             comments: "",
             name: "",
-            password: ""
+            password: "",
+            file: null
         };
     }
 
@@ -80,6 +83,11 @@ export default class ExampleForm extends React.Component {
                         <CheckBox label="Choice 2" name="choice2" checked={this.state.choice2}/>
                         <CheckBox label="Choice 3" name="choice3" checked={this.state.choice3}/>
                         <CheckBox label="Choice 4" name="choice4" checked={this.state.choice4}/>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-xs-6">
+                        <FileInput name="file" label="File Upload"/>
                     </div>
                 </div>
             </Form>

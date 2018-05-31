@@ -58,12 +58,6 @@ class SelectInput extends React.Component {
 
         // Check for form errors
         const errors = this.props.errors[this.name] || [];
-        let errorList = null;
-        if(errors.length > 0) {
-            errorList = <ul className='help-block'>
-                { errors.map((e, index) => <li key={index}><span>{e}</span></li>)}
-            </ul>
-        }
 
         return (
             <div className={"form-group " + (errors.length > 0 ? "has-error " : "" ) + (this.props.gridClass || "")}>
@@ -86,7 +80,12 @@ class SelectInput extends React.Component {
                     simpleValue={this.props.simpleValue}
                     style={selectStyle}
                 />
-                { errorList }
+                {
+                    errors.length > 0 &&
+                    <ul className='help-block'>
+                        { errors.map((e, index) => <li key={index}><span>{e}</span></li>)}
+                    </ul>
+                }
             </div>
         );
     }

@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import TextInput from "./TextInput";
-import TextArea from "./TextArea";
 import CalendarInput from "./CalendarInput";
-import SelectInput from "./SelectInput";
+import CheckBox from "./CheckBox";
+import FileInput from "./FileInput";
 import Radio from "./Radio";
 import RadioGroup from "./RadioGroup";
-import CheckBox from "./CheckBox";
+import SelectInput from "./SelectInput";
+import TextArea from "./TextArea";
+import TextInput from "./TextInput";
 
 class Form extends React.Component {
     handleChange = (field, value) => {
@@ -23,7 +24,7 @@ class Form extends React.Component {
                 let childProps = {};
                 if(React.isValidElement(child) && React.Component.prototype.isPrototypeOf(child.type.prototype) &&
                     [TextInput, TextArea, CalendarInput, SelectInput, Radio, RadioGroup,
-                    CheckBox].includes(child.type)) {
+                    CheckBox, FileInput].includes(child.type)) {
                     childProps = {...this.props, onChange: this.handleChange};
                 }
                 if(child && child.props) {

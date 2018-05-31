@@ -16,13 +16,6 @@ class CalendarInput extends React.Component {
     render() {
         // Check for form errors
         const errors = this.props.errors[this.name] || [];
-        let errorList = null;
-        if(errors.length > 0) {
-            errorList =
-                <ul style={helpBlockStyle}>
-                    {errors.map((e, index) => <li key={index}><span>{e}</span></li>)}
-                </ul>;
-        }
 
         return (
             <div className={"form-group " + (errors.length > 0 ? "has-error " : "") + (this.props.gridClass || "")}>
@@ -43,7 +36,12 @@ class CalendarInput extends React.Component {
                         dateFormat={this.props.dateFormat}
                     />
                 </div>
-                {errorList}
+                {
+                    errors.length > 0 &&
+                    <ul style={helpBlockStyle}>
+                        {errors.map((e, index) => <li key={index}><span>{e}</span></li>)}
+                    </ul>
+                }
             </div>
         );
     }
