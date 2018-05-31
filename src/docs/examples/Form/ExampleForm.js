@@ -5,17 +5,22 @@ import TextArea from "doj-react-adminlte/Form/TextArea";
 import CalendarInput from "doj-react-adminlte/Form/CalendarInput";
 import SelectInput from "doj-react-adminlte/Form/SelectInput";
 import RadioGroup from "doj-react-adminlte/Form/RadioGroup";
+import CheckBox from "doj-react-adminlte/Form/CheckBox";
 
-export default class extends React.Component {
+export default class ExampleForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             birthdate: null,
+            choice1: false,
+            choice2: false,
+            choice3: false,
+            choice4: false,
             city: null,
             coffee: null,
             comments: "",
             name: "",
-            password: "",
+            password: ""
         };
     }
 
@@ -56,7 +61,7 @@ export default class extends React.Component {
                     </div>
                     <div className="col-xs-6">
                         <SelectInput label="City" name="city" value={this.state.city}
-                                     options={cityOptions} simpleValue/>
+                                     options={cityOptions} simpleValue clearable/>
                     </div>
                 </div>
                 <div className="row">
@@ -65,9 +70,16 @@ export default class extends React.Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-xs-12">
+                    <div className="col-xs-6">
                         <RadioGroup label="Coffee" name="coffee" value={this.state.coffee}
                                     options={coffeeOptions} firstDefault/>
+                    </div>
+                    <div className="col-xs-6">
+                        <span className="text-bold">Multiple Choice</span>
+                        <CheckBox label="Choice 1" name="choice1" checked={this.state.choice1}/>
+                        <CheckBox label="Choice 2" name="choice2" checked={this.state.choice2}/>
+                        <CheckBox label="Choice 3" name="choice3" checked={this.state.choice3}/>
+                        <CheckBox label="Choice 4" name="choice4" checked={this.state.choice4}/>
                     </div>
                 </div>
             </Form>
