@@ -1,0 +1,23 @@
+.login-page {
+    background-color: #d2d6de;
+    overflow: auto;
+    height: 100vh;
+    width: 100%;
+    display: table;
+    position: absolute;
+}
+
+.login-box {
+    display: table-cell;
+    padding-top: 100px;
+    vertical-align: top;
+}
+
+.login-box-body {
+    width: 360px;
+    margin: 0 auto;
+}
+
+.login-box-body .form-group {
+    margin-bottom: 20px;
+}
