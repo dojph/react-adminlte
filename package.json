@@ -1,7 +1,23 @@
 {
-  "name": "doj-react-adminlte",
+  "name": "doj-react-adminlte-dev",
   "version": "0.1.0",
+  "main": "./lib/index.js",
   "private": true,
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "author": {
+    "name": "Justin Dane Vallar",
+    "email": "jdvallar@gmail.com",
+    "url": "https://github.com/vallarj"
+  },
+  "files": ["lib"],
+  "keywords": [
+    "adminlte",
+    "react-adminlte",
+    "react",
+    "components"
+  ],
   "dependencies": {
     "prop-types": "^15.6.1",
     "react-datetime": "^2.14.0",
@@ -20,9 +36,10 @@
     "build:docs": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "prebuild:lib": "rimraf lib",
-    "build:lib": "npm run build:commonjs && npm run build:css",
-    "build:css": "cpx \"./src/components/**/*.css\" ./lib",
+    "build:lib": "npm-run-all build:commonjs build:css build:copy-files",
     "build:commonjs": "cross-env NODE_ENV=production babel ./src/components --out-dir ./lib --ignore spec.js",
+    "build:css": "cpx \"./src/components/**/*.css\" ./lib",
+    "build:copy-files": "node scripts/copy-build-files.js",
     "eject": "react-scripts eject"
   },
   "peerDependencies": {
