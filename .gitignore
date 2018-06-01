@@ -48,7 +48,6 @@ jspm_packages
 
 # misc
 .DS_Store
-.env
 .env.local
 .env.development.local
 .env.test.local
@@ -63,10 +62,13 @@ yarn-error.log*
 /docs
 
 # Generated component data
-/config/componentData.js
+/componentData.js
 
 # VSCode launch configuration
 launch.json
 
 # Webstorm
 .idea
+
+# Webpack config for WebStorm
+webpack*

@@ -1,0 +1,35 @@
+.modal-enter {
+    opacity: 0;
+}
+
+.modal-enter-active {
+    opacity: 1;
+    transition: opacity .15s linear;
+}
+
+.modal-exit {
+    opacity: 1;
+}
+
+.modal-exit-active {
+    opacity: 0;
+    transition: opacity .15s linear;
+}
+
+.modal-dialog-enter {
+    transform: translate(0, -25%);
+}
+
+.modal-dialog-enter-active {
+    transform: translate(0, 0);
+    transition: transform 0.3s ease-out;
+}
+
+.modal-dialog-exit {
+    transform: translate(0, 0);
+}
+
+.modal-dialog-exit-active {
+    transform: translate(0, -25%);
+    transition: transform 0.3s ease-out;
+}

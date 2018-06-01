@@ -5,6 +5,7 @@ import Body from './Body';
 import Footer from './Footer';
 import PropTypes from 'prop-types';
 
+/** AdminLTE Box component. */
 class Box extends React.Component {
     constructor() {
         super();
@@ -20,35 +21,32 @@ class Box extends React.Component {
 
     render() {
         const {expanded} = this.state;
-        let header = null,
-            body = null,
-            footer = null;
+        const children = React.Children.toArray(this.props.children);
 
-        const {children} = this.props;
+        //find header
+        const header = children.find(item => item.type === Header);
 
-        if (children.constructor === Array) {
-            //find header
-            header = children.find(item => item.type === Header);
+        //find body
+        const body = children.find(item => item.type === Body);
 
-            //find body
-            body = children.find(item => item.type === Body);
-
-            //find footer
-            footer = children.find(item => item.type === Footer);
-        }
+        //find footer
+        const footer = children.find(item => item.type === Footer);
 
         return (
             <div>
                 <div className={"box " + this.props.theme }>
-                    <div className="box-header with-border">
-                        { header }
-                        {this.props.collapsible &&
-                        <div className="box-tools pull-right">
-                            <button onClick={this.toggleCollapse} className="btn btn-box-tool" type="button"><i
-                                className={"fa " + (expanded ? "fa-minus" : "fa-plus")} /></button>
+                    {
+                        header &&
+                        <div className="box-header with-border">
+                            { header }
+                            {this.props.collapsible &&
+                            <div className="box-tools pull-right">
+                                <button onClick={this.toggleCollapse} className="btn btn-box-tool" type="button"><i
+                                    className={"fa " + (expanded ? "fa-minus" : "fa-plus")} /></button>
+                            </div>
+                            }
                         </div>
-                        }
-                    </div>
+                    }
                     <SmoothCollapse expanded={expanded}>
                         { body }
                         { footer }
@@ -60,7 +58,10 @@ class Box extends React.Component {
 }
 
 Box.propTypes = {
+    /** Box theme. See AdminLTE guide for a list of themes. */
     theme: PropTypes.string,
+
+    /** Set to true if box should be collapsible. */
     collapsible: PropTypes.bool
 };
 
