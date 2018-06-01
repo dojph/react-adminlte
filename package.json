@@ -17,8 +17,12 @@
     "start:docs": "react-scripts start",
     "gen:docs": "node scripts/generate-component-data.js",
     "gen:docs-watch": "npm run gen:docs -- --watch",
-    "build": "react-scripts build",
+    "build:docs": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "prebuild:lib": "rimraf lib",
+    "build:lib": "npm run build:commonjs && npm run build:css",
+    "build:css": "cpx \"./src/components/**/*.css\" ./lib",
+    "build:commonjs": "cross-env NODE_ENV=production babel ./src/components --out-dir ./lib --ignore spec.js",
     "eject": "react-scripts eject"
   },
   "peerDependencies": {
@@ -28,13 +32,17 @@
   },
   "devDependencies": {
     "@vallarj/react-scripts": "1.0.0",
+    "babel-cli": "^6.26.0",
     "chokidar": "^2.0.3",
+    "cpx": "^1.5.0",
+    "cross-env": "^5.1.6",
     "moment": "^2.22.1",
     "npm-run-all": "^4.1.3",
     "react": "^16.4.0",
     "react-docgen": "^2.20.1",
     "react-dom": "^16.4.0",
     "react-router-dom": "^4.2.2",
-    "react-syntax-highlighter": "^7.0.4"
+    "react-syntax-highlighter": "^7.0.4",
+    "rimraf": "^2.6.2"
   }
 }
