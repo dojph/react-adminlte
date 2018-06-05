@@ -1,6 +1,6 @@
 {
   "name": "doj-react-adminlte-dev",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "main": "./lib/index.js",
   "license": "MIT",
   "repository": "dojph/react-adminlte",
@@ -13,7 +13,9 @@
     "email": "jdvallar@gmail.com",
     "url": "https://github.com/vallarj"
   },
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "keywords": [
     "adminlte",
     "react-adminlte",
