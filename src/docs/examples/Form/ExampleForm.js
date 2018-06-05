@@ -1,13 +1,10 @@
 import React from 'react';
 
-import CalendarInput from "doj-react-adminlte/Form/CalendarInput";
-import CheckBox from "doj-react-adminlte/Form/CheckBox";
-import FileInput from "../../../components/Form/FileInput";
-import Form from "doj-react-adminlte/Form";
-import RadioGroup from "doj-react-adminlte/Form/RadioGroup";
-import SelectInput from "doj-react-adminlte/Form/SelectInput";
-import TextArea from "doj-react-adminlte/Form/TextArea";
-import TextInput from "doj-react-adminlte/Form/TextInput";
+import Form, {
+    CalendarInput, CheckBox, FileInput,
+    RadioGroup, SelectInput, TextArea,
+    TextInput
+} from "doj-react-adminlte/Form";
 import ValueButton from "doj-react-adminlte/ValueButton";
 
 export default class ExampleForm extends React.Component {

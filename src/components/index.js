@@ -19,11 +19,3 @@ export {default as SidebarTree} from './Layout/SidebarTree';
 export {default as UserMenu} from './Layout/UserMenu';
 
 export {default as Form} from './Form';
-export {default as CalendarInput} from './Form/CalendarInput';
-export {default as CheckBox} from './Form/CheckBox';
-export {default as FileInput} from './Form/FileInput';
-export {default as Radio} from './Form/Radio';
-export {default as RadioGroup} from './Form/RadioGroup';
-export {default as SelectInput} from './Form/SelectInput';
-export {default as TextArea} from './Form/TextArea';
-export {default as TextInput} from './Form/TextInput';
