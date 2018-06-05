@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import * as DateTime from 'react-datetime';
+import DateTime from 'react-datetime';
 import CalendarContainer from 'react-datetime/src/CalendarContainer';
 import ResizeAware from 'react-resize-aware';
 import {Manager, Reference, Popper} from 'react-popper';
