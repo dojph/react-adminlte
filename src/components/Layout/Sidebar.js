@@ -18,7 +18,7 @@ class Sidebar extends React.Component {
     render() {
         let treeCount = 0;
         return React.Children.map(this.props.children, child => {
-            if(child.type === SidebarTree) {
+            if(child && child.type === SidebarTree) {
                 return React.cloneElement(child,
                     {
                         index: treeCount++,
