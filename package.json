@@ -38,6 +38,7 @@
     "start:docs": "react-scripts start",
     "gen:docs": "node scripts/generate-component-data.js",
     "gen:docs-watch": "npm run gen:docs -- --watch",
+    "prebuild:docs": "npm run gen:docs",
     "build:docs": "react-scripts build",
     "predeploy:docs": "npm run build:docs",
     "deploy:docs": "gh-pages -d build",
