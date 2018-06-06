@@ -9,6 +9,17 @@ import ModalFooter from './ModalFooter';
 import './styles.css';
 
 class Modal extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            mounted: false
+        };
+    }
+
+    componentDidMount() {
+        this.setState({mounted: true});
+    }
+
     handleClickBackdrop = () => {
         const {closeOnBackdropClick, onCloseClick} = this.props;
         if(closeOnBackdropClick) {
@@ -41,7 +52,7 @@ class Modal extends React.Component {
 
         return (
             <CSSTransition
-                in={this.props.show}
+                in={this.state.mounted && this.props.show}
                 timeout={150}
                 classNames="modal"
                 onEnter={this.handleEnter}
