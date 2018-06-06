@@ -4,7 +4,7 @@
   "main": "./lib/index.js",
   "license": "MIT",
   "repository": "dojph/react-adminlte",
-  "homepage": "http://github.com/dojph/react-adminlte",
+  "homepage": "http://dojph.github.io/react-adminlte/",
   "private": true,
   "engines": {
     "node": ">=4.0.0"
