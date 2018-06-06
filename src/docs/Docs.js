@@ -43,8 +43,8 @@ export default class Docs extends React.Component {
                             componentData.map(c => {
                                 const linkName = toParamCase(c.name);
                                 return (
-                                    <SidebarItem path={`/components/${linkName}`} key={c.name} id={c.name}
-                                                 iconClass="fa fa-circle-o" label={c.name}
+                                    <SidebarItem path={`${process.env.PUBLIC_URL}/components/${linkName}`} key={c.name}
+                                                 id={c.name} iconClass="fa fa-circle-o" label={c.name}
                                                  onClick={this.handleComponentClick} active={componentName === c.name} />
                                 );
                             })
