@@ -33,10 +33,12 @@ class Modal extends React.Component {
 
     handleEnter = () => {
         document.body.classList.add('modal-open');
+        this.props.onEnter();
     };
 
     handleExited = () => {
         document.body.classList.remove('modal-open');
+        this.props.onExit();
     };
 
     render() {
@@ -87,12 +89,16 @@ class Modal extends React.Component {
 Modal.defaultProps = {
     closeOnBackdropClick: true,
     onCloseClick: () => {},
+    onEnter: () => {},
+    onExit: () => {},
     show: false
 };
 
 Modal.propTypes = {
     closeOnBackdropClick: PropTypes.bool,
     onCloseClick: PropTypes.func,
+    onEnter: PropTypes.func,
+    onExit: PropTypes.func,
     show: PropTypes.bool,
     className: PropTypes.string
 };
