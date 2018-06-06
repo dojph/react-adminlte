@@ -4,6 +4,7 @@
   "main": "./lib/index.js",
   "license": "MIT",
   "repository": "dojph/react-adminlte",
+  "homepage": "http://github.com/dojph/react-adminlte",
   "private": true,
   "engines": {
     "node": ">=4.0.0"
@@ -13,7 +14,9 @@
     "email": "jdvallar@gmail.com",
     "url": "https://github.com/vallarj"
   },
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "keywords": [
     "adminlte",
     "react-adminlte",
@@ -36,6 +39,8 @@
     "gen:docs": "node scripts/generate-component-data.js",
     "gen:docs-watch": "npm run gen:docs -- --watch",
     "build:docs": "react-scripts build",
+    "predeploy:docs": "npm run build:docs",
+    "deploy:docs": "gh-pages -d build",
     "test": "react-scripts test --env=jsdom",
     "prebuild:lib": "rimraf lib",
     "build:lib": "npm-run-all build:commonjs build:css build:copy-files",
@@ -55,6 +60,7 @@
     "chokidar": "^2.0.3",
     "cpx": "^1.5.0",
     "cross-env": "^5.1.6",
+    "gh-pages": "^1.2.0",
     "moment": "^2.22.1",
     "npm-run-all": "^4.1.3",
     "react": "^16.4.0",
