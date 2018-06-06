@@ -8,6 +8,4 @@ npm install doj-react-adminlte
 ```
 
 ## Demo/Documentation
-```
-npm run start
-```
+<https://dojph.github.io/react-adminlte>
