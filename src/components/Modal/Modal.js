@@ -9,6 +9,21 @@ import ModalFooter from './ModalFooter';
 import './styles.css';
 
 class Modal extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            mounted: false
+        };
+    }
+
+    componentDidMount() {
+        this.setState({mounted: true});
+    }
+
+    static getScrollbarWidth() {
+        return window.innerWidth - document.documentElement.clientWidth;
+    }
+
     handleClickBackdrop = () => {
         const {closeOnBackdropClick, onCloseClick} = this.props;
         if(closeOnBackdropClick) {
@@ -21,11 +36,18 @@ class Modal extends React.Component {
     };
 
     handleEnter = () => {
+        const scrollbarWidth = Modal.getScrollbarWidth();
         document.body.classList.add('modal-open');
+        if(scrollbarWidth) {
+            document.body.style.paddingRight = scrollbarWidth + 'px';
+        }
+        this.props.onEnter();
     };
 
     handleExited = () => {
         document.body.classList.remove('modal-open');
+        document.body.style.paddingRight = null;
+        this.props.onExit();
     };
 
     render() {
@@ -41,7 +63,7 @@ class Modal extends React.Component {
 
         return (
             <CSSTransition
-                in={this.props.show}
+                in={this.state.mounted && this.props.show}
                 timeout={150}
                 classNames="modal"
                 onEnter={this.handleEnter}
@@ -76,12 +98,16 @@ class Modal extends React.Component {
 Modal.defaultProps = {
     closeOnBackdropClick: true,
     onCloseClick: () => {},
+    onEnter: () => {},
+    onExit: () => {},
     show: false
 };
 
 Modal.propTypes = {
     closeOnBackdropClick: PropTypes.bool,
     onCloseClick: PropTypes.func,
+    onEnter: PropTypes.func,
+    onExit: PropTypes.func,
     show: PropTypes.bool,
     className: PropTypes.string
 };
