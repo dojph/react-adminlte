@@ -44,9 +44,12 @@ class Modal extends React.Component {
         this.props.onEnter();
     };
 
-    handleExited = () => {
+    handleExit = () => {
         document.body.classList.remove('modal-open');
         document.body.style.paddingRight = null;
+    };
+
+    handleExited = () => {
         this.props.onExit();
     };
 
@@ -67,6 +70,7 @@ class Modal extends React.Component {
                 timeout={150}
                 classNames="modal"
                 onEnter={this.handleEnter}
+                onExit={this.handleExit}
                 onExited={this.handleExited}
                 unmountOnExit
             >
