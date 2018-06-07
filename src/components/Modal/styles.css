@@ -1,3 +1,7 @@
+.modal {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
 .modal-enter {
     opacity: 0;
 }
