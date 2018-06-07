@@ -24,7 +24,7 @@ class TetheredSelect extends Select {
         return (
             <Manager>
                 <Reference>
-                    {({ref}) => <div ref={ref}/>}
+                    {({ref}) => <div ref={ref} style={{height: 35, marginTop: -35}}/>}
                 </Reference>
                 {
                     ReactDOM.createPortal(
@@ -32,8 +32,7 @@ class TetheredSelect extends Select {
                                 modifiers={{
                                     preventOverflow: { enabled: true, boundariesElement: 'viewport' },
                                     computeStyle: { enabled: true, gpuAcceleration: false }
-                                }}
-                                positionFixed>
+                                }}>
                             {
                                 ({ ref, style, placement}) =>
                                     <div ref={ref}
@@ -44,7 +43,13 @@ class TetheredSelect extends Select {
                                              left: this._getSelectXPos()
                                          }} data-placement={placement}>
                                         {
-                                            React.cloneElement(menu, { style: { borderRadius: 0} })
+                                            React.cloneElement(menu, {
+                                                style: {
+                                                    position: 'static',
+                                                    borderRadius: 0,
+                                                    boxShadow: 'none'
+                                                }
+                                            })
                                         }
                                     </div>
                             }
