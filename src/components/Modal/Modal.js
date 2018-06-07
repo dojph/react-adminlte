@@ -3,26 +3,52 @@ import PropTypes from 'prop-types';
 import {CSSTransition} from 'react-transition-group';
 
 import ModalHeader from './ModalHeader';
-import ModalBody from './ModalBody';
 import ModalFooter from './ModalFooter';
 
 import './styles.css';
+
+const ModalBody = ({children}) => children || null;
 
 class Modal extends React.Component {
     constructor() {
         super();
         this.state = {
-            mounted: false
+            mounted: false,
+            fixedWidth: 0,
+            fixedHeight: 0,
+            fixedMaxWidth: 0
         };
-    }
-
-    componentDidMount() {
-        this.setState({mounted: true});
     }
 
     static getScrollbarWidth() {
         return window.innerWidth - document.documentElement.clientWidth;
     }
+
+    componentDidMount() {
+        this.setState({mounted: true});
+        window.addEventListener('resize', this.updateDimensions);
+        this.updateDimensions();
+    }
+
+    updateDimensions = () => {
+        // sm 300
+        // def 600
+        // lg 1100
+        if(this.props.fixedScroll) {
+            let maxWidth = 600;
+            if(this.props.dialogClassName.indexOf('modal-lg') !== -1) {
+                maxWidth = 1100;
+            } else if(this.props.dialogClassName.indexOf('modal-sm')) {
+                maxWidth = 300;
+            }
+
+            this.setState({
+                fixedBodyHeight: window.innerHeight - 182,
+                fixedWidth: window.innerWidth - 21,
+                fixedMaxWidth: maxWidth
+            });
+        }
+    };
 
     handleClickBackdrop = () => {
         const {closeOnBackdropClick, onCloseClick} = this.props;
@@ -45,11 +71,12 @@ class Modal extends React.Component {
     };
 
     handleExit = () => {
-        document.body.classList.remove('modal-open');
-        document.body.style.paddingRight = null;
+
     };
 
     handleExited = () => {
+        document.body.classList.remove('modal-open');
+        document.body.style.paddingRight = null;
         this.props.onExit();
     };
 
@@ -63,6 +90,21 @@ class Modal extends React.Component {
 
         const body = children.find(child => child.type === ModalBody);
         const footer = children.find(child => child.type === ModalFooter);
+
+        let dialogStyle = null, bodyStyle = null;
+
+        if(this.props.fixedScroll && window.innerWidth < 768) {
+            dialogStyle = {
+                width: this.state.fixedWidth,
+                maxWidth: this.state.fixedMaxWidth
+            };
+
+            bodyStyle = {
+                width: '100%',
+                maxHeight: this.state.fixedBodyHeight,
+                overflow: 'auto'
+            };
+        }
 
         return (
             <CSSTransition
@@ -84,10 +126,15 @@ class Modal extends React.Component {
                                 unmountOnExit
                             >
                                 <div className={"modal-dialog " + (this.props.dialogClassName || '')}
-                                     onClick={this.handleInnerClick}>
+                                     style={dialogStyle} onClick={this.handleInnerClick}>
                                     <div className="modal-content">
                                         {header}
-                                        {body}
+                                        {
+                                            body &&
+                                            <div className="modal-body" style={bodyStyle}>
+                                                {body}
+                                            </div>
+                                        }
                                         {footer}
                                     </div>
                                 </div>
@@ -102,6 +149,7 @@ class Modal extends React.Component {
 
 Modal.defaultProps = {
     closeOnBackdropClick: true,
+    fixedScroll: false,
     onCloseClick: () => {},
     onEnter: () => {},
     onExit: () => {},
@@ -112,6 +160,7 @@ Modal.propTypes = {
     className: PropTypes.string,
     closeOnBackdropClick: PropTypes.bool,
     dialogClassName: PropTypes.string,
+    fixedScroll: PropTypes.bool,
     onCloseClick: PropTypes.func,
     onEnter: PropTypes.func,
     onExit: PropTypes.func,

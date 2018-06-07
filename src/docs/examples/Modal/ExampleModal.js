@@ -23,7 +23,7 @@ export default class ExampleModal extends React.Component {
                 <button className="btn btn-default" type="button" onClick={this.handleClick}>
                     Open Default Modal
                 </button>
-                <Modal dialogClassName="modal-lg" show={this.state.show} onCloseClick={this.handleCloseClick}>
+                <Modal show={this.state.show} onCloseClick={this.handleCloseClick}>
                     <Modal.Header>
                         Default Modal
                     </Modal.Header>
