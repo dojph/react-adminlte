@@ -29,10 +29,11 @@ class TetheredSelect extends Select {
                 {
                     ReactDOM.createPortal(
                         <Popper placement="bottom-start"
-                                modifiers={{ preventOverflow: { enabled: true, boundariesElement: 'viewport' } }}>
+                                modifiers={{ preventOverflow: { enabled: true, boundariesElement: 'viewport' } }}
+                                positionFixed>
                             {
                                 ({ ref, style, placement}) =>
-                                    <div ref={ref} style={style} data-placement={placement}>
+                                    <div ref={ref} style={{...style, zIndex: 2500}} data-placement={placement}>
                                         {React.cloneElement(menu, {style: {position: 'static', width: this._getSelectWidth()}})}
                                     </div>
                             }
