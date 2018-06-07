@@ -43,7 +43,9 @@ class TetheredSelect extends Select {
                                              width: this._getSelectWidth(),
                                              left: this._getSelectXPos()
                                          }} data-placement={placement}>
-                                        {menu}
+                                        {
+                                            React.cloneElement(menu, { style: { borderRadius: 0} })
+                                        }
                                     </div>
                             }
                         </Popper>,
