@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from ''
 
 class ModalBody extends React.Component {
     render() {
@@ -9,5 +10,9 @@ class ModalBody extends React.Component {
         );
     }
 }
+
+ModalBody.propTypes = {
+    style
+};
 
 export default ModalBody;
