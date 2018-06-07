@@ -83,7 +83,8 @@ class Modal extends React.Component {
                                 classNames={'modal-dialog'}
                                 unmountOnExit
                             >
-                                <div className="modal-dialog" onClick={this.handleInnerClick}>
+                                <div className={"modal-dialog " + (this.props.dialogClassName || '')}
+                                     onClick={this.handleInnerClick}>
                                     <div className="modal-content">
                                         {header}
                                         {body}
@@ -108,12 +109,13 @@ Modal.defaultProps = {
 };
 
 Modal.propTypes = {
+    className: PropTypes.string,
     closeOnBackdropClick: PropTypes.bool,
+    dialogClassName: PropTypes.string,
     onCloseClick: PropTypes.func,
     onEnter: PropTypes.func,
     onExit: PropTypes.func,
-    show: PropTypes.bool,
-    className: PropTypes.string
+    show: PropTypes.bool
 };
 
 Modal.Header = ModalHeader;
