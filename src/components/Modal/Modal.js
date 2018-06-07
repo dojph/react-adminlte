@@ -20,6 +20,10 @@ class Modal extends React.Component {
         this.setState({mounted: true});
     }
 
+    static getScrollbarWidth() {
+        return window.innerWidth - document.documentElement.clientWidth;
+    }
+
     handleClickBackdrop = () => {
         const {closeOnBackdropClick, onCloseClick} = this.props;
         if(closeOnBackdropClick) {
@@ -32,12 +36,17 @@ class Modal extends React.Component {
     };
 
     handleEnter = () => {
+        const scrollbarWidth = Modal.getScrollbarWidth();
         document.body.classList.add('modal-open');
+        if(scrollbarWidth) {
+            document.body.style.paddingRight = scrollbarWidth + 'px';
+        }
         this.props.onEnter();
     };
 
     handleExited = () => {
         document.body.classList.remove('modal-open');
+        document.body.style.paddingRight = null;
         this.props.onExit();
     };
 
