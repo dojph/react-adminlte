@@ -30,20 +30,23 @@ class Modal extends React.Component {
         this.updateDimensions();
     }
 
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateDimensions);
+    }
+
     updateDimensions = () => {
-        // sm 300
-        // def 600
-        // lg 1100
         if(this.props.fixedScroll) {
             let maxWidth = 600;
-            if(this.props.dialogClassName.indexOf('modal-lg') !== -1) {
+            if(this.props.size === 'large') {
                 maxWidth = 1100;
-            } else if(this.props.dialogClassName.indexOf('modal-sm')) {
+            } else if(this.props.size === 'small') {
                 maxWidth = 300;
             }
 
+            const isSmall = window.innerWidth < 768;
+
             this.setState({
-                fixedBodyHeight: window.innerHeight - 182,
+                fixedBodyHeight: window.innerHeight - (isSmall ? 141 : 182),
                 fixedWidth: window.innerWidth - 21,
                 fixedMaxWidth: maxWidth
             });
@@ -70,10 +73,6 @@ class Modal extends React.Component {
         this.props.onEnter();
     };
 
-    handleExit = () => {
-
-    };
-
     handleExited = () => {
         document.body.classList.remove('modal-open');
         document.body.style.paddingRight = null;
@@ -91,9 +90,15 @@ class Modal extends React.Component {
         const body = children.find(child => child.type === ModalBody);
         const footer = children.find(child => child.type === ModalFooter);
 
-        let dialogStyle = null, bodyStyle = null;
+        let dialogClass = "default", dialogStyle = null, bodyStyle = null;
 
-        if(this.props.fixedScroll && window.innerWidth < 768) {
+        if(this.props.size === 'large') {
+            dialogClass = 'modal-lg';
+        } else if(this.props.size === 'small') {
+            dialogClass = 'modal-sm';
+        }
+
+        if(this.props.fixedScroll) {
             dialogStyle = {
                 width: this.state.fixedWidth,
                 maxWidth: this.state.fixedMaxWidth
@@ -112,7 +117,6 @@ class Modal extends React.Component {
                 timeout={150}
                 classNames="modal"
                 onEnter={this.handleEnter}
-                onExit={this.handleExit}
                 onExited={this.handleExited}
                 unmountOnExit
             >
@@ -125,7 +129,7 @@ class Modal extends React.Component {
                                 classNames={'modal-dialog'}
                                 unmountOnExit
                             >
-                                <div className={"modal-dialog " + (this.props.dialogClassName || '')}
+                                <div className={`modal-dialog ${dialogClass} ` + (this.props.dialogClassName || '')}
                                      style={dialogStyle} onClick={this.handleInnerClick}>
                                     <div className="modal-content">
                                         {header}
@@ -153,7 +157,8 @@ Modal.defaultProps = {
     onCloseClick: () => {},
     onEnter: () => {},
     onExit: () => {},
-    show: false
+    show: false,
+    size: 'default'
 };
 
 Modal.propTypes = {
@@ -164,7 +169,8 @@ Modal.propTypes = {
     onCloseClick: PropTypes.func,
     onEnter: PropTypes.func,
     onExit: PropTypes.func,
-    show: PropTypes.bool
+    show: PropTypes.bool,
+    size: PropTypes.oneOf(['default', 'large', 'small'])
 };
 
 Modal.Header = ModalHeader;
