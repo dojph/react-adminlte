@@ -24,7 +24,12 @@ class TetheredSelect extends Select {
         return (
             <Manager>
                 <Reference>
-                    {({ref}) => <div ref={ref} style={{height: 35, marginTop: -35}}/>}
+                    {
+                        ({ref}) => {
+                            const height = this._getSelectHeight();
+                            return <div ref={ref} style={{height, marginTop: 1 - height}}/>;
+                        }
+                    }
                 </Reference>
                 {
                     ReactDOM.createPortal(
@@ -61,12 +66,16 @@ class TetheredSelect extends Select {
         );
     }
 
+    _getSelectHeight() {
+        return this.control ? this.control.getBoundingClientRect().height : null;
+    }
+
     _getSelectWidth() {
-        return this.wrapper ? this.wrapper.getBoundingClientRect().width : null;
+        return this.control ? this.control.getBoundingClientRect().width : null;
     }
 
     _getSelectXPos() {
-        return this.wrapper ? this.wrapper.getBoundingClientRect().x : null;
+        return this.control ? this.control.getBoundingClientRect().x : null;
     }
 }
 
