@@ -28,7 +28,7 @@ class CalendarInput extends React.Component {
                         inputProps={{readOnly: !this.props.disabled, disabled: this.props.disabled}}
                         onChange={this.handleChange}
                         value={this.props.value}
-                        isValidDate={this.props.isValidDate}
+                        isValidDate={this.props.dateValidator}
                         timeConstraints={this.props.timeConstraints}
                         closeOnSelect={!this.props.timeFormat}
                         className={this.props.innerClass}
@@ -68,7 +68,7 @@ CalendarInput.propTypes = {
     gridClass: PropTypes.string,
     iconClass: PropTypes.string,
     innerClass: PropTypes.string,
-    isValidDate: PropTypes.bool,
+    dateValidator: PropTypes.func,
     label: PropTypes.string,
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func,
