@@ -28,19 +28,24 @@ class DataTable extends React.Component {
         return this.props.columnDefs.map((column, index) => <th key={index}>{column.header}</th>);
     };
 
-    renderTableBody = () => {
-        const {data, emptyMessage, columnDefs} = this.props;
+    renderEmptyMessage = () => {
+        return <tr><td colSpan={this.props.columnDefs.length}>{this.props.emptyMessage}</td></tr>;
+    };
 
-        if(!data.length) {
-            return (
-                <tr>
-                    <td colSpan={columnDefs.length}>{emptyMessage}</td>
-                </tr>
-            );
-        }
+    renderTableBody = () => {
+        const {data} = this.props;
 
         if(this.props.bodyRenderer) {
-            return this.props.bodyRenderer(data, this.renderRow);
+            const body = this.props.bodyRenderer(data, this.renderRow);
+            if(body && (body.constructor !== Array || body.length)) {
+                return body;
+            }
+
+            return this.renderEmptyMessage();
+        }
+
+        if(!data.length) {
+            return this.renderEmptyMessage();
         }
 
         return data.map((object, index) => this.renderRow(object, index));
