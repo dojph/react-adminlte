@@ -62,11 +62,11 @@ class TetheredSelect extends Select {
     }
 
     _getSelectWidth() {
-        return this.wrapper ? this.wrapper.getBoundingClientRect().width : null;
+        return this.control ? this.control.getBoundingClientRect().width : null;
     }
 
     _getSelectXPos() {
-        return this.wrapper ? this.wrapper.getBoundingClientRect().x : null;
+        return this.control ? this.control.getBoundingClientRect().x : null;
     }
 }
 
