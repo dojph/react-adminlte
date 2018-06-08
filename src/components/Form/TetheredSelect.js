@@ -27,7 +27,7 @@ class TetheredSelect extends Select {
                     {
                         ({ref}) => {
                             const height = this._getSelectHeight();
-                            return <div ref={ref} style={{height, marginTop: 1 - height}}/>;
+                            return <div ref={ref} style={{height: height - 1, marginTop: 1 - height}}/>;
                         }
                     }
                 </Reference>
