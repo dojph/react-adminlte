@@ -14,6 +14,7 @@ class Modal extends React.Component {
         super();
         this.state = {
             mounted: false,
+            exited: true,
             fixedWidth: 0,
             fixedHeight: 0,
             fixedMaxWidth: 0
@@ -32,6 +33,10 @@ class Modal extends React.Component {
 
     componentWillUnmount() {
         window.removeEventListener('resize', this.updateDimensions);
+        if(!this.state.exited) {
+            // Force handleExited
+            this.handleExited();
+        }
     }
 
     updateDimensions = () => {
@@ -70,12 +75,14 @@ class Modal extends React.Component {
         if(scrollbarWidth) {
             document.body.style.paddingRight = scrollbarWidth + 'px';
         }
+        this.setState({exited: false});
         this.props.onEnter();
     };
 
     handleExited = () => {
         document.body.classList.remove('modal-open');
         document.body.style.paddingRight = null;
+        this.setState({exited: true});
         this.props.onExit();
     };
 
