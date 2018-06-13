@@ -65,6 +65,20 @@ class Modal extends React.Component {
         }
     };
 
+    handleEscapeKeypress = event => {
+        event = event || window.event;
+        let isEscape = false;
+        if("key" in event) {
+            isEscape = (event.key === "Escape" || event.key === "Esc");
+        } else {
+            isEscape = (event.keyCode === 27);
+        }
+
+        if(isEscape) {
+            this.props.onCloseClick();
+        }
+    };
+
     handleInnerClick = event => {
         event.stopPropagation();
     };
@@ -76,6 +90,13 @@ class Modal extends React.Component {
             document.body.style.paddingRight = scrollbarWidth + 'px';
         }
         this.setState({exited: false});
+
+        // Add escape key event listener
+        const {closeOnEscapeKey, onCloseClick} = this.props;
+        if(closeOnEscapeKey) {
+            window.addEventListener('keyup', this.handleEscapeKeypress);
+        }
+
         this.props.onEnter();
     };
 
@@ -83,6 +104,10 @@ class Modal extends React.Component {
         document.body.classList.remove('modal-open');
         document.body.style.paddingRight = null;
         this.setState({exited: true});
+
+        // Remove escape key event listener
+        window.removeEventListener('keyup', this.handleEscapeKeypress);
+
         this.props.onExit();
     };
 
@@ -160,6 +185,7 @@ class Modal extends React.Component {
 
 Modal.defaultProps = {
     closeOnBackdropClick: true,
+    closeOnEscapeKey: true,
     fixedScroll: false,
     onCloseClick: () => {},
     onEnter: () => {},
@@ -171,6 +197,7 @@ Modal.defaultProps = {
 Modal.propTypes = {
     className: PropTypes.string,
     closeOnBackdropClick: PropTypes.bool,
+    closeOnEscapeKey: PropTypes.bool,
     dialogClassName: PropTypes.string,
     fixedScroll: PropTypes.bool,
     onCloseClick: PropTypes.func,
