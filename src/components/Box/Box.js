@@ -52,12 +52,20 @@ class Box extends React.Component {
                         { footer }
                     </SmoothCollapse>
                 </div>
+                {
+                    this.props.isLoading &&
+                    <div className="overlay">
+                        <i className="fa fa-spinner fa-spin"/>
+                    </div>
+                }
             </div>
         );
     }
 }
 
 Box.propTypes = {
+    isLoading: PropTypes.bool,
+
     /** Box theme. See AdminLTE guide for a list of themes. */
     theme: PropTypes.string,
 
@@ -66,6 +74,7 @@ Box.propTypes = {
 };
 
 Box.defaultProps = {
+    isLoading: false,
     theme: "box-default",
     collapsible: false
 };
