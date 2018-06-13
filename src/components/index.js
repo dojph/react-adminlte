@@ -7,12 +7,14 @@ export {default as Login} from './Login';
 export {default as Modal} from './Modal';
 export {default as ValueButton} from './ValueButton';
 
+export {default as Content} from './Content';
+export {default as BreadcrumbItem} from './Content/BreadcrumbItem';
+
 export {default as TabContainer} from './TabContainer';
 export {default as Tab} from './TabContainer/Tab';
 export {default as TabUtilityButton} from './TabContainer/TabUtilityButton';
 
 export {default as Layout} from './Layout';
-export {default as Content} from './Layout/Content';
 export {default as SidebarHeader} from './Layout/SidebarHeader';
 export {default as SidebarItem} from './Layout/SidebarItem';
 export {default as SidebarTree} from './Layout/SidebarTree';
