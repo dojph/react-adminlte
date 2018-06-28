@@ -5,7 +5,6 @@ import helpBlockStyle from './helpBlockStyle';
 class TextInput extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props.disabled);
         this.name = props.name;
     }
 

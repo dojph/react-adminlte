@@ -46,7 +46,7 @@ export default class ExampleForm extends React.Component {
         ];
 
         return (
-            <Form onChange={this.handleChange} errors={errors} disabled>
+            <Form onChange={this.handleChange} errors={errors}>
                 <div className="row">
                     <div className="col-xs-6">
                         <TextInput name="name" value={this.state.name} label="Name"/>
@@ -73,7 +73,7 @@ export default class ExampleForm extends React.Component {
                 <div className="row">
                     <div className="col-xs-6">
                         <RadioGroup label="Coffee" name="coffee" value={this.state.coffee}
-                                    options={coffeeOptions} firstDefault/>
+                                    options={coffeeOptions} simpleValue firstDefault/>
                     </div>
                     <div className="col-xs-6">
                         <span className="text-bold">Multiple Choice</span>

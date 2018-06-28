@@ -18,6 +18,8 @@ class SelectInput extends React.Component {
 
     handleChange = item => {
         let value = this.props.simpleValue ? item : item[this.props.valueKey];
+        let currentValue = this.props.simpleValue ? this.props.value : (this.props.value && this.props.value[this.props.valueKey]);
+
         switch(value) {
             case "__defaultNull":
                 value = null;
@@ -26,11 +28,11 @@ class SelectInput extends React.Component {
                 value = "0";
                 break;
             default:
-                value = item;
-                break;
         }
 
-        this.props.onChange(this.name, value);
+        if(value !== currentValue) {
+            this.props.onChange(this.name, item);
+        }
     };
 
     render() {
