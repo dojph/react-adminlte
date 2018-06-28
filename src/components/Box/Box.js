@@ -51,13 +51,13 @@ class Box extends React.Component {
                         { body }
                         { footer }
                     </SmoothCollapse>
+                    {
+                        this.props.isLoading &&
+                        <div className="overlay">
+                            <i className="fa fa-spinner fa-spin"/>
+                        </div>
+                    }
                 </div>
-                {
-                    this.props.isLoading &&
-                    <div className="overlay">
-                        <i className="fa fa-spinner fa-spin"/>
-                    </div>
-                }
             </div>
         );
     }
