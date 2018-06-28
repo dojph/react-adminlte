@@ -45,6 +45,7 @@ class RadioGroup extends React.Component {
                                    onChange={this.handleChange}
                                    checkedValue={checkedValue}
                                    inline={this.props.inline}
+                                   disabled={this.props.disabled}
                             />
                         )
                     }
@@ -55,6 +56,7 @@ class RadioGroup extends React.Component {
 }
 
 RadioGroup.defaultProps = {
+    disabled: false,
     firstDefault: false,
     inline: false,
     onChange: () => {},
@@ -63,6 +65,7 @@ RadioGroup.defaultProps = {
 };
 
 RadioGroup.propTypes = {
+    disabled: PropTypes.bool,
     firstDefault: PropTypes.bool,
     inline: PropTypes.bool,
     label: PropTypes.string,

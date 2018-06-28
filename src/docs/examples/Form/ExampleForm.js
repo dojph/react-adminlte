@@ -73,7 +73,7 @@ export default class ExampleForm extends React.Component {
                 <div className="row">
                     <div className="col-xs-6">
                         <RadioGroup label="Coffee" name="coffee" value={this.state.coffee}
-                                    options={coffeeOptions} firstDefault/>
+                                    options={coffeeOptions} simpleValue firstDefault/>
                     </div>
                     <div className="col-xs-6">
                         <span className="text-bold">Multiple Choice</span>

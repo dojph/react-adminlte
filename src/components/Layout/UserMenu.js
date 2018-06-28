@@ -19,6 +19,10 @@ class UserMenu extends React.Component {
         document.addEventListener('mousedown', this.handleClickOutside);
     }
 
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClickOutside);
+    }
+
     setRootNodeRef = element => {
         this.rootNode = element;
     };

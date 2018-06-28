@@ -36,7 +36,8 @@ class Radio extends React.Component {
         if(this.props.inline) {
             return (
                 <label className="radio-inline">
-                    <input type="radio" value={value} checked={checked} onChange={this.handleChange}/>
+                    <input type="radio" value={value} checked={checked} onChange={this.handleChange}
+                           disabled={this.props.disabled}/>
                     {this.props.label}
                 </label>
             );
@@ -44,7 +45,8 @@ class Radio extends React.Component {
             return (
                 <div className="radio">
                     <label>
-                        <input type="radio" value={value} checked={checked} onChange={this.handleChange}/>
+                        <input type="radio" value={value} checked={checked} onChange={this.handleChange}
+                               disabled={this.props.disabled}/>
                         {this.props.label}
                     </label>
                 </div>
@@ -55,11 +57,18 @@ class Radio extends React.Component {
 
 Radio.defaultProps = {
     checkedValue: false,
+    disabled: false,
     inline: false,
     onChange: () => {}
 };
 
 Radio.propTypes = {
+    checkedValue: PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.number,
+        PropTypes.string,
+    ]),
+    disabled: PropTypes.bool,
     inline: PropTypes.bool,
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
@@ -68,12 +77,7 @@ Radio.propTypes = {
         PropTypes.bool,
         PropTypes.number,
         PropTypes.string
-    ]).isRequired,
-    checkedValue: PropTypes.oneOfType([
-        PropTypes.bool,
-        PropTypes.number,
-        PropTypes.string,
-    ])
+    ]).isRequired
 };
 
 export default Radio;

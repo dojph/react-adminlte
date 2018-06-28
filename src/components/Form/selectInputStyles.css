@@ -1,0 +1,4 @@
+.Select.is-disabled>.Select-control {
+    background-color: #eee;
+    cursor: not-allowed;
+}

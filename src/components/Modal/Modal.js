@@ -5,8 +5,6 @@ import {CSSTransition} from 'react-transition-group';
 import ModalHeader from './ModalHeader';
 import ModalFooter from './ModalFooter';
 
-import './styles.css';
-
 const ModalBody = ({children}) => children || null;
 
 class Modal extends React.Component {
@@ -92,7 +90,7 @@ class Modal extends React.Component {
         this.setState({exited: false});
 
         // Add escape key event listener
-        const {closeOnEscapeKey, onCloseClick} = this.props;
+        const {closeOnEscapeKey} = this.props;
         if(closeOnEscapeKey) {
             window.addEventListener('keyup', this.handleEscapeKeypress);
         }

@@ -17,15 +17,23 @@ class Form extends React.Component {
         }
     };
 
+    isFormElement = childType => {
+        return [TextInput, TextArea, CalendarInput, SelectInput, Radio, RadioGroup,
+            CheckBox, FileInput].includes(childType);
+    };
+
     recursiveCloneChildren = children => {
         return React.Children.map(
             children,
             child => {
                 let childProps = {};
                 if(React.isValidElement(child) && React.Component.prototype.isPrototypeOf(child.type.prototype) &&
-                    [TextInput, TextArea, CalendarInput, SelectInput, Radio, RadioGroup,
-                    CheckBox, FileInput].includes(child.type)) {
-                    childProps = {...this.props, onChange: this.handleChange};
+                    this.isFormElement(child.type)) {
+                    childProps = {
+                        ...this.props,
+                        disabled: this.props.disabled || child.props.disabled,
+                        onChange: this.handleChange
+                    };
                 }
                 if(child && child.props) {
                     childProps.children = this.recursiveCloneChildren(child.props.children);
