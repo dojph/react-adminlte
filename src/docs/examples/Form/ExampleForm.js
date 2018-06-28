@@ -46,7 +46,7 @@ export default class ExampleForm extends React.Component {
         ];
 
         return (
-            <Form onChange={this.handleChange} errors={errors}>
+            <Form onChange={this.handleChange} errors={errors} disabled>
                 <div className="row">
                     <div className="col-xs-6">
                         <TextInput name="name" value={this.state.name} label="Name"/>

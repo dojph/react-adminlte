@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import TetheredSelect from './TetheredSelect';
+import './selectInputStyles.css';
 
 const selectStyle = {
     borderColor: '#d2d6de',
