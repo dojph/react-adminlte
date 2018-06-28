@@ -27,7 +27,8 @@ class CheckBox extends React.Component {
                     <label>
                         <input type="checkbox" value={this.props.label}
                                checked={this.props.checked}
-                               onChange={this.handleChange}/>
+                               onChange={this.handleChange}
+                               disabled={this.props.disabled}/>
                         {this.props.label}
                     </label>
                 </div>
@@ -38,12 +39,14 @@ class CheckBox extends React.Component {
 
 CheckBox.defaultProps = {
     checked: false,
+    disabled: false,
     inline: false,
     onChange: () => {}
 };
 
 CheckBox.propTypes = {
     checked: PropTypes.bool,
+    disabled: PropTypes.bool,
     inline: PropTypes.bool,
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

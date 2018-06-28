@@ -23,7 +23,7 @@ class FileInput extends React.Component {
         return (
             <div className={"form-group " + (errors.length > 0 ? "has-error " : "") + (gridClass || "")}>
                 {label && <label>{label}</label>}
-                <input type="file" onChange={this.handleChange}/>
+                <input type="file" onChange={this.handleChange} disabled={this.props.disabled}/>
                 {
                     errors.length > 0 &&
                     <ul style={helpBlockStyle}>
@@ -36,11 +36,13 @@ class FileInput extends React.Component {
 }
 
 FileInput.defaultProps = {
+    disabled: false,
     errors: {},
     onChange: () => {}
 };
 
 FileInput.propTypes = {
+    disabled: PropTypes.bool,
     errors: PropTypes.objectOf(
         PropTypes.arrayOf(PropTypes.string)
     ),

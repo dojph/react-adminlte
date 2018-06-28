@@ -29,7 +29,11 @@ class Form extends React.Component {
                 let childProps = {};
                 if(React.isValidElement(child) && React.Component.prototype.isPrototypeOf(child.type.prototype) &&
                     this.isFormElement(child.type)) {
-                    childProps = {...this.props, onChange: this.handleChange};
+                    childProps = {
+                        ...this.props,
+                        disabled: this.props.disabled || child.props.disabled,
+                        onChange: this.handleChange
+                    };
                 }
                 if(child && child.props) {
                     childProps.children = this.recursiveCloneChildren(child.props.children);

@@ -36,7 +36,7 @@ class TextArea extends React.Component {
                 <div style={containerStyle}>
                     <textarea readOnly={this.props.readOnly} className="form-control"
                               placeholder={this.props.placeholder} onChange={this.handleChange} value={value}
-                              maxLength={this.props.maxLength} style={{height: '140px'}}/>
+                              maxLength={this.props.maxLength} style={{height: '140px'}} disabled={this.props.disabled}/>
                     {
                         this.props.showCounter &&
                         <span className="text-muted" style={counterStyle}>
@@ -56,6 +56,7 @@ class TextArea extends React.Component {
 }
 
 TextArea.defaultProps = {
+    disabled: false,
     errors: {},
     maxLength: 500,
     onChange: () => {},
@@ -64,6 +65,7 @@ TextArea.defaultProps = {
 };
 
 TextArea.propTypes = {
+    disabled: PropTypes.bool,
     errors: PropTypes.objectOf(
         PropTypes.arrayOf(PropTypes.string)
     ),
