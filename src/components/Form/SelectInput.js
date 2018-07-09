@@ -79,6 +79,7 @@ class SelectInput extends React.Component {
                     clearable={this.props.clearable}
                     placeholder={this.props.disabled ? "N/A" : "Select..."}
                     options={modOptions}
+                    optionRenderer={this.props.optionRenderer}
                     disabled={this.props.disabled}
                     simpleValue={this.props.simpleValue}
                     style={selectStyle}
@@ -118,6 +119,7 @@ SelectInput.propTypes = {
     labelKey: PropTypes.string,
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func,
+    optionRenderer: PropTypes.func,
     options: PropTypes.array,
     placeholder: PropTypes.string,
     searchable: PropTypes.bool,
