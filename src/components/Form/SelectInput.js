@@ -83,6 +83,7 @@ class SelectInput extends React.Component {
                     disabled={this.props.disabled}
                     simpleValue={this.props.simpleValue}
                     style={selectStyle}
+                    valueRenderer={this.props.valueRenderer}
                 />
                 {
                     errors.length > 0 &&
@@ -125,7 +126,8 @@ SelectInput.propTypes = {
     searchable: PropTypes.bool,
     simpleValue: PropTypes.bool,
     value: PropTypes.any,
-    valueKey: PropTypes.string
+    valueKey: PropTypes.string,
+    valueRenderer: PropTypes.func
 };
 
 export default SelectInput;
