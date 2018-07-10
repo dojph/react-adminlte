@@ -1,3 +1,5 @@
+import './calendarInputStyles.css';
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import TetheredDateTime from './TetheredDateTime';
@@ -13,41 +15,54 @@ class CalendarInput extends React.Component {
         this.props.onChange(this.name, date);
     };
 
+    handleClear = () => {
+        this.props.onChange(this.name, null);
+    };
+
     render() {
         // Check for form errors
         const errors = this.props.errors[this.name] || [];
 
         return (
-            <div className={"form-group " + (errors.length > 0 ? "has-error " : "") + (this.props.gridClass || "")}>
-                {this.props.label && <label>{this.props.label}</label>}
-                <div className="input-group">
-                    <div className="input-group-addon">
-                        <i className={this.props.iconClass}/>
-                    </div>
-                    <TetheredDateTime
-                        inputProps={{readOnly: !this.props.disabled, disabled: this.props.disabled}}
-                        onChange={this.handleChange}
-                        value={this.props.value}
-                        isValidDate={this.props.dateValidator}
-                        timeConstraints={this.props.timeConstraints}
-                        closeOnSelect={!this.props.timeFormat}
-                        className={this.props.innerClass}
-                        timeFormat={this.props.timeFormat}
-                        dateFormat={this.props.dateFormat}
-                    />
-                </div>
+            <div className="calendar-input">
                 {
-                    errors.length > 0 &&
-                    <ul style={helpBlockStyle}>
-                        {errors.map((e, index) => <li key={index}><span>{e}</span></li>)}
-                    </ul>
+                    this.props.clearable && Boolean(this.props.value) &&
+                    <div className="calendar-input-clear">
+                        <button onClick={this.handleClear}><i className="fa fa-times"/></button>
+                    </div>
                 }
+                <div className={"form-group " + (errors.length > 0 ? "has-error " : "") + (this.props.gridClass || "")}>
+                    {this.props.label && <label>{this.props.label}</label>}
+                    <div className="input-group">
+                        <div className="input-group-addon">
+                            <i className={this.props.iconClass}/>
+                        </div>
+                        <TetheredDateTime
+                            inputProps={{readOnly: !this.props.disabled, disabled: this.props.disabled}}
+                            onChange={this.handleChange}
+                            value={this.props.value}
+                            isValidDate={this.props.dateValidator}
+                            timeConstraints={this.props.timeConstraints}
+                            closeOnSelect={!this.props.timeFormat}
+                            className={this.props.innerClass}
+                            timeFormat={this.props.timeFormat}
+                            dateFormat={this.props.dateFormat}
+                        />
+                    </div>
+                    {
+                        errors.length > 0 &&
+                        <ul style={helpBlockStyle}>
+                            {errors.map((e, index) => <li key={index}><span>{e}</span></li>)}
+                        </ul>
+                    }
+                </div>
             </div>
         );
     }
 }
 
 CalendarInput.defaultProps = {
+    clearable: true,
     dateFormat: true,
     disabled: false,
     errors: {},
