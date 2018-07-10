@@ -47,6 +47,20 @@ class DropdownButton extends React.Component {
         this.setState({show: !this.state.show});
     };
 
+    renderButtonLabel = () => {
+        const {renderButtonLabel} = this.props;
+
+        if(renderButtonLabel) {
+            return renderButtonLabel(this.props.label);
+        }
+
+        return (
+            <span>
+                {this.props.label} <i className="caret"/>
+            </span>
+        );
+    };
+
     render() {
         // Find menu items
         const children = React.Children.toArray(this.props.children);
@@ -67,7 +81,7 @@ class DropdownButton extends React.Component {
                                 <div ref={this.setButtonRef}>
                                     <button ref={ref} type="button" className={this.props.className}
                                             onClick={this.handleButtonClick}>
-                                            {this.props.label} <i className="caret"/>
+                                        {this.renderButtonLabel()}
                                     </button>
                                 </div>
                             )
@@ -107,7 +121,8 @@ DropdownButton.propTypes = {
     label: PropTypes.string,
     menuAlignment: PropTypes.oneOf([
         'left', 'right'
-    ])
+    ]),
+    renderButtonLabel: PropTypes.func
 };
 
 DropdownButton.MenuItem = MenuItem;
