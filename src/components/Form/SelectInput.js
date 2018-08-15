@@ -3,12 +3,7 @@ import PropTypes from 'prop-types';
 
 import TetheredSelect from './TetheredSelect';
 import './selectInputStyles.css';
-
-const selectStyle = {
-    borderColor: '#d2d6de',
-    borderRadius: 0,
-    height: '34px'
-};
+import helpBlockStyle from "./helpBlockStyle";
 
 class SelectInput extends React.Component {
     constructor(props) {
@@ -82,12 +77,11 @@ class SelectInput extends React.Component {
                     optionRenderer={this.props.optionRenderer}
                     disabled={this.props.disabled}
                     simpleValue={this.props.simpleValue}
-                    style={selectStyle}
                     valueRenderer={this.props.valueRenderer}
                 />
                 {
                     errors.length > 0 &&
-                    <ul className='help-block'>
+                    <ul className='help-block' style={helpBlockStyle}>
                         { errors.map((e, index) => <li key={index}><span>{e}</span></li>)}
                     </ul>
                 }

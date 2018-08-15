@@ -2,3 +2,13 @@
     background-color: #eee;
     cursor: not-allowed;
 }
+
+.Select-control {
+    border-color: #d2d6de;
+    border-radius: 0;
+    height: 34px;
+}
+
+.has-error .Select-control {
+    border-color: #dd4b39;
+}
