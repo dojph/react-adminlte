@@ -64,13 +64,17 @@ class DropdownButton extends React.Component {
     render() {
         // Find menu items
         const children = React.Children.toArray(this.props.children);
+        let menuItemCount = 0;
         const menuItems = children.filter(child => child.type === MenuItem || child.type === Divider)
-            .map(item => item.type === MenuItem ?
-                React.cloneElement(item, {
-                    closeMenuCallback: this.closeMenu
-                }) :
-                item
-            );
+            .map(item => {
+                if(item.type === MenuItem) {
+                    menuItemCount++;
+                    return React.cloneElement(item, {
+                        closeMenuCallback: this.closeMenu
+                    })
+                } else return item
+            });
+        const {disabledIfEmpty} = this.props;
 
         return (
             <Manager>
@@ -80,7 +84,8 @@ class DropdownButton extends React.Component {
                             return (
                                 <div ref={this.setButtonRef}>
                                     <button ref={ref} type="button" className={this.props.className}
-                                            onClick={this.handleButtonClick}>
+                                            onClick={this.handleButtonClick}
+                                            disabled={disabledIfEmpty && menuItemCount === 0}>
                                         {this.renderButtonLabel()}
                                     </button>
                                 </div>
@@ -89,7 +94,7 @@ class DropdownButton extends React.Component {
                     }
                 </Reference>
                 {
-                    this.state.show &&
+                    this.state.show && menuItemCount > 0 &&
                     ReactDOM.createPortal(
                         <Popper placement={this.props.menuAlignment === 'left' ? 'bottom-start' : 'bottom-end'}>
                             {
@@ -113,11 +118,13 @@ class DropdownButton extends React.Component {
 }
 
 DropdownButton.defaultProps = {
-    menuAlignment: 'left'
+    disabledIfEmpty: true,
+    menuAlignment: 'left',
 };
 
 DropdownButton.propTypes = {
     className: PropTypes.string,
+    disabledIfEmpty: PropTypes.bool,
     label: PropTypes.string,
     menuAlignment: PropTypes.oneOf([
         'left', 'right'
