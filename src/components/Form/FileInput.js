@@ -26,7 +26,7 @@ class FileInput extends React.Component {
                 <input type="file" onChange={this.handleChange} disabled={this.props.disabled}/>
                 {
                     errors.length > 0 &&
-                    <ul style={helpBlockStyle}>
+                    <ul className="help-block" style={helpBlockStyle}>
                         {errors.map((e, i) => <li key={i}><span>{e}</span></li>)}
                     </ul>
                 }
