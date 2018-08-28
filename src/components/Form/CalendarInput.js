@@ -24,14 +24,14 @@ class CalendarInput extends React.Component {
         const errors = this.props.errors[this.name] || [];
 
         return (
-            <div className="calendar-input">
-                {
-                    this.props.clearable && Boolean(this.props.value) &&
-                    <div className="calendar-input-clear">
-                        <button onClick={this.handleClear}><i className="fa fa-times"/></button>
-                    </div>
-                }
-                <div className={"form-group " + (errors.length > 0 ? "has-error " : "") + (this.props.gridClass || "")}>
+            <div className={"form-group " + (errors.length > 0 ? "has-error " : "") + (this.props.gridClass || "")}>
+                <div className="calendar-input">
+                    {
+                        this.props.clearable && Boolean(this.props.value) &&
+                        <div className="calendar-input-clear">
+                            <button onClick={this.handleClear}><i className="fa fa-times"/></button>
+                        </div>
+                    }
                     {this.props.label && <label>{this.props.label}</label>}
                     <div className="input-group">
                         <div className="input-group-addon">
@@ -49,13 +49,13 @@ class CalendarInput extends React.Component {
                             dateFormat={this.props.dateFormat}
                         />
                     </div>
-                    {
-                        errors.length > 0 &&
-                        <ul style={helpBlockStyle}>
-                            {errors.map((e, index) => <li key={index}><span>{e}</span></li>)}
-                        </ul>
-                    }
                 </div>
+                {
+                    errors.length > 0 &&
+                    <ul className="help-block" style={helpBlockStyle}>
+                        {errors.map((e, index) => <li key={index}><span>{e}</span></li>)}
+                    </ul>
+                }
             </div>
         );
     }

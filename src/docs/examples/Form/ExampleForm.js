@@ -31,7 +31,7 @@ export default class ExampleForm extends React.Component {
 
     render() {
         const errors = {
-            name: [ "Invalid name." ]
+            birthdate: [ "Invalid name." ]
         };
 
         const cityOptions = [
