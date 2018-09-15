@@ -29,7 +29,10 @@ class DataTable extends React.Component {
     };
 
     renderEmptyMessage = () => {
-        return <tr><td colSpan={this.props.columnDefs.length}>{this.props.emptyMessage}</td></tr>;
+        const {showEmptyMessageRow} = this.props;
+        return showEmptyMessageRow ?
+            <tr><td colSpan={this.props.columnDefs.length}>{this.props.emptyMessage}</td></tr> :
+            null;
     };
 
     renderTableBody = () => {
@@ -86,6 +89,7 @@ DataTable.defaultProps = {
     extra: {},
     identifierKey: 'id',
     onRowClick: object => {},
+    showEmptyMessageRow: true,
     tableClassName: ""
 };
 
@@ -105,6 +109,7 @@ DataTable.propTypes = {
     footRenderer: PropTypes.func,
     identifierKey: PropTypes.string,
     onRowClick: PropTypes.func,
+    showEmptyMessageRow: PropTypes.bool,
     tableClassName: PropTypes.string
 };
 
