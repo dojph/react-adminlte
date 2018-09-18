@@ -25,6 +25,7 @@ class CalendarInput extends React.Component {
 
         return (
             <div className={"form-group " + (errors.length > 0 ? "has-error " : "") + (this.props.gridClass || "")}>
+                {this.props.label && <label>{this.props.label}</label>}
                 <div className="calendar-input">
                     {
                         this.props.clearable && Boolean(this.props.value) &&
@@ -32,7 +33,6 @@ class CalendarInput extends React.Component {
                             <button onClick={this.handleClear}><i className="fa fa-times"/></button>
                         </div>
                     }
-                    {this.props.label && <label>{this.props.label}</label>}
                     <div className="input-group">
                         <div className="input-group-addon">
                             <i className={this.props.iconClass}/>
