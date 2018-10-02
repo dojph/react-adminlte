@@ -12,7 +12,7 @@ class SelectInput extends React.Component {
     }
 
     handleChange = item => {
-        let value = this.props.simpleValue ? item : item[this.props.valueKey];
+        let value = this.props.simpleValue ? item : (item && item[this.props.valueKey]);
         let currentValue = this.props.simpleValue ? this.props.value : (this.props.value && this.props.value[this.props.valueKey]);
 
         switch(value) {
