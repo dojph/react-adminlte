@@ -3,12 +3,7 @@ import PropTypes from 'prop-types';
 
 import TetheredSelect from './TetheredSelect';
 import './selectInputStyles.css';
-
-const selectStyle = {
-    borderColor: '#d2d6de',
-    borderRadius: 0,
-    height: '34px'
-};
+import helpBlockStyle from "./helpBlockStyle";
 
 class SelectInput extends React.Component {
     constructor(props) {
@@ -17,7 +12,7 @@ class SelectInput extends React.Component {
     }
 
     handleChange = item => {
-        let value = this.props.simpleValue ? item : item[this.props.valueKey];
+        let value = this.props.simpleValue ? item : (item && item[this.props.valueKey]);
         let currentValue = this.props.simpleValue ? this.props.value : (this.props.value && this.props.value[this.props.valueKey]);
 
         switch(value) {
@@ -79,13 +74,14 @@ class SelectInput extends React.Component {
                     clearable={this.props.clearable}
                     placeholder={this.props.disabled ? "N/A" : "Select..."}
                     options={modOptions}
+                    optionRenderer={this.props.optionRenderer}
                     disabled={this.props.disabled}
                     simpleValue={this.props.simpleValue}
-                    style={selectStyle}
+                    valueRenderer={this.props.valueRenderer}
                 />
                 {
                     errors.length > 0 &&
-                    <ul className='help-block'>
+                    <ul className='help-block' style={helpBlockStyle}>
                         { errors.map((e, index) => <li key={index}><span>{e}</span></li>)}
                     </ul>
                 }
@@ -118,12 +114,14 @@ SelectInput.propTypes = {
     labelKey: PropTypes.string,
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func,
+    optionRenderer: PropTypes.func,
     options: PropTypes.array,
     placeholder: PropTypes.string,
     searchable: PropTypes.bool,
     simpleValue: PropTypes.bool,
     value: PropTypes.any,
-    valueKey: PropTypes.string
+    valueKey: PropTypes.string,
+    valueRenderer: PropTypes.func
 };
 
 export default SelectInput;
