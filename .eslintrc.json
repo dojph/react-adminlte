@@ -1,0 +1,7 @@
+{
+  "extends": "react-app",
+  "rules": {
+    "default-case": "off",
+    "jsx-a11y/anchor-is-valid": "off"
+  }
+}
