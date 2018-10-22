@@ -15,7 +15,13 @@ class Modal extends React.Component {
             exited: true,
             fixedWidth: 0,
             fixedHeight: 0,
-            fixedMaxWidth: 0
+            fixedMaxWidth: 0,
+            bodyHeight: 0
+        };
+
+        this.bodyRef = null;
+        this.setBodyRef = element => {
+            this.bodyRef = element;
         };
     }
 
@@ -53,6 +59,10 @@ class Modal extends React.Component {
                 fixedWidth: window.innerWidth - 21,
                 fixedMaxWidth: maxWidth
             });
+        }
+
+        if(this.bodyRef) {
+            this.setState({bodyHeight: this.bodyRef.clientHeight});
         }
     };
 
@@ -141,12 +151,15 @@ class Modal extends React.Component {
             };
         }
 
+        const {isLoading} = this.props;
+
         return (
             <CSSTransition
                 in={this.state.mounted && this.props.show}
                 timeout={150}
                 classNames="modal"
                 onEnter={this.handleEnter}
+                onEntering={this.updateDimensions}
                 onExited={this.handleExited}
                 unmountOnExit
             >
@@ -164,8 +177,14 @@ class Modal extends React.Component {
                                     <div className="modal-content">
                                         {header}
                                         {
+                                            isLoading &&
+                                            <div className="modal-overlay" style={{height: this.state.bodyHeight}}>
+                                                <i className="fa fa-spinner fa-spin"/>
+                                            </div>
+                                        }
+                                        {
                                             body &&
-                                            <div className="modal-body" style={bodyStyle}>
+                                            <div className="modal-body" style={bodyStyle} ref={this.setBodyRef}>
                                                 {body}
                                             </div>
                                         }
@@ -185,6 +204,7 @@ Modal.defaultProps = {
     closeOnBackdropClick: true,
     closeOnEscapeKey: true,
     fixedScroll: false,
+    isLoading: false,
     onCloseClick: () => {},
     onEnter: () => {},
     onExit: () => {},
@@ -198,6 +218,7 @@ Modal.propTypes = {
     closeOnEscapeKey: PropTypes.bool,
     dialogClassName: PropTypes.string,
     fixedScroll: PropTypes.bool,
+    isLoading: PropTypes.bool,
     onCloseClick: PropTypes.func,
     onEnter: PropTypes.func,
     onExit: PropTypes.func,
