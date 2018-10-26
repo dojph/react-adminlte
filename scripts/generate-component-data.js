@@ -55,7 +55,7 @@ function getComponentData(paths, componentName) {
 function getExampleData(examplesPath, componentName) {
     const examples = getExampleFiles(examplesPath, componentName);
     return examples.map(function(file) {
-        const filePath = path.join(examplesPath, componentName, file);
+        const filePath = path.join(examplesPath, componentName, 'examples', file);
         const content = readFile(filePath);
         const info = parse(content);
         return {
@@ -71,7 +71,7 @@ function getExampleData(examplesPath, componentName) {
 function getExampleFiles(examplesPath, componentName) {
     let exampleFiles = [];
     try {
-        exampleFiles = getFiles(path.join(examplesPath, componentName));
+        exampleFiles = getFiles(path.join(examplesPath, componentName, 'examples'));
     } catch(error) {
         console.log(chalk.red(`No examples found for ${componentName}.`));
     }

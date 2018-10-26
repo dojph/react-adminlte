@@ -18,7 +18,6 @@ const ComponentPage = ({component}) => {
             </Content.Breadcrumb>
             <Content.Body>
                 <p>{description}</p>
-                <h4>Example{examples.length > 1 && "s"}</h4>
                 {
                     examples.length > 0 ?
                         examples.map( example => <Example key={example.code} example={example} componentName={name} /> ) :
