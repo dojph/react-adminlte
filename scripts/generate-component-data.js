@@ -11,7 +11,7 @@ const excludedComponents = [
 ];
 
 const paths = {
-    examples: path.join(__dirname, '../src', 'docs', 'examples'),
+    examples: path.join(__dirname, '../src', 'docs', 'components'),
     components: path.join(__dirname, '../src', 'components'),
     output: path.join(__dirname, '../', 'componentData.js')
 };
