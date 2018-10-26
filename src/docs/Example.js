@@ -3,6 +3,19 @@ import PropTypes from 'prop-types';
 import CodeExample from './CodeExample';
 
 class Example extends React.Component {
+    constructor(props) {
+        super(props);
+        const {name} = props.example;
+
+        // Must use CommonJS require to dynamically require because ES Modules must be statically analyzable.
+        this.exampleComponent = require(`./components/${this.props.componentName}/examples/${name}`).default;
+        try {
+            this.exampleDescription = require(`./components/${this.props.componentName}/examples/desc/${name}`).default;
+        } catch {
+            this.exampleDescription = null;
+        }
+    }
+
     toggleCode = event => {
         event.preventDefault();
         this.setState(prevState => {
@@ -11,23 +24,14 @@ class Example extends React.Component {
     };
 
     render() {
-        const {code, description, name} = this.props.example;
-        // Must use CommonJS require to dynamically require because ES Modules must be statically analyzable.
-        const ExampleComponent = require(`./components/${this.props.componentName}/examples/${name}`).default;
+        const {code} = this.props.example;
 
-        let ExampleDescription;
-        try {
-            ExampleDescription = require(`./components/${this.props.componentName}/examples/desc/${name}`).default;
-        } catch (e) {
-            ExampleDescription = null;
-        }
-
+        const ExampleComponent = this.exampleComponent;
+        const ExampleDescription = this.exampleDescription;
 
         return (
             <div className="example">
-                {description && <h4>{description}</h4> }
-
-                { ExampleDescription && <ExampleDescription/> }
+                { ExampleDescription && <ExampleDescription/>}
                 <ExampleComponent />
                 <CodeExample>{code}</CodeExample>
             </div>
