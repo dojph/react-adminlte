@@ -162,6 +162,7 @@ class Modal extends React.Component {
                 onEntering={this.updateDimensions}
                 onExited={this.handleExited}
                 unmountOnExit
+
             >
                 {
                     state => (
@@ -213,16 +214,36 @@ Modal.defaultProps = {
 };
 
 Modal.propTypes = {
+    /** className gets and sets the value of the class attribute of the specified element.*/
     className: PropTypes.string,
+
+    /** Set to true so that the modal will close by clickin the modal' backdrop. */
     closeOnBackdropClick: PropTypes.bool,
+
+    /** Set to true so that you can close the modal by just pressing the Escape key.*/
     closeOnEscapeKey: PropTypes.bool,
+
+
     dialogClassName: PropTypes.string,
+
     fixedScroll: PropTypes.bool,
+
+    /** Returns a boolean value for a postback or loading a content.*/
     isLoading: PropTypes.bool,
+
+    /** The function that is binded in this event will be invoked when the close button is clicked. */
     onCloseClick: PropTypes.func,
+
+    /** The function that is binded in this event will be invoked when the Enter key was pressed.*/
     onEnter: PropTypes.func,
+
+    /** The function that is binded in this event will be invoked when the user exits the Modal. */
     onExit: PropTypes.func,
+
+    /** Set to true to open the modal */
     show: PropTypes.bool,
+
+    /** You can set the modal size in this prop*/
     size: PropTypes.oneOf(['default', 'large', 'small'])
 };
 

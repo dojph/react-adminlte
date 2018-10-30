@@ -123,9 +123,16 @@ DropdownButton.defaultProps = {
 };
 
 DropdownButton.propTypes = {
+    /** className gets and sets the value of the class attribute of the specified element*/
     className: PropTypes.string,
+
+    /** Set to true if the button will be disabled when a particular input is empty*/
     disabledIfEmpty: PropTypes.bool,
+
+    /** Label of the button*/
     label: PropTypes.string,
+
+    /** You can set the alignment of the DropdownButton in this prop*/
     menuAlignment: PropTypes.oneOf([
         'left', 'right'
     ]),

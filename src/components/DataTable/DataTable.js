@@ -95,7 +95,11 @@ DataTable.defaultProps = {
 
 DataTable.propTypes = {
     bodyRenderer: PropTypes.func,
+
+    /** className gets and sets the value of the class attribute of the specified element.*/
     className: PropTypes.string,
+
+    /** It sets a column definition properties*/
     columnDefs: PropTypes.arrayOf(PropTypes.shape({
         header: PropTypes.string,
         renderValue: PropTypes.oneOfType([
@@ -103,13 +107,27 @@ DataTable.propTypes = {
             PropTypes.func
         ])
     })),
+    /** You can set the data of the table by passing an array or object in this prop.*/
     data: PropTypes.arrayOf(PropTypes.object),
+
+    /** The message that will be shown when there's no data in the table.*/
     emptyMessage: PropTypes.string,
+
+    /** You can add an extra customized props by binding it in this prop.*/
     extra: PropTypes.object,
+
     footRenderer: PropTypes.func,
+
+    /** It sets the identifier key of the Table.*/
     identifierKey: PropTypes.string,
+
+    /** Function to invoke when a row is clicked.*/
     onRowClick: PropTypes.func,
+
+    /** Set to true so that the empty message will be shown.*/
     showEmptyMessageRow: PropTypes.bool,
+
+    /** The className of the table.*/
     tableClassName: PropTypes.string
 };
 
