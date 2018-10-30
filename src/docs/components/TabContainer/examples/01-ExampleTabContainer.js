@@ -1,15 +1,25 @@
 import React from 'react';
 import TabContainer from "doj-react-adminlte/TabContainer";
 import Tab from "doj-react-adminlte/TabContainer/Tab";
-import TabUtilityButton from "doj-react-adminlte/TabContainer/TabUtilityButton";
+import TabToolBox from "doj-react-adminlte/TabContainer/TabToolBox";
+
+const buttonStyle = {
+    width: '120px'
+};
 
 export default class ExampleTabContainer extends React.Component {
+    handleClick = () => {
+        console.log("Clicked!");
+    };
+
     render() {
         return (
             <TabContainer defaultTab="profile">
-                <TabUtilityButton onClick={() => { console.log("Clicked!"); }}
-                                  label={<span><i className="fa fa-save margin-r-5"/>Save</span>}
-                                  className="btn btn-primary"/>
+                <TabToolBox>
+                    <button onClick={this.handleClick} type="button" className="btn btn-primary" style={buttonStyle}>
+                        <i className="fa fa-thumbs-up margin-r-5"/>Click Me!
+                    </button>
+                </TabToolBox>
                 <Tab label="Profile" tabId="profile">
                     <h4>Profile Tab</h4>
                 </Tab>
