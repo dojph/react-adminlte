@@ -57,7 +57,7 @@ Form.defaultProps = {
 
 Form.propTypes = {
 
-    /** You can assign the error message/s variable in this props that will be executed when the validation failed*/
+    /** You can bind the error message/s variable in this props that will be executed when the validation failed*/
     errors: PropTypes.object,
 
     /** The corresponding function that is binded in this event handler will trigger when the value of an element has been changed*/

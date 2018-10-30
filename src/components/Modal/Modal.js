@@ -226,6 +226,7 @@ Modal.propTypes = {
 
     dialogClassName: PropTypes.string,
 
+    /** Set to true to show a scrollbar.*/
     fixedScroll: PropTypes.bool,
 
     /** Returns a boolean value for a postback or loading a content.*/
