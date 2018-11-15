@@ -25,16 +25,16 @@ Alert.defaultProps = {
 };
 
 Alert.propTypes = {
-    /** Alert Icons. Check AdminLTE for the list of icons available */
+    /** Alert Icons. Check AdminLTE for the list of icons available.*/
     iconClass: PropTypes.string,
 
-    /** The title header of your Alert component */
+    /** The title header of your Alert component.*/
     title: PropTypes.string,
 
-    /** The type of the Alert*/
+    /** The type of the Alert.*/
     type: PropTypes.string,
 
-    /** The function/method that will execute after you click the close button*/
+    /** The function that is binded in this prop will execute after you click the close button.*/
     onClose: PropTypes.func
 };
 

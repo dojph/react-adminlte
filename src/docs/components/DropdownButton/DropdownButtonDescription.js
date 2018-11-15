@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default class FormDescription extends React.Component {
+export default class DropdownButtonDescription extends React.Component {
     render() {
         return (
-                <p>DropdownButton is almost the same as ValueButton but it has a slight difference because when you click it, a drop-down button list will appear.  </p>
+                <p>DropdownButton component is a contextual overlays for displaying lists of links and more. It is a button that, when clicked, it will show its sub-buttons. </p>
         );
     }
 }

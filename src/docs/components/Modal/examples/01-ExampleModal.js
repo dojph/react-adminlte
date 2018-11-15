@@ -23,7 +23,7 @@ export default class ExampleModal extends React.Component {
     render() {
         return (
             <div>
-                <button className="btn btn-default" type="button" onClick={this.handleClick}>
+                <button className="btn btn-info" type="button" onClick={this.handleClick}>
                     Open Default Modal
                 </button>
                 <Modal show={this.state.show} onCloseClick={this.handleCloseClick} size="large" fixedScroll>

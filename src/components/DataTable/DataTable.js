@@ -94,12 +94,13 @@ DataTable.defaultProps = {
 };
 
 DataTable.propTypes = {
+    /** It sets the data inside the Table Body.*/
     bodyRenderer: PropTypes.func,
 
-    /** className gets and sets the value of the class attribute of the specified element.*/
+    /** className gets and sets the value of the class attribute of the specified element. You can also add a CSS class in this prop to style a particular element.*/
     className: PropTypes.string,
 
-    /** It sets a column definition properties*/
+    /** It sets a column definition properties.*/
     columnDefs: PropTypes.arrayOf(PropTypes.shape({
         header: PropTypes.string,
         renderValue: PropTypes.oneOfType([
@@ -113,9 +114,10 @@ DataTable.propTypes = {
     /** The message that will be shown when there's no data in the table.*/
     emptyMessage: PropTypes.string,
 
-    /** You can add an extra customized props by binding it in this prop.*/
+    /** You can add an extra user-defined props by binding it in this prop.*/
     extra: PropTypes.object,
 
+    /** It sets the data inside the Footer Body.*/
     footRenderer: PropTypes.func,
 
     /** It sets the identifier key of the Table.*/

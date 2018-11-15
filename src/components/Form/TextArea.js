@@ -69,6 +69,7 @@ TextArea.propTypes = {
     errors: PropTypes.objectOf(
         PropTypes.arrayOf(PropTypes.string)
     ),
+    showCounter: PropTypes.bool,
     gridClass: PropTypes.string,
     label: PropTypes.string,
     maxLength: PropTypes.number,

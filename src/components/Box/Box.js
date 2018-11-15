@@ -64,13 +64,13 @@ class Box extends React.Component {
 }
 
 Box.propTypes = {
-    /** Returns a boolean value for a postback or loading a content*/
+    /** Returns a boolean value for a postback or loading a content.*/
     isLoading: PropTypes.bool,
 
-    /** Box theme. See AdminLTE guide for a list of themes. */
+    /** Box theme. See AdminLTE guide for a list of themes.*/
     theme: PropTypes.string,
 
-    /** Set to true if box should be collapsible. */
+    /** Set to true if box should be collapsible.*/
     collapsible: PropTypes.bool
 };
 

@@ -18,13 +18,13 @@ ValueButton.defaultProps = {
 };
 
 ValueButton.propTypes = {
-    /** className gets and sets the value of the class attribute of the specified element.*/
+    /** className gets and sets the value of the class attribute of the specified element. You can also add a CSS class in this prop to style a particular element.*/
     className: PropTypes.string,
 
     /** When the button is clicked, the corresponding function that is binded in this prop will trigger.*/
     onClick: PropTypes.func,
 
-    /** The value prop specifies the initial value for a ValueButton*/
+    /** The value prop specifies the initial value for a ValueButton.*/
      value: PropTypes.any
 };
 

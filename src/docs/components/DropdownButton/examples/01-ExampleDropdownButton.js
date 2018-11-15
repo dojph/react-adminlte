@@ -12,7 +12,7 @@ export default class ExampleDropdownButton extends React.Component {
 
     render() {
         return (
-            <DropdownButton label="Actions" className="btn btn-default btn-block">
+            <DropdownButton label="Actions" className="btn btn-danger btn-lg btn-block">
                 <DropdownButton.MenuItem label="Generate Reports"
                                          onClick={this.handleGenerateReport}/>
                 <DropdownButton.Divider/>

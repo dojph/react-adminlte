@@ -214,16 +214,16 @@ Modal.defaultProps = {
 };
 
 Modal.propTypes = {
-    /** className gets and sets the value of the class attribute of the specified element.*/
+    /** className gets and sets the value of the class attribute of the specified element. You can also add a CSS class in this prop to style a particular element.*/
     className: PropTypes.string,
 
-    /** Set to true so that the modal will close by clickin the modal' backdrop. */
+    /** Set to true to close the modal by just pressing the backdrop.*/
     closeOnBackdropClick: PropTypes.bool,
 
-    /** Set to true so that you can close the modal by just pressing the Escape key.*/
+    /** Set to true to close the modal by pressing Escape key.*/
     closeOnEscapeKey: PropTypes.bool,
 
-
+    /** dialogClassName is a css class to apply to the Modal Dialog.*/
     dialogClassName: PropTypes.string,
 
     /** Set to true to show a scrollbar.*/
@@ -232,19 +232,19 @@ Modal.propTypes = {
     /** Returns a boolean value for a postback or loading a content.*/
     isLoading: PropTypes.bool,
 
-    /** The function that is binded in this event will be invoked when the close button is clicked. */
+    /** The onCloseClick prop allows passing a function that will be invoked when the close button is clicked.*/
     onCloseClick: PropTypes.func,
 
-    /** The function that is binded in this event will be invoked when the Enter key was pressed.*/
+    /** The onEnter prop allows binding a function that will be invoked when the Enter button is clicked.*/
     onEnter: PropTypes.func,
 
-    /** The function that is binded in this event will be invoked when the user exits the Modal. */
+    /** The function that is binded in this event will be invoked when the user exits the Modal.*/
     onExit: PropTypes.func,
 
-    /** Set to true to open the modal */
+    /** Set to true to automatically show the modal.*/
     show: PropTypes.bool,
 
-    /** You can set the modal size in this prop*/
+    /** You can set the size of the Modal in this prop.*/
     size: PropTypes.oneOf(['default', 'large', 'small'])
 };
 

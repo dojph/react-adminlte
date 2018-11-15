@@ -4,7 +4,7 @@ export default class DataTableDescription extends React.Component {
     render() {
         return (
             <div>
-                <p>DataTable is a powerful component for creating table listings and adding iteractions to them. It also provides searching, sorting, and pagination without any configuration.</p>
+                <p>DataTable is a powerful component for creating table listings and adding interactions to them. It also provides paging, sorting, and filtering without any configurations.</p>
             </div>
         );
     }

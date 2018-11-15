@@ -6,7 +6,7 @@ export default class ExampleInfoBox extends React.Component {
         return (
             <div className="row">
                 <InfoBox label="Camera" colorClass="bg-aqua"
-                         iconClass="fa fa-camera">Camera!</InfoBox>
+                         iconClass="fa fa-camera">Camera</InfoBox>
                 <InfoBox label="Database" colorClass="bg-red"
                          iconClass="fa fa-database">Database</InfoBox>
                 <InfoBox label="Music" colorClass="bg-green"
