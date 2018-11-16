@@ -7,7 +7,14 @@ import Form, {
 import ValueButton from "doj-react-adminlte/ValueButton";
 
 export default class ExampleBox extends React.Component {
-
+    constructor(props){
+        super(props);
+        this.state = {
+            firstName: "",
+            middleName: "",
+            lastName: ""
+        }
+    }
     handleFormChange = (name, value) => {
         this.setState({[name]: value});
     };
@@ -20,9 +27,9 @@ export default class ExampleBox extends React.Component {
                     <Box.Header title="Form"/>
                     <Box.Body>
                         <Form onChange={this.handleFormChange}>
-                            <TextInput name="firstName" label="First Name"/>
-                            <TextInput name="middleName"  label="Middle Name"/>
-                            <TextInput name="lastName" label="Last Name"/>
+                            <TextInput name="firstName" label="First Name" value={this.state.firstName}/>
+                            <TextInput name="middleName"  label="Middle Name" value={this.state.middleName}/>
+                            <TextInput name="lastName" label="Last Name" value={this.state.lastName}/>
                         </Form>
                     </Box.Body>
                     <Box.Footer>
