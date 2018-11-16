@@ -60,8 +60,13 @@ class TabContainer extends React.Component {
 }
 
 TabContainer.propTypes = {
+    /** You can set the default tab in this prop.*/
     defaultTab: PropTypes.string,
+
+    /** You can set the active tab in this prop.*/
     activeTab: PropTypes.string,
+
+    /** The function that is binded will be invoked after clicking the tab button.*/
     onTabClick: PropTypes.func
 };
 

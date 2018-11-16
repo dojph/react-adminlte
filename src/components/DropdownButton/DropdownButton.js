@@ -123,12 +123,21 @@ DropdownButton.defaultProps = {
 };
 
 DropdownButton.propTypes = {
+    /** className gets and sets the value of the class attribute of the specified element. You can also add a CSS class in this prop to style a particular element.*/
     className: PropTypes.string,
+
+    /** Set to true to disable the button if empty.*/
     disabledIfEmpty: PropTypes.bool,
+
+    /** Label of the button.*/
     label: PropTypes.string,
+
+    /** You can set the alignment of the DropdownButton in this prop.*/
     menuAlignment: PropTypes.oneOf([
         'left', 'right'
     ]),
+
+    /** You can bind a complex function that will manipulate the label of the button.*/
     renderButtonLabel: PropTypes.func
 };
 

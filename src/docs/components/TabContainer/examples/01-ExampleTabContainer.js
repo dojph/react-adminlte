@@ -20,6 +20,9 @@ export default class ExampleTabContainer extends React.Component {
                         <i className="fa fa-thumbs-up margin-r-5"/>Click Me!
                     </button>
                 </TabToolBox>
+                <Tab label="Home" tabId="home">
+                    <h4>Home Tab</h4>
+                </Tab>
                 <Tab label="Profile" tabId="profile">
                     <h4>Profile Tab</h4>
                 </Tab>

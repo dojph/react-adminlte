@@ -27,8 +27,11 @@ InfoBox.defaultProps = {
 };
 
 InfoBox.propTypes = {
+    /** The color of the InfoBox.*/
     colorClass: PropTypes.string,
+    /** InfoBox Icons. Check AdminLTE for the list of icons available.*/
     iconClass: PropTypes.string.isRequired,
+    /** Defines the label of the InfoBox.*/
     label: PropTypes.string
 };
 

@@ -84,11 +84,22 @@ Avatar.defaultProps = {
 };
 
 Avatar.propTypes = {
+    /** Set the firstname of the Avatar in this prop.*/
     firstName: PropTypes.string.isRequired,
+
+    /** Set the lastname of the Avatar in this prop.*/
     lastName: PropTypes.string,
+
+    /** It specifies the URL of the image.*/
     imgSrc: PropTypes.string,
+
+    /** Set the size of the specified Avatar.*/
     size: PropTypes.number,
+
+    /** Set the text size in this prop.*/
     textSizeRatio: PropTypes.number,
+
+    /** Set to true to change the shape of the component into a rounded shape.*/
     round: PropTypes.bool
 };
 
