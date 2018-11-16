@@ -22,7 +22,7 @@ export default class ExampleAlert extends React.Component{
         if (show) {
             return (
                 <div>
-                    <Alert iconClass='fa fa-info' type='alert-danger' onDismiss={this.handleDismiss}>
+                    <Alert iconClass='fa fa-info' type='alert-danger' onClose={this.handleDismiss}>
                         <h1>Warning!!</h1>
                         <p>
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry.
