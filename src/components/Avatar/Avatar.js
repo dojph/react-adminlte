@@ -12,7 +12,7 @@ class Avatar extends React.Component {
     static prepareInitials(firstName, lastName) {
         let initial = firstName.substr(0, 1);
 
-        if(lastName) {
+        if (lastName) {
             if (lastName.startsWith("dela ")) {
                 initial += lastName.substr(4, 2);
             } else if (lastName.startsWith("de la ")) {
@@ -27,8 +27,6 @@ class Avatar extends React.Component {
 
         return initial;
     }
-
-
 
     renderInitials = () => {
         const initialStyle = {
@@ -66,7 +64,7 @@ class Avatar extends React.Component {
             ...this.props.round && {borderRadius: '50%'},
             display: 'inline-block',
             overflow: 'hidden',
-            ...this.props.size && { width: `${this.props.size}px`, height: `${this.props.size}px` }
+            ...this.props.size && {width: `${this.props.size}px`, height: `${this.props.size}px`}
         };
 
         return (
@@ -79,13 +77,13 @@ class Avatar extends React.Component {
 
 Avatar.defaultProps = {
     round: false,
-    size: 200,
-    textSizeRatio: 1.72
+    size: 100,
+    textSizeRatio: 1.45
 };
 
 Avatar.propTypes = {
     /** Set the firstname of the Avatar in this prop.*/
-    firstName: PropTypes.string.isRequired,
+    firstName: PropTypes.string,
 
     /** Set the lastname of the Avatar in this prop.*/
     lastName: PropTypes.string,

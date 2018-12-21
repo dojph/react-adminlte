@@ -1,9 +1,7 @@
 import React from 'react';
-import Box from "doj-react-adminlte/Box";
 
-import Form, {
-    TextInput
-} from 'doj-react-adminlte/Form';
+import Box from "doj-react-adminlte/Box";
+import Form, {TextInput} from 'doj-react-adminlte/Form';
 import ValueButton from "doj-react-adminlte/ValueButton";
 
 export default class ExampleBox extends React.Component {
@@ -20,7 +18,6 @@ export default class ExampleBox extends React.Component {
     };
 
     render() {
-
         return (
             <div>
                 <Box collapsible={true} theme="box box-solid box-info">

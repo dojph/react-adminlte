@@ -25,7 +25,7 @@ class ComponentPage extends React.Component {
                 </Content.Breadcrumb>
                 <Content.Body>
                     { Description && <Description/> }
-                    <h4>Examples</h4>
+                    <h4><strong>Examples</strong></h4>
                     {
                         examples.length > 0 ?
                             examples.map( example => <Example key={example.code} example={example} componentName={name} /> ) :

@@ -1,9 +1,7 @@
 import React from 'react';
 
-
 export default class ExampleDropdownButton extends React.Component {
     render(){
-        return <h1><strong>DropdownButton</strong></h1>
+        return <h4>Dropdown Button</h4>
     }
-
 }

@@ -38,7 +38,7 @@ class DropdownButton extends React.Component {
     };
 
     handleClickOutside = event => {
-        if(this.state.show && !this.buttonRef.contains(event.target) && !this.menuRef.contains(event.target)) {
+        if (this.state.show && !this.buttonRef.contains(event.target) && !this.menuRef.contains(event.target)) {
             this.closeMenu();
         }
     };
@@ -50,7 +50,7 @@ class DropdownButton extends React.Component {
     renderButtonLabel = () => {
         const {renderButtonLabel} = this.props;
 
-        if(renderButtonLabel) {
+        if (renderButtonLabel) {
             return renderButtonLabel(this.props.label);
         }
 
@@ -67,7 +67,7 @@ class DropdownButton extends React.Component {
         let menuItemCount = 0;
         const menuItems = children.filter(child => child.type === MenuItem || child.type === Divider)
             .map(item => {
-                if(item.type === MenuItem) {
+                if (item.type === MenuItem) {
                     menuItemCount++;
                     return React.cloneElement(item, {
                         closeMenuCallback: this.closeMenu
