@@ -25,17 +25,20 @@ export default class ExampleModal extends React.Component {
                     <button className="btn btn-default" type="button" onClick={this.handleClick}>
                         Open Modal
                     </button>
-                    <Modal isLoading={isLoading} className="modal modal-default" show={this.state.show} onCloseClick={this.handleCloseClick} fixedScroll>
+                    <Modal isLoading={isLoading} className="modal modal-default" show={this.state.show}
+                           onCloseClick={this.handleCloseClick} fixedScroll>
                         <Modal.Header>
                             Default Modal
                         </Modal.Header>
                         <Modal.Body>
                             <p>
-                                Show prop is used for setting the state of the modal. Show prop is a boolean with values of either true or false.
+                                Show prop is used for setting the state of the modal.
+                                Show prop is a boolean with values of either true or false.
                             </p>
                         </Modal.Body>
                         <Modal.Footer>
-                            <button type="button" className="btn btn-default pull-left" onClick={this.handleCloseClick}>
+                            <button type="button" className="btn btn-default pull-left"
+                                    onClick={this.handleCloseClick}>
                                 Close
                             </button>
                         </Modal.Footer>

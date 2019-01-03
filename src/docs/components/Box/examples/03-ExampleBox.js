@@ -29,18 +29,24 @@ export default class ExampleBox extends React.Component {
                                message="Primary"/>
                     <SimpleBox theme="box-info" title="Info"
                                message="Info"/>
+                </div>
+                <div className='row'>
                     <SimpleBox theme="box-warning" title="Warning"
                                message="Warning"/>
                     <SimpleBox theme="box-success" title="Success"
                                message="Success"/>
                     <SimpleBox theme="box-danger" title="Danger"
                                message="Danger"/>
+                </div>
+                <div className='row'>
                     <SimpleBox theme="box-solid box-default" title="Default"
                                message="Solid Default"/>
                     <SimpleBox theme="box-solid box-primary" title="Primary"
                                message="Solid Primary"/>
                     <SimpleBox theme="box-solid box-info" title="Info"
                                message="Solid Info"/>
+                </div>
+                <div className='row'>
                     <SimpleBox theme="box-solid box-warning" title="Warning"
                                message="Solid Warning"/>
                     <SimpleBox theme="box-solid box-success" title="Success"
