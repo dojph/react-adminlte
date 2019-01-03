@@ -30,7 +30,7 @@ class Example extends React.Component {
         const ExampleDescription = this.exampleDescription;
 
         return (
-            <div className="example">
+            <div style={{marginTop: "20px"}}>
                 { ExampleDescription && <ExampleDescription/>}
                 <ExampleComponent />
                 <CodeExample>{code}</CodeExample>
