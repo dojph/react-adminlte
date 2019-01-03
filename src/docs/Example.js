@@ -32,8 +32,12 @@ class Example extends React.Component {
         return (
             <div style={{marginTop: "20px"}}>
                 { ExampleDescription && <ExampleDescription/>}
-                <ExampleComponent />
-                <CodeExample>{code}</CodeExample>
+                <div style={{border: "1px solid #d2d6de", borderRadius: "4px"}}>
+                    <div style={{padding: "20px", paddingTop: "20px"}}>
+                        <ExampleComponent />
+                    </div>
+                    <CodeExample>{code}</CodeExample>
+                </div>
             </div>
         )
     }

@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 import Example from './Example';
 import Props from './Props';
 
-import Content from "doj-react-adminlte/Content";
-import BreadcrumbItem from "doj-react-adminlte/Content/BreadcrumbItem";
-
 const articleStyle = {
     padding: "0 40px 50px 40px"
 };
