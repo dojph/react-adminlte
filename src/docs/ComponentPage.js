@@ -53,32 +53,6 @@ class ComponentPage extends React.Component {
                 </article>
             </React.Fragment>
         );
-
-        // return (
-        //     <Content>
-        //         <Content.Header title={name}/>
-        //         <Content.Breadcrumb>
-        //             <BreadcrumbItem label="Components" iconClass="fa fa-wrench"/>
-        //             <BreadcrumbItem label={name} active/>
-        //         </Content.Breadcrumb>
-        //         <Content.Body>
-        //             { Description && <Description/> }
-        //             <h4><strong>Examples</strong></h4>
-        //             {
-        //                 examples.length > 0 ?
-        //                     examples.map( example => <Example key={example.code} example={example} componentName={name} /> ) :
-        //                     "No examples exist."
-        //             }
-        //
-        //             <h4>Props</h4>
-        //             {
-        //                 props ?
-        //                     <Props props={props} /> :
-        //                     "This component accepts no props."
-        //             }
-        //         </Content.Body>
-        //     </Content>
-        // );
     }
 }
 
