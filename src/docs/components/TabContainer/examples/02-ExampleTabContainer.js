@@ -9,16 +9,30 @@ const buttonStyle = {
 };
 
 export default class ExampleTabContainer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            clicked: false
+        };
+    }
+
     handleClick = () => {
-        console.log("Clicked!");
+        this.setState({clicked: true});
+        setTimeout(() => {
+            this.setState({clicked: false});
+        }, 2000);
     };
 
     render() {
+        const {clicked} = this.state;
+
         return (
             <TabContainer defaultTab="profile">
                 <TabToolBox>
-                    <button onClick={this.handleClick} type="button" className="btn btn-primary" style={buttonStyle}>
-                        <i className="fa fa-thumbs-up margin-r-5"/>Click Me!
+                    <button onClick={this.handleClick} className="btn btn-primary"
+                            style={buttonStyle} disabled={clicked}>
+                        <i className="fa fa-thumbs-up margin-r-5"/>
+                        {clicked ? "Clicked!" : "Click Me!"}
                     </button>
                 </TabToolBox>
                 <Tab label="Home" tabId="home">

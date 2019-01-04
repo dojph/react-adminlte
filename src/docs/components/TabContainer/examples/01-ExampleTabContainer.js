@@ -6,9 +6,12 @@ import Tab from "doj-react-adminlte/TabContainer/Tab";
 export default class ExampleTabContainer extends React.Component {
     render() {
         return (
-            <TabContainer defaultTab="profile">
+            <TabContainer defaultTab="home">
                 <Tab label="Home" tabId="home">
-                    <h4>Tab helps you manage or group sections in your website.</h4>
+                    <p>Tab helps you manage or group sections in your website.</p>
+                </Tab>
+                <Tab label="Example" tabId="example">
+                    <p>My new example tab.</p>
                 </Tab>
             </TabContainer>
         );
