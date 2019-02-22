@@ -1,9 +1,9 @@
 import React from 'react';
 
-
-export default class ExampleBoxDescription extends React.Component {
+class ExampleBoxDescription extends React.Component {
     render(){
-        return <h1><strong>Box</strong></h1>
+        return <h4>Box</h4>
     }
-
 }
+
+export default ExampleBoxDescription;

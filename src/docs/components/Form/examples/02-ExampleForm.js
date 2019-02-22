@@ -1,8 +1,8 @@
 import React from 'react';
 
 import Form, {
-    CalendarInput, CheckBox, FileInput,
-    RadioGroup, SelectInput, TextArea,
+    CheckBox,
+    RadioGroup, SelectInput,
     TextInput
 } from "doj-react-adminlte/Form";
 

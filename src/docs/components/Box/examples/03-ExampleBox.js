@@ -1,104 +1,60 @@
 import React from 'react';
 import Box from "doj-react-adminlte/Box";
 
-import Form, {
-    TextInput
-} from 'doj-react-adminlte/Form';
-import ValueButton from "doj-react-adminlte/ValueButton";
-
-export default class ExampleBox extends React.Component {
-
-    handleFormChange = (name, value) => {
-        this.setState({[name]: value});
-    };
-
+class SimpleBox extends React.Component {
     render() {
+        const {theme, title, message} = this.props;
 
         return (
-                <Form>
-                    <div className='row'>
-                        <div className='col-xs-4'>
-                        <Box collapsible={true} theme="box box-solid box-default">
-                            <Box.Header title="Default"/>
-                            <Box.Body>
-                                Default!
-                            </Box.Body>
-                            <Box.Footer>
-                                <ValueButton className="btn btn-default pull-right">
-                                    Submit
-                                </ValueButton>
-                            </Box.Footer>
-                        </Box>
-                    </div>
-                        <div className='col-xs-4'>
-                            <Box collapsible={true} theme="box box-solid box-primary">
-                                <Box.Header title="Primary"/>
-                                <Box.Body>
-                                    Primary!
-                                </Box.Body>
-                                <Box.Footer>
-                                    <ValueButton className="btn btn-primary pull-right">
-                                        Submit
-                                    </ValueButton>
-                                </Box.Footer>
-                            </Box>
-                        </div>
-                        <div className='col-xs-4'>
-                            <Box collapsible={true} theme="box box-solid box-info">
-                                <Box.Header title="Info"/>
-                                <Box.Body>
-                                    Info!
-                                </Box.Body>
-                                <Box.Footer>
-                                    <ValueButton className="btn btn-info pull-right">
-                                        Submit
-                                    </ValueButton>
-                                </Box.Footer>
-                            </Box>
-                        </div>
-                    </div>
-                    <div className='row'>
-                        <div className='col-xs-4'>
-                            <Box collapsible={true} theme="box box-solid box-warning">
-                                <Box.Header title="Warning"/>
-                                <Box.Body>
-                                    Warning!
-                                </Box.Body>
-                                <Box.Footer>
-                                    <ValueButton className="btn btn-warning pull-right">
-                                        Submit
-                                    </ValueButton>
-                                </Box.Footer>
-                            </Box>
-                        </div>
-                        <div className='col-xs-4'>
-                            <Box collapsible={true} theme="box box-solid box-success">
-                                <Box.Header title="Success"/>
-                                <Box.Body>
-                                    Success!
-                                </Box.Body>
-                                <Box.Footer>
-                                    <ValueButton className="btn btn-success pull-right">
-                                        Submit
-                                    </ValueButton>
-                                </Box.Footer>
-                            </Box>
-                        </div>
-                        <div className='col-xs-4'>
-                            <Box collapsible={true} theme="box box-solid box-danger">
-                                <Box.Header title="Danger"/>
-                                <Box.Body>
-                                    Danger!
-                                </Box.Body>
-                                <Box.Footer>
-                                    <ValueButton className="btn btn-danger pull-right">
-                                        Submit
-                                    </ValueButton>
-                                </Box.Footer>
-                            </Box>
-                        </div>
-                    </div>
-                </Form>
+            <div className="col-xs-4">
+                <Box collapsible={true} theme={theme}>
+                    <Box.Header title={title}/>
+                    <Box.Body>
+                        {message}
+                    </Box.Body>
+                </Box>
+            </div>
+        );
+    }
+}
+
+export default class ExampleBox extends React.Component {
+    render() {
+        return (
+            <React.Fragment>
+                <div className='row'>
+                    <SimpleBox theme="box-default" title="Default"
+                               message="Default"/>
+                    <SimpleBox theme="box-primary" title="Primary"
+                               message="Primary"/>
+                    <SimpleBox theme="box-info" title="Info"
+                               message="Info"/>
+                </div>
+                <div className='row'>
+                    <SimpleBox theme="box-warning" title="Warning"
+                               message="Warning"/>
+                    <SimpleBox theme="box-success" title="Success"
+                               message="Success"/>
+                    <SimpleBox theme="box-danger" title="Danger"
+                               message="Danger"/>
+                </div>
+                <div className='row'>
+                    <SimpleBox theme="box-solid box-default" title="Default"
+                               message="Solid Default"/>
+                    <SimpleBox theme="box-solid box-primary" title="Primary"
+                               message="Solid Primary"/>
+                    <SimpleBox theme="box-solid box-info" title="Info"
+                               message="Solid Info"/>
+                </div>
+                <div className='row'>
+                    <SimpleBox theme="box-solid box-warning" title="Warning"
+                               message="Solid Warning"/>
+                    <SimpleBox theme="box-solid box-success" title="Success"
+                               message="Solid Success"/>
+                    <SimpleBox theme="box-solid box-danger" title="Danger"
+                               message="Solid Danger"/>
+                </div>
+            </React.Fragment>
         );
     }
 }

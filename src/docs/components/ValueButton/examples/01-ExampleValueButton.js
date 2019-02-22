@@ -22,8 +22,8 @@ export default class ExampleValueButton extends React.Component {
                     <span className="text-bold">myValue: </span>
                     <span>{this.state.myValue}</span>
                 </div>
-                <ValueButton className="btn btn-primary btn-lg" value={incrementValue} onClick={this.handleIncrementClick}>
-                    Increment myValue
+                <ValueButton className="btn btn-primary btn-sm" value={incrementValue} onClick={this.handleIncrementClick}>
+                    <i className="fa fa-plus" /> myValue
                 </ValueButton>
             </div>
         );

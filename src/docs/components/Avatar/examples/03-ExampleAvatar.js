@@ -1,23 +1,23 @@
 import React from 'react';
-import Avatar from 'doj-react-adminlte/Avatar';
+import Avatar from "doj-react-adminlte/Avatar";
 
-export default class ExampleAlert extends React.Component {
+export default class ExampleAvatar extends React.Component {
     render() {
         return (
             <React.Fragment>
                 <div className="row">
-                    <div className="col-md-2">
+                    <div className="col-xs-3">
                         <Avatar
                             firstName='Chelzy'
                             lastName='Baldovino'
-                            round={true}/>
-                        <h5>Rounded Avatar</h5>
+                            round={true} />
+                        <p>First and Last Name Initials</p>
                     </div>
-                    <div className='col-md-2'>
+                    <div className="col-xs-3">
                         <Avatar
                             firstName='Chelzy'
-                            lastName='Baldovino'/>
-                        <h5>Not Rounded Avatar</h5>
+                            round={true} />
+                        <p>First Name Initial</p>
                     </div>
                 </div>
             </React.Fragment>

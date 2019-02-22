@@ -35,7 +35,7 @@ Alert.propTypes = {
     /** The title header of your Alert component.*/
     title: PropTypes.string,
 
-    /** The type of the Alert.*/
+    /** Distinguishes an alert. It can be a danger, warning, info and success alert.*/
     type: PropTypes.string,
 
     /** The function that is binded in this prop will execute after you click the close button.*/

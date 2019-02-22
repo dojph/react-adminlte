@@ -4,7 +4,7 @@ export default class FormDescription extends React.Component {
     render() {
         return (
             <div>
-            <p>Form is used to collect user's input and send it to a server for processing.  </p>
+                <p>Form is used to collect user's input and send it to a server for processing.  </p>
                 <p>Form elements: </p>
                 <ul>
                     <li>TextInput</li>
