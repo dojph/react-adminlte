@@ -6,7 +6,7 @@ class InfoBox extends React.Component {
         const colorClass = "info-box-icon " + this.props.colorClass;
 
         return (
-            <div className="col-md-3 col-sm-6 col-xs-12">
+            <div className="col-md-6 col-xs-12">
                 <div className="info-box">
                     <span className={colorClass}>
                         <i className={this.props.iconClass}/>
