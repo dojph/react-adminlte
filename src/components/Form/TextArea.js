@@ -15,20 +15,15 @@ const counterStyle = {
 };
 
 class TextArea extends React.Component {
-    constructor(props) {
-        super(props);
-        this.name = props.name;
-    }
-
     handleChange = event => {
-        this.props.onChange(this.name, event.target.value);
+        this.props.onChange(this.props.name, event.target.value);
     };
 
     render() {
         const value = this.props.value || "";
 
         // Check for form errors
-        const errors = this.props.errors[this.name] || [];
+        const errors = this.props.errors[this.props.name] || [];
 
         return (
             <div className={"form-group " + (errors.length > 0 ? "has-error " : "") + (this.props.gridClass || "")}>

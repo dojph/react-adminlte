@@ -10,11 +10,6 @@ const labelStyle = {
 };
 
 class RadioGroup extends React.Component {
-    constructor(props) {
-        super(props);
-        this.name = props.name;
-    }
-
     componentDidMount() {
         if(this.props.firstDefault && !this.props.value && this.props.options.length) {
             this.props.onChange(this.props.name, this.props.options[0]);
@@ -25,7 +20,7 @@ class RadioGroup extends React.Component {
         // TODO: Optimize this by directly using the value instead of using find
         const {options, valueKey, simpleValue} = this.props;
         value = options.find(o => o[valueKey] === value.value);
-        this.props.onChange(this.name, simpleValue ? value[valueKey] : value);
+        this.props.onChange(this.props.name, simpleValue ? value[valueKey] : value);
     };
 
     render() {
@@ -41,7 +36,7 @@ class RadioGroup extends React.Component {
                             <Radio key={option[this.props.valueKey]}
                                    label={option[this.props.labelKey]}
                                    value={option[this.props.valueKey]}
-                                   name={this.name}
+                                   name={this.props.name}
                                    onChange={this.handleChange}
                                    checkedValue={checkedValue}
                                    inline={this.props.inline}

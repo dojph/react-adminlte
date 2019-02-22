@@ -2,13 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class CheckBox extends React.Component {
-    constructor(props) {
-        super(props);
-        this.name = props.name;
-    }
-
     handleChange = event => {
-        this.props.onChange(this.name, event.target.checked)
+        this.props.onChange(this.props.name, event.target.checked)
     };
 
     render() {

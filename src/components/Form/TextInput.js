@@ -3,13 +3,8 @@ import PropTypes from 'prop-types';
 import helpBlockStyle from './helpBlockStyle';
 
 class TextInput extends React.Component {
-    constructor(props) {
-        super(props);
-        this.name = props.name;
-    }
-
     handleChange = event => {
-        this.props.onChange(this.name, event.target.value);
+        this.props.onChange(this.props.name, event.target.value);
     };
 
     handleKeyUp = event => {
@@ -33,7 +28,7 @@ class TextInput extends React.Component {
         const value = this.props.value || "";
 
         // Check for form errors
-        const errors = this.props.errors[this.name] || [];
+        const errors = this.props.errors[this.props.name] || [];
 
         return (
             <div className={"form-group " + (errors.length > 0 ? "has-error " : "") + gridClass}>

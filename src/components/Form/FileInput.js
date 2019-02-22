@@ -4,14 +4,9 @@ import PropTypes from 'prop-types';
 import helpBlockStyle from './helpBlockStyle';
 
 class FileInput extends React.Component {
-    constructor(props) {
-        super(props);
-        this.name = props.name;
-    }
-
     handleChange = event => {
         const {files} = event.target;
-        this.props.onChange(this.name, files.length > 0 ? files[0] : null);
+        this.props.onChange(this.props.name, files.length > 0 ? files[0] : null);
     };
 
     render() {

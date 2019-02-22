@@ -6,22 +6,17 @@ import TetheredDateTime from './TetheredDateTime';
 import helpBlockStyle from './helpBlockStyle';
 
 class CalendarInput extends React.Component {
-    constructor(props) {
-        super(props);
-        this.name = props.name;
-    }
-
     handleChange = date => {
-        this.props.onChange(this.name, date);
+        this.props.onChange(this.props.name, date);
     };
 
     handleClear = () => {
-        this.props.onChange(this.name, null);
+        this.props.onChange(this.props.name, null);
     };
 
     render() {
         // Check for form errors
-        const errors = this.props.errors[this.name] || [];
+        const errors = this.props.errors[this.props.name] || [];
 
         return (
             <div className={"form-group " + (errors.length > 0 ? "has-error " : "") + (this.props.gridClass || "")}>

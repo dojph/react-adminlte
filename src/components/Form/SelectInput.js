@@ -6,11 +6,6 @@ import './selectInputStyles.css';
 import helpBlockStyle from "./helpBlockStyle";
 
 class SelectInput extends React.Component {
-    constructor(props) {
-        super(props);
-        this.name = props.name;
-    }
-
     handleChange = item => {
         let value = this.props.simpleValue ? item : (item && item[this.props.valueKey]);
         let currentValue = this.props.simpleValue ? this.props.value : (this.props.value && this.props.value[this.props.valueKey]);
@@ -26,7 +21,7 @@ class SelectInput extends React.Component {
         }
 
         if(value !== currentValue) {
-            this.props.onChange(this.name, item);
+            this.props.onChange(this.props.name, item);
         }
     };
 
@@ -55,7 +50,7 @@ class SelectInput extends React.Component {
         })) || [];
 
         // Check for form errors
-        const errors = this.props.errors[this.name] || [];
+        const errors = this.props.errors[this.props.name] || [];
 
         return (
             <div className={"form-group " + (errors.length > 0 ? "has-error " : "" ) + (this.props.gridClass || "")}>

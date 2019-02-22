@@ -2,11 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Radio extends React.Component {
-    constructor(props) {
-        super(props);
-        this.name = props.name;
-    }
-
     handleChange = event => {
         let value = event.target.value;
 
@@ -18,7 +13,7 @@ class Radio extends React.Component {
             value = Number(value.substr(9));
         }
 
-        this.props.onChange(this.name, {label: this.props.label, value})
+        this.props.onChange(this.props.name, {label: this.props.label, value})
     };
 
     render() {
