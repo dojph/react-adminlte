@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Select from 'react-select';
 import {Manager, Reference, Popper} from 'react-popper';
+import ResizeAware from "react-resize-aware";
 
 class TetheredSelect extends Select {
     constructor(props) {
@@ -39,7 +40,7 @@ class TetheredSelect extends Select {
                                     computeStyle: { enabled: true, gpuAcceleration: false }
                                 }}>
                             {
-                                ({ ref, style, placement}) =>
+                                ({ ref, style, placement, scheduleUpdate }) =>
                                     <div ref={ref}
                                          style={{
                                              ...style,
@@ -47,6 +48,7 @@ class TetheredSelect extends Select {
                                              width: this._getSelectWidth(),
                                              left: this._getSelectXPos()
                                          }} data-placement={placement}>
+                                        <ResizeAware onResize={scheduleUpdate}>
                                         {
                                             React.cloneElement(menu, {
                                                 style: {
@@ -56,6 +58,7 @@ class TetheredSelect extends Select {
                                                 }
                                             })
                                         }
+                                        </ResizeAware>
                                     </div>
                             }
                         </Popper>,
