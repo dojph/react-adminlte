@@ -79,7 +79,7 @@ CalendarInput.propTypes = {
     iconClass: PropTypes.string,
     innerClass: PropTypes.string,
     dateValidator: PropTypes.func,
-    label: PropTypes.string,
+    label: PropTypes.node,
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func,
     timeConstraints: PropTypes.object,

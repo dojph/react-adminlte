@@ -105,7 +105,7 @@ SelectInput.propTypes = {
         PropTypes.arrayOf(PropTypes.string)
     ),
     gridClass: PropTypes.string,
-    label: PropTypes.string,
+    label: PropTypes.node,
     labelKey: PropTypes.string,
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func,

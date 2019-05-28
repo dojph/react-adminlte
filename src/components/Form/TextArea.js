@@ -66,7 +66,7 @@ TextArea.propTypes = {
     ),
     showCounter: PropTypes.bool,
     gridClass: PropTypes.string,
-    label: PropTypes.string,
+    label: PropTypes.node,
     maxLength: PropTypes.number,
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func,

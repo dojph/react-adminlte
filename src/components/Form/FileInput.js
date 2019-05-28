@@ -42,7 +42,7 @@ FileInput.propTypes = {
         PropTypes.arrayOf(PropTypes.string)
     ),
     gridClass: PropTypes.string,
-    label: PropTypes.string,
+    label: PropTypes.node,
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func,
 };

@@ -65,7 +65,7 @@ Radio.propTypes = {
     ]),
     disabled: PropTypes.bool,
     inline: PropTypes.bool,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.node.isRequired,
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func,
     value: PropTypes.oneOfType([

@@ -63,7 +63,7 @@ RadioGroup.propTypes = {
     disabled: PropTypes.bool,
     firstDefault: PropTypes.bool,
     inline: PropTypes.bool,
-    label: PropTypes.string,
+    label: PropTypes.node,
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func,
     options: PropTypes.array.isRequired,

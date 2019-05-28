@@ -72,7 +72,7 @@ TextInput.propTypes = {
     feedbackIconClass: PropTypes.string,
     feedbackIconLeft: PropTypes.bool,
     gridClass: PropTypes.string,
-    label: PropTypes.string,
+    label: PropTypes.node,
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func,
     onEnterKey: PropTypes.func,
