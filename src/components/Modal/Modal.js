@@ -20,8 +20,13 @@ class Modal extends React.Component {
         };
 
         this.bodyRef = null;
+        this.contentRef = null;
+        this.isMouseDownOnContent = false;
         this.setBodyRef = element => {
             this.bodyRef = element;
+        };
+        this.setContentRef = element => {
+            this.contentRef = element;
         };
     }
 
@@ -66,11 +71,20 @@ class Modal extends React.Component {
         }
     };
 
-    handleClickBackdrop = () => {
+    handleBackdropMouseUp = event => {
         const {closeOnBackdropClick, onCloseClick} = this.props;
-        if(closeOnBackdropClick) {
+        if(closeOnBackdropClick && !this.isMouseDownOnContent) {
             onCloseClick();
         }
+    };
+
+    handleBackdropMouseDown = event => {
+        this.isMouseDownOnContent = false;
+    };
+
+    handleContentMouseDown = event => {
+        event.stopPropagation();
+        this.isMouseDownOnContent = true;
     };
 
     handleEscapeKeypress = event => {
@@ -85,10 +99,6 @@ class Modal extends React.Component {
         if(isEscape) {
             this.props.onCloseClick();
         }
-    };
-
-    handleInnerClick = event => {
-        event.stopPropagation();
     };
 
     handleEnter = () => {
@@ -166,7 +176,8 @@ class Modal extends React.Component {
             >
                 {
                     state => (
-                        <div className={"modal " + (this.props.className || '')} onClick={this.handleClickBackdrop}>
+                        <div className={"modal " + (this.props.className || '')} onMouseUp={this.handleBackdropMouseUp}
+                             onMouseDown={this.handleBackdropMouseDown}>
                             <CSSTransition
                                 in={(state === 'entering' || state === 'entered')}
                                 timeout={300}
@@ -174,7 +185,7 @@ class Modal extends React.Component {
                                 unmountOnExit
                             >
                                 <div className={`modal-dialog ${dialogClass} ` + (this.props.dialogClassName || '')}
-                                     style={dialogStyle} onClick={this.handleInnerClick}>
+                                     style={dialogStyle} ref={this.setContentRef} onMouseDown={this.handleContentMouseDown}>
                                     <div className="modal-content">
                                         {header}
                                         {
