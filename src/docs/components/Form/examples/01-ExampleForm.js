@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 import Form, {
     CalendarInput, CheckBox, FileInput,
@@ -23,15 +24,22 @@ export default class ExampleForm extends React.Component {
             password: "",
             file: null
         };
+
+        this.x = 0;
     }
 
     handleChange = (name, value) => {
         this.setState({[name]: value});
     };
 
+    isValidDate = current => {
+        const yesterday = moment().subtract(1, 'day');
+        return current.isAfter(yesterday);
+    };
+
     render() {
         const errors = {
-            birthdate: [ "Invalid name." ]
+            birthdate: [ "Invalid date." ]
         };
 
         const cityOptions = [
@@ -58,7 +66,7 @@ export default class ExampleForm extends React.Component {
                 <div className="row">
                     <div className="col-xs-6">
                         <CalendarInput name="birthdate" value={this.state.birthdate}
-                                       label="Birthdate" timeFormat={false} />
+                                       label="Birthdate" timeFormat={false} isSelectableDate={this.isValidDate}/>
                     </div>
                     <div className="col-xs-6">
                         <SelectInput label="City" name="city" value={this.state.city}
