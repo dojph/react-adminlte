@@ -36,15 +36,15 @@ export default class ExampleForm extends React.Component{
             { label: "Jessy", value: "Jessy" }
         ];
         const shoesOptions = [
-            { label: "Addidas", value: "Addidas" },
+            { label: "Adidas", value: "Adidas" },
             { label: "Nike", value: "Nike" },
             { label: "Under Armour", value: "Under Armour" },
             { label: "New Balance", value: "New Balance" }
         ];
 
-        const errors = [
-            { comments: 'Empty Field' }
-        ];
+        const errors = {
+            comments: ['Empty Field']
+        };
         return(
             <div>
                 <Box theme="box box-solid box-success"> collapsible={true}>
