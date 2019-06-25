@@ -1,9 +1,7 @@
 import React from 'react';
 
-
-export default class ExampleAvatarDescription extends React.Component {
-    render(){
-        return <h1><strong>Customized Form Elements</strong></h1>
+export default class ExampleFormDescription extends React.Component {
+    render() {
+        return <h4>Custom Form Elements</h4>
     }
-
 }

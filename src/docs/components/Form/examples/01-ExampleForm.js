@@ -44,7 +44,11 @@ export default class ExampleForm extends React.Component {
 
         const cityOptions = [
             { label: "Manila", value: "Manila" },
-            { label: "Cebu", value: "Cebu" }
+            { label: "Makati", value: "Makati" },
+            { label: "Las Piñas City", value: "Las Piñas City" },
+            { label: "Marikina", value: "Marikina" },
+            { label: "Muntinlupa", value: "Muntinlupa" },
+            { label: "Quezon City", value: "Quezon City" },
         ];
 
         const coffeeOptions = [
@@ -70,7 +74,7 @@ export default class ExampleForm extends React.Component {
                     </div>
                     <div className="col-xs-6">
                         <SelectInput label="City" name="city" value={this.state.city}
-                                     options={cityOptions} simpleValue clearable/>
+                                        options={cityOptions} simpleValue clearable/>
                     </div>
                 </div>
                 <div className="row">

@@ -1,9 +1,7 @@
 import React from 'react';
 
 import Form, {
-    CheckBox,
-    RadioGroup, SelectInput,
-    TextInput
+    CheckBox, RadioGroup, SelectInput, TextInput
 } from "doj-react-adminlte/Form";
 
 import Box from 'doj-react-adminlte/Box';
@@ -51,7 +49,7 @@ export default class ExampleForm extends React.Component{
                     <Box.Header title='Form Elements'/>
                     <Box.Body>
                         <Form onChange={this.handleChange} errors={errors}>
-                            <div className='form-group-lg'>
+                            <div>
                                 <div className='row'>
                                     <div className='col-xs-6'>
                                         <h4><strong>Searchable Select Input</strong></h4>
