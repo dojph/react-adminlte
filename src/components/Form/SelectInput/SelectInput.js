@@ -139,14 +139,12 @@ SelectInput.defaultProps = {
     clearable: false,
     disabled: false,
     errors: {},
-    labelKey: "label",
     onChange: () => {},
     options: [],
     placeholder: "Select...",
     searchable: false,
     simpleValue: false,
     value: null,
-    valueKey: "value"
 };
 
 SelectInput.propTypes = {
