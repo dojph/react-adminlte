@@ -138,7 +138,7 @@ class CalendarInput extends React.Component {
                                         <i className={this.props.iconClass}/>
                                     </div>
                                     <input className="form-control" style={{background: "#FFF"}} value={display} ref={ref}
-                                           onFocus={this.handleInputFocus} onBlur={this.handleInputBlur}/>
+                                           onFocus={this.handleInputFocus} onBlur={this.handleInputBlur} readOnly/>
                                 </div>
                             }
                         </Reference>
