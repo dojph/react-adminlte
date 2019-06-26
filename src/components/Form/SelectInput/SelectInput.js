@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Select, {components} from 'react-select';
 import {Popper} from "react-popper";
 import PropTypes from 'prop-types';
+import ResizeAware from 'react-resize-aware';
 
 import helpBlockStyle from "../helpBlockStyle";
 
@@ -19,9 +20,11 @@ const Menu = getInputRef => {
                         preventOverflow: {enabled: true, boundariesElement: 'viewport'},
                         computeStyle: {enabled: true, gpuAcceleration: false}
                     }}>
-                {({ref, style, placement}) => (
+                {({ref, style, placement, scheduleUpdate}) => (
                     <div ref={ref} style={{...style, width, zIndex: 9999}} data-placement={placement}>
-                        <components.Menu {...props}>{props.children}</components.Menu>
+                        <ResizeAware onResize={scheduleUpdate}>
+                            <components.Menu {...props}>{props.children}</components.Menu>
+                        </ResizeAware>
                     </div>
                 )}
             </Popper>,
