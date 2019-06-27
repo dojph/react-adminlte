@@ -7,6 +7,7 @@ import moment from 'moment';
 import PickerContainer from "./PickerContainer";
 
 import {Manager, Reference, Popper} from 'react-popper';
+import ResizeAware from 'react-resize-aware';
 
 class CalendarInput extends React.Component {
     constructor(props) {
@@ -147,15 +148,17 @@ class CalendarInput extends React.Component {
                                 <Popper placement="bottom-start" positionFixed innerRef={this.setPickerContainerRef}
                                         modifiers={{preventOverflow: {enabled: true, boundariesElement: 'viewport'}}}>
                                     {
-                                        ({ref, style, placement}) => {
+                                        ({ref, style, placement, scheduleUpdate}) => {
                                             if(this.state.currentView !== "none") {
                                                 return(
                                                     <div ref={ref} style={{...style, zIndex: 99999}} data-placement={placement}>
-                                                        <PickerContainer viewDate={this.state.viewDate} selectedDate={this.props.value}
-                                                                         onDatePick={this.handleDatePick} isSelectableDate={this.props.isSelectableDate}
-                                                                         currentMonth={this.state.currentMonth} onCurrentMonthChange={this.handleCurrentMonthChange}
-                                                                         currentView={this.state.currentView} onSwitchView={this.handleSwitchView}
-                                                                         datePicker={this.props.datePicker} timePicker={this.props.timePicker}/>
+                                                        <ResizeAware onResize={scheduleUpdate}>
+                                                            <PickerContainer viewDate={this.state.viewDate} selectedDate={this.props.value}
+                                                                             onDatePick={this.handleDatePick} isSelectableDate={this.props.isSelectableDate}
+                                                                             currentMonth={this.state.currentMonth} onCurrentMonthChange={this.handleCurrentMonthChange}
+                                                                             currentView={this.state.currentView} onSwitchView={this.handleSwitchView}
+                                                                             datePicker={this.props.datePicker} timePicker={this.props.timePicker}/>
+                                                        </ResizeAware>
                                                     </div>
                                                 )
                                             }
