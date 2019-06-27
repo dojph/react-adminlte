@@ -49,6 +49,8 @@ class SelectInput extends React.Component {
     constructor(props) {
         super(props);
 
+        this.menuComponent = Menu(this.getInputRef);
+        this.selectContainerComponent = SelectContainer(this.setInputRef);
         this.inputRef = null;
     }
 
@@ -98,7 +100,7 @@ class SelectInput extends React.Component {
                 }
                 <Select {...props} options={this.props.options} onChange={this.handleSelectOption}
                         value={this.resolveValueFromOptions(value)} maxMenuHeight={250}
-                        components={{Menu: Menu(this.getInputRef), SelectContainer: SelectContainer(this.setInputRef)}}
+                        components={{Menu: this.menuComponent, SelectContainer: this.selectContainerComponent}}
                         styles={{
                             menu: base => ({
                                 ...base,
