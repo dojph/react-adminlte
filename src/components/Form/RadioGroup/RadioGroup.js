@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Radio from './Radio';
+import Radio from '../Radio';
 
 const labelStyle = {
     display: 'inline-block',

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import helpBlockStyle from './helpBlockStyle';
+import helpBlockStyle from '../helpBlockStyle';
 
 class FileInput extends React.Component {
     handleChange = event => {
