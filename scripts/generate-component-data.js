@@ -11,15 +11,18 @@ const excludedComponents = [
 ];
 
 const paths = {
-    examples: path.join(__dirname, '../src', 'docs', 'components'),
+    componentDocs: path.join(__dirname, '../src', 'docs', 'components'),
+    formDocs: path.join(__dirname, '../src', 'docs', 'forms'),
     components: path.join(__dirname, '../src', 'components'),
-    output: path.join(__dirname, '../', 'componentData.js')
+    form: path.join(__dirname, '../src', 'components', 'Form'),
+    componentDataOutput: path.join(__dirname, '../', 'componentData.js'),
+    formDataOutput: path.join(__dirname, '../', 'formData.js')
 };
 
 const enableWatchMode = process.argv.slice(2) == '--watch';
 if (enableWatchMode) {
     // Regenerate component metadata when components or examples change.
-    chokidar.watch([paths.examples, paths.components]).on('change', function(event, path) {
+    chokidar.watch([paths.componentDocs, paths.formDocs, paths.components]).on('change', function(event, path) {
         generate(paths);
     });
 } else {
@@ -28,17 +31,49 @@ if (enableWatchMode) {
 }
 
 function generate(paths) {
-    const errors = [];
+    const componentDataErrors = [];
     const componentData = getDirectories(paths.components)
         .filter(componentName => excludedComponents.indexOf(componentName) === -1)
         .map(function(componentName) {
         try {
             return getComponentData(paths, componentName);
         } catch(error) {
-            errors.push('An error occurred while attempting to generate metadata for ' + componentName + '. ' + error);
+            componentDataErrors.push('An error occurred while attempting to generate metadata for ' + componentName + '. ' + error);
         }
     });
-    writeFile(paths.output, "module.exports = /* eslint-disable */ " + JSON.stringify(errors.length ? errors : componentData));
+
+    const formDataErrors = [];
+    const formData = (function() {
+        const content = readFile(path.join(paths.form, 'Form.js'));
+        const info = parse(content);
+        return {
+            description: info.description,
+            props: info.props,
+            examples: getFormUsageExampleData(paths.formDocs),
+            components: getDirectories(paths.form)
+                .map(function(componentName) {
+                    try {
+                        return getFormComponentData(paths, componentName);
+                    } catch(error) {
+                        formDataErrors.push('An error occurred while attempting to generate metadata for ' + componentName + '. ' + error);
+                    }
+                })
+        };
+    })();
+
+    writeFile(paths.componentDataOutput, "module.exports = /* eslint-disable */ " + JSON.stringify(componentDataErrors.length ? componentDataErrors : componentData));
+    writeFile(paths.formDataOutput, "module.exports = /* eslint-disable */ " + JSON.stringify(formDataErrors.length ? formDataErrors : formData));
+}
+
+function getFormComponentData(paths, componentName) {
+    const content = readFile(path.join(paths.form, componentName, componentName + '.js'));
+    const info = parse(content);
+    return {
+        name: componentName,
+        description: info.description,
+        props: info.props,
+        examples: getExampleData(path.join(paths.formDocs, 'components'), componentName)
+    }
 }
 
 function getComponentData(paths, componentName) {
@@ -48,8 +83,24 @@ function getComponentData(paths, componentName) {
         name: componentName,
         description: info.description,
         props: info.props,
-        examples: getExampleData(paths.examples, componentName)
+        examples: getExampleData(paths.componentDocs, componentName)
     }
+}
+
+function getFormUsageExampleData(formDocsPath) {
+    const examples = getFormUsageExampleFiles(formDocsPath);
+    return examples.map(function(file) {
+        const filePath = path.join(formDocsPath, 'examples', file);
+        const content = readFile(filePath);
+        const info = parse(content);
+        return {
+            // By convention, component name should match the filename.
+            // So remove the .js extension to get the component name.
+            name: file.slice(0, -3),
+            description: info.description,
+            code: content
+        };
+    });
 }
 
 function getExampleData(examplesPath, componentName) {
@@ -66,6 +117,17 @@ function getExampleData(examplesPath, componentName) {
             code: content
         };
     });
+}
+
+function getFormUsageExampleFiles(formDocsPath) {
+    let exampleFiles = [];
+    try {
+        exampleFiles = getFiles(path.join(formDocsPath, 'examples'));
+    } catch(error) {
+        console.log(chalk.red(`No form usage examples found.`));
+    }
+
+    return exampleFiles;
 }
 
 function getExampleFiles(examplesPath, componentName) {
