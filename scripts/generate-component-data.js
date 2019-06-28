@@ -7,7 +7,8 @@ const chokidar = require('chokidar');
 const excludedComponents = [
     'Content',
     'Layout',
-    'Login'
+    'Login',
+    'Form'
 ];
 
 const paths = {
@@ -47,6 +48,7 @@ function generate(paths) {
         const content = readFile(path.join(paths.form, 'Form.js'));
         const info = parse(content);
         return {
+            name: 'Form',
             description: info.description,
             props: info.props,
             examples: getFormUsageExampleData(paths.formDocs),

@@ -5,12 +5,13 @@ import CodeExample from './CodeExample';
 class Example extends React.Component {
     constructor(props) {
         super(props);
+        const {componentPath} = props;
         const {name} = props.example;
 
         // Must use CommonJS require to dynamically require because ES Modules must be statically analyzable.
-        this.exampleComponent = require(`./components/${this.props.componentName}/examples/${name}`).default;
+        this.exampleComponent = require(`${componentPath}examples/${name}`).default;
         try {
-            this.exampleDescription = require(`./components/${this.props.componentName}/examples/desc/${name}`).default;
+            this.exampleDescription = require(`${componentPath}examples/desc/${name}`).default;
         } catch {
             this.exampleDescription = null;
         }

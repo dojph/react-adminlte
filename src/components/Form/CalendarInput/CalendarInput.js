@@ -197,6 +197,7 @@ CalendarInput.defaultProps = {
 };
 
 CalendarInput.propTypes = {
+    clearable: PropTypes.bool,
     dateFormat: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.bool

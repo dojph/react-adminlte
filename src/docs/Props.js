@@ -14,7 +14,7 @@ const columnDefs = [
     },
     {
         header: 'Type',
-        renderValue: prop => prop.type.name
+        renderValue: prop => prop.type && prop.type.name
     },
     {
         header: 'Default',

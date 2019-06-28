@@ -8,7 +8,7 @@ import ExampleLoginScreen from "./docs/layoutExamples/ExampleLoginScreen";
 ReactDOM.render(
     <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
-            <Route exact path="/components/:component" component={Docs}/>
+            <Route path="/:root(components|forms)/:sub" component={Docs}/>
             <Route exact path="/examples/example-login-screen" component={ExampleLoginScreen}/>
             <Redirect to="/components/alert"/>
         </Switch>
