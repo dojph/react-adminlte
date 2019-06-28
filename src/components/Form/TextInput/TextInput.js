@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import helpBlockStyle from './helpBlockStyle';
+import helpBlockStyle from '../helpBlockStyle';
 
 class TextInput extends React.Component {
     handleChange = event => {

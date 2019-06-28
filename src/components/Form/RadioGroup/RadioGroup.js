@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Radio from './Radio';
+import Radio from '../Radio';
 
 const labelStyle = {
     display: 'inline-block',
@@ -64,6 +64,7 @@ RadioGroup.propTypes = {
     firstDefault: PropTypes.bool,
     inline: PropTypes.bool,
     label: PropTypes.node,
+    labelKey: PropTypes.string,
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func,
     options: PropTypes.array.isRequired,

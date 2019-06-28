@@ -14,10 +14,11 @@ const titleStyle = {
 
 class ComponentPage extends React.Component {
     render() {
-        const {name, props, examples} = this.props.component;
+        const {componentPath, component, title} = this.props;
+        const {name, props, examples} = component;
         let Description;
         try {
-            Description = require(`./components/${name}/`).default;
+            Description = require(`${componentPath}`).default;
         } catch {
             Description = null;
         }
@@ -28,7 +29,7 @@ class ComponentPage extends React.Component {
                     <section className="content-header" style={{paddingTop: 0}}>
                         <div className="row">
                             <div className="col-lg-8">
-                                <h1 style={titleStyle}>{name}</h1>
+                                <h1 style={titleStyle}>{title || name}</h1>
                             </div>
                         </div>
                     </section>
@@ -38,7 +39,8 @@ class ComponentPage extends React.Component {
                             { Description && <Description/> }
                             {
                                 examples.length > 0 ?
-                                    examples.map( example => <Example key={example.code} example={example} componentName={name} /> ) :
+                                    examples.map( example => <Example key={example.code} example={example}
+                                                                      componentName={name} componentPath={componentPath} /> ) :
                                     "No examples exist."
                             }
                             <h4 style={{marginTop: "20px"}}>Props</h4>
