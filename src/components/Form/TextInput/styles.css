@@ -1,0 +1,8 @@
+.has-feedback-left .form-control-feedback {
+    left: 0;
+}
+
+.has-feedback-left input.form-control {
+    padding-left: 34px; /* @input-height-base; */
+    padding-right: 12px; /* @padding-base-horizontal */
+}

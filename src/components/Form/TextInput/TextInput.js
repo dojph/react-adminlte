@@ -65,21 +65,48 @@ TextInput.defaultProps = {
 };
 
 TextInput.propTypes = {
+    /** If true, user won't be able to interact with the component.*/
     disabled: PropTypes.bool,
-    errors: PropTypes.objectOf(
-        PropTypes.arrayOf(PropTypes.string)
-    ),
+
+    errors: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.string)),
+
+    /** Specifies the icon class to be displayed within the component */
     feedbackIconClass: PropTypes.string,
+
+    /** When set to true, the icon is placed at the left side of the component*/
     feedbackIconLeft: PropTypes.bool,
+
+    /** Layout that arranges views of the component */
     gridClass: PropTypes.string,
+
+    /** Specifies the text to use as the label */
     label: PropTypes.node,
+
+    /** Specifies the name of the component. It is used to distinguish elements
+     * when a single form change handler is used. */
     name: PropTypes.string.isRequired,
+
+    /** Callback fired when component value changes. Accepts a function with two parameters, namely field and value */
     onChange: PropTypes.func,
-    onEnterKey: PropTypes.func,
-    onKeyUp: PropTypes.func,
+
+        // TODO:
+    //onEnterKey: PropTypes.func,
+
+        // TODO:
+    //onKeyUp: PropTypes.func,
+
+    /** Specifies a short hint that describes the expected value of
+     * an input field */
     placeholder: PropTypes.string,
+
+    /** Specifies the maximum number of characters allowed in the
+     * component */
     maxLength: PropTypes.number,
+
+    /** Specifies the type. Can be one of: text, password */
     type: PropTypes.oneOf(['text', 'password']),
+
+    /** Specifies the current value for an input field */
     value: PropTypes.string
 };
 
