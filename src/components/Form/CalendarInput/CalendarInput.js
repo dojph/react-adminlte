@@ -188,7 +188,6 @@ class CalendarInput extends React.Component {
 
 CalendarInput.defaultProps = {
     clearable: true,
-    dateFormat: true,
     disabled: false,
     errors: {},
     iconClass: "fa fa-calendar",
@@ -200,23 +199,46 @@ CalendarInput.defaultProps = {
 };
 
 CalendarInput.propTypes = {
+    /** Set to false to remove the clear button to disable clearing of
+     * the value using the built-in clear button of the component.*/
     clearable: PropTypes.bool,
-    dateFormat: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.bool
-    ]),
+
+    /** Set to false to use time picker  only*/
+    datePicker: PropTypes.bool,
+
+    /** If true, users won't be able to interact with the component*/
     disabled: PropTypes.bool,
+
     errors: PropTypes.objectOf(
         PropTypes.arrayOf(PropTypes.string)
     ),
+
+    /** Specifies a Bootstrap 3 grid class*/
     gridClass: PropTypes.string,
+
+    /** Specifies the icon class to be displayed within the component*/
     iconClass: PropTypes.string,
+
+    /** Specify a callback to determine the dates that can be selected.
+     * The function receives (currentDate, selectedDate) and shall return
+     * a true or false whether the date is valid or not.*/
     isSelectableDate: PropTypes.func,
+
+    /** Specifies the text to use as the label*/
     label: PropTypes.node,
+
+    /** Specifies the name of the component. It is used to distinguish elements when
+     * a single form change handler is used*/
     name: PropTypes.string.isRequired,
+
+    /** Callback fired when component value changes. Accepts a function with two parameters,
+     *  namely field and value*/
     onChange: PropTypes.func,
-    datePicker: PropTypes.bool,
+
+    /** Set to false to use date picker only*/
     timePicker: PropTypes.bool,
+
+    /** Specifies the current value of this component.*/
     value: PropTypes.any,
 };
 
