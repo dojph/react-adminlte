@@ -20,7 +20,9 @@ export default class SimpleUsage extends React.Component {
         return (
             <div className="row">
                 <div className="col-xs-6">
-                    <CalendarInput name="calendar" label="Date" value={selectedDate}
+                    <CalendarInput name="calendar"
+                                   label="Date"
+                                   value={selectedDate}
                                    onChange={this.handleDateChange}/>
                 </div>
             </div>
