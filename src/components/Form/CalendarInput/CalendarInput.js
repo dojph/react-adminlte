@@ -118,6 +118,7 @@ class CalendarInput extends React.Component {
     render() {
         const errors = this.props.errors[this.props.name] || [];
         const display = this.resolveDisplayValue();
+        const inputBgColor = this.props.disabled ? "#eee" : "#fff";
 
         return (
             <div className={"form-group " + (errors.length > 0 ? "has-error " : "") + (this.props.gridClass || "")}
@@ -125,7 +126,7 @@ class CalendarInput extends React.Component {
                 {this.props.label && <label>{this.props.label}</label>}
                 <div className="dralt-cal-input" ref={this.setInputContainerRef}>
                     {
-                        this.props.clearable && Boolean(this.props.value) &&
+                        !this.props.disabled && this.props.clearable && Boolean(this.props.value) &&
                         <div className="dralt-cal-input-clear">
                             <button onClick={this.handleClear}><i className="fa fa-times"/></button>
                         </div>
@@ -138,7 +139,7 @@ class CalendarInput extends React.Component {
                                     <div className="input-group-addon">
                                         <i className={this.props.iconClass}/>
                                     </div>
-                                    <input className="form-control" style={{background: "#FFF"}} value={display} ref={ref}
+                                    <input className="form-control" style={{background: inputBgColor}} value={display} ref={ref}
                                            onFocus={this.handleInputFocus} onBlur={this.handleInputBlur} readOnly
                                            disabled={this.props.disabled}/>
 
