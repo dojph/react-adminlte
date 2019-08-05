@@ -166,7 +166,7 @@ SelectInput.propTypes = {
     label: PropTypes.node,
     /** Specifies the name of the component. */
     name: PropTypes.string.isRequired,
-    /** Callback fired when component value changes. Accepts a function with two aprameters, namely field and value.*/
+    /** Callback fired when component value changes. Accepts a function with two parameters, namely field and value.*/
     onChange: PropTypes.func,
     /** Retrieves the Label of the Selected option.*/
     getOptionLabel: PropTypes.func,
