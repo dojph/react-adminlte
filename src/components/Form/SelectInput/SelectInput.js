@@ -153,21 +153,34 @@ SelectInput.defaultProps = {
 };
 
 SelectInput.propTypes = {
+    /** Set to false to remove the clear button to disable clearing of the value using the built-in clear button of the component.*/
     clearable: PropTypes.bool,
+    /** Set to true to disable the select input.*/
     disabled: PropTypes.bool,
     errors: PropTypes.objectOf(
         PropTypes.arrayOf(PropTypes.string)
     ),
+    /** Specifies a Bootstrap 3 grid class.*/
     gridClass: PropTypes.string,
+    /** Specifies the text to use as the label.*/
     label: PropTypes.node,
+    /** Specifies the name of the component. */
     name: PropTypes.string.isRequired,
+    /** Callback fired when component value changes. Accepts a function with two aprameters, namely field and value.*/
     onChange: PropTypes.func,
+    /** Retrieves the Label of the Selected option.*/
     getOptionLabel: PropTypes.func,
+    /** Retrieves the Value of the Select Option.*/
     getOptionValue: PropTypes.func,
+    /** Options of the Select Input.*/
     options: PropTypes.array,
+    /** Serves as a hint that describes the expected value of the Select Input.*/
     placeholder: PropTypes.string,
+    /** Set to true to make the options of the Select Input searchable.*/
     searchable: PropTypes.bool,
+    /** Set to true to get the value of the component.*/
     simpleValue: PropTypes.bool,
+    /** The value prop specifies the initial value of the Select Input*/
     value: PropTypes.any
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import Form, {SelectInput, TextArea, TextInput} from "doj-react-adminlte/Form";
+import Form, {CalendarInput, SelectInput, TextArea, TextInput} from "doj-react-adminlte/Form";
 
 export default class SelectInput4 extends React.Component{
     constructor(props) {
@@ -22,10 +22,10 @@ export default class SelectInput4 extends React.Component{
             <Form onChange={this.handleOnChange}>
                 <div className="row">
                         <div className="col-xs-12">
-                            <TextInput name="username" label="Username" value={this.state.username}/>
+                            <TextInput name="username" label="Username" placeholder="Enter your username..." value={this.state.username}/>
                         </div>
                         <div className="col-xs-12">
-                            <TextInput name="password" label="Password" value={this.state.password}/>
+                            <TextInput name="password" label="Password" placeholder="Enter your password..." value={this.state.password}/>
                         </div>
                     </div>
                     <div className="col-xs-12">
@@ -41,12 +41,15 @@ export default class SelectInput4 extends React.Component{
         return (
             <Form onChange={this.handleOnChange}>
                 <div className="row">
-                        <div className="col-xs-12">
-                            <TextInput name="email" label="Email Address" value={this.state.email}/>
+                        <div className="col-xs-6">
+                            <TextInput name="email" label="Email Address" placeholder="Enter your e-mail address..." value={this.state.email}/>
                         </div>
-                        <div className="col-xs-12">
-                            <TextInput name="password" label="Password" value={this.state.password}/>
+                        <div className="col-xs-6">
+                            <CalendarInput label="Date"/>
                         </div>
+                    <div className="col-xs-12">
+                        <TextArea label="Comments" placeholder="Place your comments here.."/>
+                    </div>
                     </div>
                     <div className="col-xs-12">
                         <button className="btn btn-primary pull-right">
@@ -62,10 +65,10 @@ export default class SelectInput4 extends React.Component{
                 <Form onChange={this.handleOnChange}>
                     <div className="row">
                             <div className="col-xs-12">
-                                <TextInput name="username" label="Username" value={this.state.username}/>
+                                <TextInput name="username" label="Username" placeholder="Enter your username..." value={this.state.username}/>
                             </div>
                             <div className="col-xs-12">
-                                <TextArea name="textArea" label="Comments" value={this.state.textArea}/>
+                                <TextArea name="textArea" label="Comments" placeholder="What's in your mind?" value={this.state.textArea}/>
                             </div>
                         </div>
                         <div className="col-xs-12">
