@@ -1,18 +1,19 @@
 import React from 'react';
+import HoldButton from "./HoldButton";
 
 class PickerControl extends React.Component {
     render() {
         return (
             <>
-                <div className="dralt-cal-control dralt-cal-direction" onClick={this.props.onPreviousClick}>
-                    <span>&lsaquo;</span>
-                </div>
+                <HoldButton className="dralt-cal-control dralt-cal-direction" onClick={this.props.onPreviousClick}>
+                    &lsaquo;
+                </HoldButton>
                 <div className="dralt-cal-control dralt-cal-switch" onClick={this.props.onSwitchClick}>
                     <span>{this.props.switchLabel}</span>
                 </div>
-                <div className="dralt-cal-control dralt-cal-direction" onClick={this.props.onNextClick}>
-                    <span>&rsaquo;</span>
-                </div>
+                <HoldButton className="dralt-cal-control dralt-cal-direction" onClick={this.props.onNextClick}>
+                    &rsaquo;
+                </HoldButton>
             </>
         );
     }

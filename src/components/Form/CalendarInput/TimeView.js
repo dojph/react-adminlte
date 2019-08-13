@@ -1,14 +1,13 @@
 import React from 'react';
+import HoldButton from "./HoldButton";
 
 class Counter extends React.Component {
     render() {
-        const {onIncreaseClick, onDecreaseClick} = this.props;
-
         return (
             <div className="dralt-cal-counter">
-                <span onClick={onIncreaseClick}>&#x25b2;</span>
+                <HoldButton onClick={this.props.onIncreaseClick}>&#x25b2;</HoldButton>
                 <span>{this.props.value}</span>
-                <span onClick={onDecreaseClick}>&#x25bc;</span>
+                <HoldButton onClick={this.props.onDecreaseClick}>&#x25bc;</HoldButton>
             </div>
         );
     }
@@ -93,7 +92,7 @@ class TimeView extends React.Component {
                     <Counter value={periodDisp} onIncreaseClick={this.handlePeriodChange}
                              onDecreaseClick={this.handlePeriodChange}/>
                 </div>
-                <div>
+                <div className="dralt-cal-feedback">
                     <button onClick={this.handleCancelClick}>
                         <i className="fa fa-times"/>
                     </button>
