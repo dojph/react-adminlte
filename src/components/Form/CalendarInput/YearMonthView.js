@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import HoldButton from "doj-react-adminlte/Form/CalendarInput/HoldButton";
 
 class Month extends React.Component {
     handleClick = () => {
@@ -107,15 +108,15 @@ class YearMonthView extends React.Component {
         return (
             <>
                 <div>
-                    <div className="dralt-cal-control dralt-cal-direction" onClick={this.handlePreviousClick}>
-                        <span>&lsaquo;</span>
-                    </div>
+                    <HoldButton className="dralt-cal-control dralt-cal-direction" onClick={this.handlePreviousClick}>
+                        &lsaquo;
+                    </HoldButton>
                     <div className="dralt-cal-control dralt-cal-year">
                         <input value={selectedYear} onChange={this.handleYearChange} ref={this.setInputRef}/>
                     </div>
-                    <div className="dralt-cal-control dralt-cal-direction" onClick={this.handleNextClick}>
-                        <span>&rsaquo;</span>
-                    </div>
+                    <HoldButton className="dralt-cal-control dralt-cal-direction" onClick={this.handleNextClick}>
+                        &rsaquo;
+                    </HoldButton>
                 </div>
                 <div>
                     {this.renderMonths()}
