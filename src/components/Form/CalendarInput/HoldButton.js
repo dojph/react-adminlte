@@ -9,11 +9,13 @@ class HoldButton extends React.Component {
     }
 
     componentDidMount() {
-        document.addEventListener('mouseup', this.handleMouseUp);
+        document.addEventListener('click', this.handleMouseUp);
+        document.addEventListener('contextmenu', this.handleMouseUp);
     }
 
     componentWillUnmount() {
-        document.removeEventListener('mouseup', this.handleMouseUp);
+        document.removeEventListener('click', this.handleMouseUp);
+        document.removeEventListener('contextmenu', this.handleMouseUp);
     }
 
     handleMouseUp = () => {
