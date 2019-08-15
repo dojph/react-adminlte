@@ -49,7 +49,7 @@ class HoldButton extends React.Component {
         const {className, style, children} = this.props;
 
         return (
-            <button className={className} style={style} onMouseDown={this.handleMouseDown}>{children}</button>
+            <button className={className} style={style} onMouseDown={this.handleMouseDown} tabIndex="-1">{children}</button>
         );
     }
 }

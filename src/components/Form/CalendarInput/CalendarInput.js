@@ -17,13 +17,13 @@ class CalendarInput extends React.Component {
         this.state = {
             viewDate,
             currentMonth: viewDate.clone().date(1),
-            currentView: "none"
+            currentView: "none",
+            isFocused: false
         };
 
         this.pickerContainerRef = null;
         this.inputContainerRef = null;
-
-        this.isCalendarFocused = false;
+        this.inputRef = null;
     }
 
     setPickerContainerRef = element => {
@@ -34,14 +34,28 @@ class CalendarInput extends React.Component {
         this.inputContainerRef = element;
     };
 
+    setInputRef = element => {
+        this.inputRef = element;
+    };
+
     componentDidUpdate(prevProps, prevState) {
-        const {currentView, viewDate} = this.state;
-        const {value} = this.props;
+        const {currentView, viewDate, isFocused} = this.state;
+        const {value, datePicker, timePicker} = this.props;
 
         if((currentView === "none" && currentView !== prevState.currentView) ||
             value !== prevProps.value) {
             const date = moment.isMoment(value) ? value : viewDate;
             this.setState({currentMonth: date.clone().date(1)});
+        }
+
+        if(isFocused !== prevState.isFocused) {
+            if(isFocused) {
+                this.setState({currentView: datePicker || !timePicker ? "day" : "time"});
+                document.addEventListener('keydown', this.handleKeyDown);
+            } else {
+                this.setState({currentView: "none"});
+                document.removeEventListener('keydown', this.handleKeyDown);
+            }
         }
     }
 
@@ -51,6 +65,7 @@ class CalendarInput extends React.Component {
 
     componentWillUnmount() {
         document.removeEventListener('mousedown', this.handleMouseDown);
+        document.removeEventListener('keydown', this.handleKeyDown);
     }
 
     handleSwitchView = view => {
@@ -58,27 +73,37 @@ class CalendarInput extends React.Component {
     };
 
     handleMouseDown = event => {
-        const {currentView} = this.state;
-        if(currentView !== "none") {
-            if (this.pickerContainerRef && !this.pickerContainerRef.contains(event.target) &&
-                this.inputContainerRef && !this.inputContainerRef.contains(event.target)) {
-                this.setState({currentView: "none"});
-                this.isCalendarFocused = false;
-            } else {
-                this.isCalendarFocused = true;
+        if((this.pickerContainerRef && this.pickerContainerRef.contains(event.target)) ||
+            (this.inputContainerRef && this.inputContainerRef.contains(event.target))) {
+            this.setState({isFocused: true});
+        } else {
+            this.setState({isFocused: false});
+        }
+    };
+
+    handleKeyDown = event => {
+        // If focused and tab was pressed
+        if(event.keyCode === 9 && this.state.isFocused) {
+            event.preventDefault();
+            this.setState({isFocused: false});
+            // Get all focusable elements
+            const focusable = Array.from(document
+                .querySelectorAll('button, [href], input, select, textarea'))
+                .filter(el => el.getAttribute('tabindex') !== "-1");
+
+            // Search for next focusable element
+            for(let i = 0; i < focusable.length; i++) {
+                if(focusable[i] === this.inputRef) {
+                    console.log(focusable[i], focusable[i+1]);
+                    focusable[(i + 1) % focusable.length].focus();
+                    break;
+                }
             }
         }
     };
 
     handleInputFocus = () => {
-        const {datePicker, timePicker} = this.props;
-        this.setState({currentView: datePicker || !timePicker ? "day" : "time"});
-    };
-
-    handleInputBlur = () => {
-        if(!this.isCalendarFocused) {
-            this.setState({currentView: "none"});
-        }
+        this.setState({isFocused: true});
     };
 
     handleDatePick = date => {
@@ -118,7 +143,10 @@ class CalendarInput extends React.Component {
     render() {
         const errors = this.props.errors[this.props.name] || [];
         const display = this.resolveDisplayValue();
-        const inputBgColor = this.props.disabled ? "#eee" : "#fff";
+        const inputStyle = {
+            backgroundColor: this.props.disabled ? "#eee" : "#fff",
+            borderColor: this.state.isFocused ? "#3c8dbc" : undefined
+        };
 
         return (
             <div className={"form-group " + (errors.length > 0 ? "has-error " : "") + (this.props.gridClass || "")}
@@ -128,7 +156,7 @@ class CalendarInput extends React.Component {
                     {
                         !this.props.disabled && this.props.clearable && Boolean(this.props.value) &&
                         <div className="dralt-cal-input-clear">
-                            <button onClick={this.handleClear}><i className="fa fa-times"/></button>
+                            <button tabIndex="-1" onClick={this.handleClear}><i className="fa fa-times"/></button>
                         </div>
                     }
                     <Manager>
@@ -139,10 +167,11 @@ class CalendarInput extends React.Component {
                                     <div className="input-group-addon">
                                         <i className={this.props.iconClass}/>
                                     </div>
-                                    <input className="form-control" style={{background: inputBgColor}} value={display} ref={ref}
-                                           onFocus={this.handleInputFocus} onBlur={this.handleInputBlur} readOnly
-                                           disabled={this.props.disabled}/>
-
+                                    <div ref={ref} style={{overflow: "auto"}}>
+                                        <input className="form-control" style={inputStyle} value={display}
+                                               ref={this.setInputRef} onFocus={this.handleInputFocus} readOnly
+                                               disabled={this.props.disabled}/>
+                                    </div>
                                 </div>
                             }
                         </Reference>
