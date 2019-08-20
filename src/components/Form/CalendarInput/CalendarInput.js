@@ -8,6 +8,7 @@ import PickerContainer from "./PickerContainer";
 
 import {Manager, Reference, Popper} from 'react-popper';
 import ResizeAware from 'react-resize-aware';
+import Input from "./Input";
 
 class CalendarInput extends React.Component {
     constructor(props) {
@@ -40,7 +41,7 @@ class CalendarInput extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         const {currentView, viewDate, isFocused} = this.state;
-        const {value, datePicker, timePicker} = this.props;
+        const {value, datePicker, timePicker, disabled} = this.props;
 
         if((currentView === "none" && currentView !== prevState.currentView) ||
             value !== prevProps.value) {
@@ -49,7 +50,7 @@ class CalendarInput extends React.Component {
         }
 
         if(isFocused !== prevState.isFocused) {
-            if(isFocused) {
+            if(isFocused && !disabled) {
                 this.setState({currentView: datePicker || !timePicker ? "day" : "time"});
                 document.addEventListener('keydown', this.handleKeyDown);
             } else {
@@ -106,6 +107,16 @@ class CalendarInput extends React.Component {
         this.setState({isFocused: true});
     };
 
+    handleInputMouseDown = () => {
+        const {datePicker, timePicker} = this.props;
+        const {isFocused, currentView} = this.state;
+        if(isFocused) {
+            this.setState({
+                currentView: currentView === "none" ? (datePicker || !timePicker ? "day" : "time") : "none"
+            });
+        }
+    };
+
     handleDatePick = date => {
         this.props.onChange(this.props.name, date);
         this.setState({currentMonth: date.clone().date(1)});
@@ -119,34 +130,8 @@ class CalendarInput extends React.Component {
         this.setState({currentMonth: date});
     };
 
-    resolveDisplayValue = () => {
-        const {value, datePicker, timePicker} = this.props;
-        let display = "";
-
-        if(moment.isMoment(value)) {
-            const format = [];
-
-            if(datePicker || !timePicker) {
-                format.push("Y/MM/DD");
-            }
-
-            if(timePicker) {
-                format.push("hh:mm A");
-            }
-
-            display = value.format(format.join(' '));
-        }
-
-        return display;
-    };
-
     render() {
         const errors = this.props.errors[this.props.name] || [];
-        const display = this.resolveDisplayValue();
-        const inputStyle = {
-            backgroundColor: this.props.disabled ? "#eee" : "#fff",
-            borderColor: this.state.isFocused ? "#3c8dbc" : undefined
-        };
 
         return (
             <div className={"form-group " + (errors.length > 0 ? "has-error " : "") + (this.props.gridClass || "")}
@@ -167,11 +152,12 @@ class CalendarInput extends React.Component {
                                     <div className="input-group-addon">
                                         <i className={this.props.iconClass}/>
                                     </div>
-                                    <div ref={ref} style={{overflow: "auto"}}>
-                                        <input className="form-control" style={inputStyle} value={display}
-                                               ref={this.setInputRef} onFocus={this.handleInputFocus} readOnly
-                                               disabled={this.props.disabled}/>
-                                    </div>
+                                    <Input selectedValue={this.props.value} innerRef={this.setInputRef} containerRef={ref}
+                                           onFocus={this.handleInputFocus} disabled={this.props.disabled}
+                                           datePicker={this.props.datePicker} timePicker={this.props.timePicker}
+                                           onDatePick={this.handleDatePick} isFocused={this.state.isFocused}
+                                           onClear={this.handleClear} isSelectableDate={this.props.isSelectableDate}
+                                           manualInput={this.props.manualInput} onMouseDown={this.handleInputMouseDown}/>
                                 </div>
                             }
                         </Reference>
@@ -222,6 +208,7 @@ CalendarInput.defaultProps = {
     iconClass: "fa fa-calendar",
     datePicker: true,
     timePicker: true,
+    manualInput: true,
     value: null,
     isSelectableDate: () => true,
     onChange: () => {}
