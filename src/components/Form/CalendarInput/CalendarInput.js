@@ -110,9 +110,9 @@ class CalendarInput extends React.Component {
     handleInputMouseDown = () => {
         const {datePicker, timePicker} = this.props;
         const {isFocused, currentView} = this.state;
-        if(isFocused) {
+        if(isFocused && currentView === "none") {
             this.setState({
-                currentView: currentView === "none" ? (datePicker || !timePicker ? "day" : "time") : "none"
+                currentView: datePicker || !timePicker ? "day" : "time"
             });
         }
     };
@@ -157,7 +157,8 @@ class CalendarInput extends React.Component {
                                            datePicker={this.props.datePicker} timePicker={this.props.timePicker}
                                            onDatePick={this.handleDatePick} isFocused={this.state.isFocused}
                                            onClear={this.handleClear} isSelectableDate={this.props.isSelectableDate}
-                                           manualInput={this.props.manualInput} onMouseDown={this.handleInputMouseDown}/>
+                                           manualInput={this.props.manualInput} onMouseDown={this.handleInputMouseDown}
+                                           currentView={this.state.currentView}/>
                                 </div>
                             }
                         </Reference>
