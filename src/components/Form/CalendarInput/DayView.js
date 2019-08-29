@@ -194,6 +194,8 @@ class DayView extends React.Component {
 
         if(!timePicker) {
             switchCallback("none");
+        } else {
+            switchCallback("time");
         }
     };
 
