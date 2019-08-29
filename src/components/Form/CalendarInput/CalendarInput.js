@@ -8,6 +8,7 @@ import PickerContainer from "./PickerContainer";
 
 import {Manager, Reference, Popper} from 'react-popper';
 import ResizeAware from 'react-resize-aware';
+import Input from "./Input";
 
 class CalendarInput extends React.Component {
     constructor(props) {
@@ -17,13 +18,13 @@ class CalendarInput extends React.Component {
         this.state = {
             viewDate,
             currentMonth: viewDate.clone().date(1),
-            currentView: "none"
+            currentView: "none",
+            isFocused: false
         };
 
         this.pickerContainerRef = null;
         this.inputContainerRef = null;
-
-        this.isCalendarFocused = false;
+        this.inputRef = null;
     }
 
     setPickerContainerRef = element => {
@@ -34,14 +35,28 @@ class CalendarInput extends React.Component {
         this.inputContainerRef = element;
     };
 
+    setInputRef = element => {
+        this.inputRef = element;
+    };
+
     componentDidUpdate(prevProps, prevState) {
-        const {currentView, viewDate} = this.state;
-        const {value} = this.props;
+        const {currentView, viewDate, isFocused} = this.state;
+        const {value, datePicker, timePicker, disabled} = this.props;
 
         if((currentView === "none" && currentView !== prevState.currentView) ||
             value !== prevProps.value) {
             const date = moment.isMoment(value) ? value : viewDate;
             this.setState({currentMonth: date.clone().date(1)});
+        }
+
+        if(isFocused !== prevState.isFocused) {
+            if(isFocused && !disabled) {
+                this.setState({currentView: datePicker || !timePicker ? "day" : "time"});
+                document.addEventListener('keydown', this.handleKeyDown);
+            } else {
+                this.setState({currentView: "none"});
+                document.removeEventListener('keydown', this.handleKeyDown);
+            }
         }
     }
 
@@ -51,6 +66,7 @@ class CalendarInput extends React.Component {
 
     componentWillUnmount() {
         document.removeEventListener('mousedown', this.handleMouseDown);
+        document.removeEventListener('keydown', this.handleKeyDown);
     }
 
     handleSwitchView = view => {
@@ -58,26 +74,46 @@ class CalendarInput extends React.Component {
     };
 
     handleMouseDown = event => {
-        const {currentView} = this.state;
-        if(currentView !== "none") {
-            if (this.pickerContainerRef && !this.pickerContainerRef.contains(event.target) &&
-                this.inputContainerRef && !this.inputContainerRef.contains(event.target)) {
-                this.setState({currentView: "none"});
-                this.isCalendarFocused = false;
-            } else {
-                this.isCalendarFocused = true;
+        if((this.pickerContainerRef && this.pickerContainerRef.contains(event.target)) ||
+            (this.inputContainerRef && this.inputContainerRef.contains(event.target))) {
+            this.setState({isFocused: true});
+        } else {
+            this.setState({isFocused: false});
+        }
+    };
+
+    handleKeyDown = event => {
+        // If focused and tab was pressed
+        if(event.keyCode === 9 && this.state.isFocused) {
+            event.preventDefault();
+            this.setState({isFocused: false});
+            // Get all focusable elements
+            const focusable = Array.from(document
+                .querySelectorAll('button, [href], input, select, textarea'))
+                .filter(el => el.getAttribute('tabindex') !== "-1");
+
+            // Search for next focusable element
+            for(let i = 0; i < focusable.length; i++) {
+                if(focusable[i] === this.inputRef) {
+                    console.log(focusable[i], focusable[i+1]);
+                    focusable[(i + 1) % focusable.length].focus();
+                    break;
+                }
             }
         }
     };
 
     handleInputFocus = () => {
-        const {datePicker, timePicker} = this.props;
-        this.setState({currentView: datePicker || !timePicker ? "day" : "time"});
+        this.setState({isFocused: true});
     };
 
-    handleInputBlur = () => {
-        if(!this.isCalendarFocused) {
-            this.setState({currentView: "none"});
+    handleInputMouseDown = () => {
+        const {datePicker, timePicker} = this.props;
+        const {isFocused, currentView} = this.state;
+        if(isFocused && currentView === "none") {
+            this.setState({
+                currentView: datePicker || !timePicker ? "day" : "time"
+            });
         }
     };
 
@@ -94,31 +130,8 @@ class CalendarInput extends React.Component {
         this.setState({currentMonth: date});
     };
 
-    resolveDisplayValue = () => {
-        const {value, datePicker, timePicker} = this.props;
-        let display = "";
-
-        if(moment.isMoment(value)) {
-            const format = [];
-
-            if(datePicker || !timePicker) {
-                format.push("Y/MM/DD");
-            }
-
-            if(timePicker) {
-                format.push("hh:mm A");
-            }
-
-            display = value.format(format.join(' '));
-        }
-
-        return display;
-    };
-
     render() {
         const errors = this.props.errors[this.props.name] || [];
-        const display = this.resolveDisplayValue();
-        const inputBgColor = this.props.disabled ? "#eee" : "#fff";
 
         return (
             <div className={"form-group " + (errors.length > 0 ? "has-error " : "") + (this.props.gridClass || "")}
@@ -128,7 +141,7 @@ class CalendarInput extends React.Component {
                     {
                         !this.props.disabled && this.props.clearable && Boolean(this.props.value) &&
                         <div className="dralt-cal-input-clear">
-                            <button onClick={this.handleClear}><i className="fa fa-times"/></button>
+                            <button tabIndex="-1" onClick={this.handleClear}><i className="fa fa-times"/></button>
                         </div>
                     }
                     <Manager>
@@ -139,10 +152,13 @@ class CalendarInput extends React.Component {
                                     <div className="input-group-addon">
                                         <i className={this.props.iconClass}/>
                                     </div>
-                                    <input className="form-control" style={{background: inputBgColor}} value={display} ref={ref}
-                                           onFocus={this.handleInputFocus} onBlur={this.handleInputBlur} readOnly
-                                           disabled={this.props.disabled}/>
-
+                                    <Input selectedValue={this.props.value} innerRef={this.setInputRef} containerRef={ref}
+                                           onFocus={this.handleInputFocus} disabled={this.props.disabled}
+                                           datePicker={this.props.datePicker} timePicker={this.props.timePicker}
+                                           onDatePick={this.handleDatePick} isFocused={this.state.isFocused}
+                                           onClear={this.handleClear} isSelectableDate={this.props.isSelectableDate}
+                                           manualInput={this.props.manualInput} onMouseDown={this.handleInputMouseDown}
+                                           currentView={this.state.currentView}/>
                                 </div>
                             }
                         </Reference>
@@ -193,6 +209,7 @@ CalendarInput.defaultProps = {
     iconClass: "fa fa-calendar",
     datePicker: true,
     timePicker: true,
+    manualInput: true,
     value: null,
     isSelectableDate: () => true,
     onChange: () => {}
@@ -226,6 +243,9 @@ CalendarInput.propTypes = {
 
     /** Specifies the text to use as the label*/
     label: PropTypes.node,
+
+    /** Set to false to disable manual input */
+    manualInput: PropTypes.bool,
 
     /** Specifies the name of the component. It is used to distinguish elements when
      * a single form change handler is used*/

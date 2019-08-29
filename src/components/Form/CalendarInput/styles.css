@@ -236,3 +236,30 @@ span.dralt-cal-selected:hover {
 .dralt-cal-input-clear button:hover {
     color: #555;
 }
+
+.dralt-cal-input-container {
+    position: relative;
+    overflow: auto;
+}
+
+.dralt-cal-input-container .form-control {
+    background: none;
+}
+
+.dralt-cal-mask {
+    position: absolute;
+    left: 0;
+    color: #aaa;
+    border: 1px solid transparent;
+    width: calc(100% - 12px);
+    box-sizing: border-box;
+    margin-right: 12px;
+    overflow: hidden;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+.dralt-cal-mask > div {
+    width: 200px;
+}
