@@ -34,7 +34,7 @@ class Input extends React.Component {
         const {selectedValue, currentView} = this.props;
 
         if(selectedValue !== prevProps.selectedValue ||
-            currentView !== prevProps.currentView && currentView === "none") {
+            (currentView !== prevProps.currentView && currentView === "none")) {
             this.setState({display: this.resolveDisplayValue(selectedValue)});
         }
     }

@@ -61,7 +61,7 @@ class TimeView extends React.Component {
     };
 
     handleAcceptClick = () => {
-        const {viewDate, selectedDate, onDatePick, switchCallback, datePicker} = this.props;
+        const {viewDate, selectedDate, onDatePick, switchCallback} = this.props;
         const {hour, minute} = this.state;
         const date = selectedDate || viewDate;
 
