@@ -208,10 +208,22 @@ span.dralt-cal-selected:hover {
 .dralt-cal-time-switch {
     border-top: 1px solid #f9f9f9;
     padding: 5px;
+    font-weight: bold;
     cursor: pointer;
 }
 
 .dralt-cal-time-switch:hover {
+    background-color: #eeeeee;
+}
+
+.dralt-cal-date-switch {
+    border-bottom: 1px solid #f9f9f9;
+    padding: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.dralt-cal-date-switch:hover {
     background-color: #eeeeee;
 }
 

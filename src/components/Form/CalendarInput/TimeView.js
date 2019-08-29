@@ -74,33 +74,52 @@ class TimeView extends React.Component {
         switchCallback(datePicker ? "day" : "none");
     };
 
+    handleDateSwitchClick = () => {
+        const {switchCallback} = this.props;
+        switchCallback("day");
+    };
+
+    renderDate = () => {
+        const {selectedDate, viewDate} = this.props;
+
+        return (
+            <div className="dralt-cal-date-switch" onClick={this.handleDateSwitchClick}>
+                {selectedDate ? selectedDate.format("YYYY/MM/DD") : viewDate.format("YYYY/MM/DD")}
+            </div>
+        );
+    };
+
     render() {
+        const {datePicker} = this.props;
         const {hour, minute} = this.state;
         const hourDisp = (hour - 1 + 12) % 12 + 1;
         const minuteDisp = minute.toString().padStart(2, '0');
         const periodDisp = hour < 12 ? "AM" : "PM";
 
         return (
-            <div className="dralt-cal-time-picker">
-                <div>
-                    <Counter value={hourDisp} onIncreaseClick={this.handleHourIncrease}
-                             onDecreaseClick={this.handleHourDecrease}/>
-                    <div className="dralt-cal-time-sep">:</div>
-                    <Counter value={minuteDisp} onIncreaseClick={this.handleMinuteIncrease}
-                             onDecreaseClick={this.handleMinuteDecrease}/>
-                    <div className="dralt-cal-time-sep">:</div>
-                    <Counter value={periodDisp} onIncreaseClick={this.handlePeriodChange}
-                             onDecreaseClick={this.handlePeriodChange}/>
+            <>
+                {datePicker && this.renderDate()}
+                <div className="dralt-cal-time-picker">
+                    <div>
+                        <Counter value={hourDisp} onIncreaseClick={this.handleHourIncrease}
+                                 onDecreaseClick={this.handleHourDecrease}/>
+                        <div className="dralt-cal-time-sep">:</div>
+                        <Counter value={minuteDisp} onIncreaseClick={this.handleMinuteIncrease}
+                                 onDecreaseClick={this.handleMinuteDecrease}/>
+                        <div className="dralt-cal-time-sep">:</div>
+                        <Counter value={periodDisp} onIncreaseClick={this.handlePeriodChange}
+                                 onDecreaseClick={this.handlePeriodChange}/>
+                    </div>
+                    <div className="dralt-cal-feedback">
+                        <button onClick={this.handleCancelClick}>
+                            <i className="fa fa-times"/>
+                        </button>
+                        <button onClick={this.handleAcceptClick}>
+                            <i className="fa fa-check"/>
+                        </button>
+                    </div>
                 </div>
-                <div className="dralt-cal-feedback">
-                    <button onClick={this.handleCancelClick}>
-                        <i className="fa fa-times"/>
-                    </button>
-                    <button onClick={this.handleAcceptClick}>
-                        <i className="fa fa-check"/>
-                    </button>
-                </div>
-            </div>
+            </>
         );
     }
 }
