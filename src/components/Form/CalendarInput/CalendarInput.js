@@ -243,6 +243,9 @@ CalendarInput.propTypes = {
     /** Specifies the text to use as the label*/
     label: PropTypes.node,
 
+    /** Set to false to disable manual input */
+    manualInput: PropTypes.bool,
+
     /** Specifies the name of the component. It is used to distinguish elements when
      * a single form change handler is used*/
     name: PropTypes.string.isRequired,

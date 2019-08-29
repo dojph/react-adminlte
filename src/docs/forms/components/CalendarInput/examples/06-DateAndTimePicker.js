@@ -6,9 +6,7 @@ export default class DateAndTimePicker extends React.Component {
         super(props);
 
         this.state = {
-            date1: null,
-            date2: null,
-            date3: null
+            date: null
         };
     }
 
@@ -17,29 +15,33 @@ export default class DateAndTimePicker extends React.Component {
     };
 
     render() {
-        const {date1,date2,date3} = this.state;
+        const {date} = this.state;
 
         return (
             <div className="row">
                 <div className="col-xs-4">
-                    <CalendarInput name="date1"
+                    <CalendarInput name="date"
                                    label="Both pickers enabled"
-                                   value={date1}
+                                   value={date}
                                    onChange={this.handleDateChange}/>
                 </div>
                 <div className="col-xs-4">
-                    <CalendarInput name="date2"
+                    <CalendarInput name="date"
                                    label="Time picker only "
-                                   value={date2}
+                                   value={date}
                                    onChange={this.handleDateChange}
                                    datePicker={false}/>
                 </div>
                 <div className="col-xs-4">
-                    <CalendarInput name="date3"
+                    <CalendarInput name="date"
                                    label="Date picker only"
-                                   value={date3}
+                                   value={date}
                                    onChange={this.handleDateChange}
                                    timePicker={false}/>
+                </div>
+                <div className="col-xs-12">
+                    <span style={{fontWeight: 'bold'}}>Selected: </span>
+                    { date ? date.format("LLLL") : "No selected date" }
                 </div>
             </div>
         );
