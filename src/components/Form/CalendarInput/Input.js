@@ -30,6 +30,14 @@ class Input extends React.Component {
         }, 70);
     };
 
+    componentDidMount() {
+        const {selectedValue} = this.props;
+
+        if(selectedValue) {
+            this.setState({display: this.resolveDisplayValue(selectedValue)});
+        }
+    }
+
     componentDidUpdate(prevProps) {
         const {selectedValue, currentView} = this.props;
 
