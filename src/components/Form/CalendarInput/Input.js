@@ -425,9 +425,10 @@ class Input extends React.Component {
 
         // Set component value if complete
         let setDisplay = true;
+        const {datePicker, timePicker} = this.props;
         if(this.isComplete(newValue)) {
             // Get selected date
-            const {selectedDate, datePicker, timePicker, isSelectableDate} = this.props;
+            const {selectedDate, isSelectableDate} = this.props;
             const format = [];
             if(datePicker || !timePicker) {
                 format.push("YYYY/MM/DD");
@@ -447,7 +448,7 @@ class Input extends React.Component {
             } else {
                 this.props.onDatePick(newDate);
             }
-        } else if(newValue === "") {
+        } else if(newValue === "" && (datePicker || !timePicker)) {
             this.props.onClear();
         }
 
