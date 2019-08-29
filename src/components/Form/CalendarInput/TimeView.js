@@ -66,7 +66,7 @@ class TimeView extends React.Component {
         const date = selectedDate || viewDate;
 
         onDatePick(date.clone().hour(hour).minute(minute));
-        switchCallback(datePicker ? "day" : "none");
+        switchCallback("none");
     };
 
     handleCancelClick = () => {
