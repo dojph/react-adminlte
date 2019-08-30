@@ -123,7 +123,10 @@ class CalendarInput extends React.Component {
     };
 
     handleClear = () => {
-        this.props.onChange(this.props.name, null);
+        const {clearable, onChange, name} = this.props;
+        if(clearable) {
+            onChange(name, null);
+        }
     };
 
     handleCurrentMonthChange = date => {
