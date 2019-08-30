@@ -20,13 +20,9 @@ class Modal extends React.Component {
         };
 
         this.bodyRef = null;
-        this.contentRef = null;
-        this.isMouseDownOnContent = false;
+        this.isMouseDownOnBackdrop = false;
         this.setBodyRef = element => {
             this.bodyRef = element;
-        };
-        this.setContentRef = element => {
-            this.contentRef = element;
         };
     }
 
@@ -73,21 +69,24 @@ class Modal extends React.Component {
 
     handleBackdropMouseUp = event => {
         const {closeOnBackdropClick, onCloseClick} = this.props;
-        if(closeOnBackdropClick && !this.isMouseDownOnContent) {
+        if(closeOnBackdropClick && this.isMouseDownOnBackdrop) {
             onCloseClick();
         }
-        this.isMouseDownOnContent = false;
+
+        this.isMouseDownOnBackdrop = false;
     };
 
     handleBackdropMouseDown = event => {
-        this.isMouseDownOnContent = false;
+        this.isMouseDownOnBackdrop = true;
+    };
+
+    handleContentMouseUp = event => {
+        event.stopPropagation();
+        this.isMouseDownOnBackdrop = false;
     };
 
     handleContentMouseDown = event => {
-        const clickedElement = event.target;
-        if(this.contentRef && this.contentRef.contains(clickedElement)) {
-            this.isMouseDownOnContent = true;
-        }
+        event.stopPropagation();
     };
 
     handleEscapeKeypress = event => {
@@ -108,7 +107,6 @@ class Modal extends React.Component {
         const scrollbarWidth = Modal.getScrollbarWidth();
         document.body.classList.add('modal-open');
 
-        document.addEventListener('mousedown', this.handleContentMouseDown);
         if(scrollbarWidth) {
             document.body.style.paddingRight = scrollbarWidth + 'px';
         }
@@ -124,7 +122,6 @@ class Modal extends React.Component {
     };
 
     handleExited = () => {
-        document.removeEventListener('mousedown', this.handleContentMouseDown);
         document.body.classList.remove('modal-open');
         document.body.style.paddingRight = null;
         this.setState({exited: true});
@@ -178,7 +175,6 @@ class Modal extends React.Component {
                 onEntering={this.updateDimensions}
                 onExited={this.handleExited}
                 unmountOnExit
-
             >
                 {
                     state => (
@@ -191,8 +187,9 @@ class Modal extends React.Component {
                                 unmountOnExit
                             >
                                 <div className={`modal-dialog ${dialogClass} ` + (this.props.dialogClassName || '')}
-                                     style={dialogStyle} ref={this.setContentRef}>
-                                    <div className="modal-content">
+                                     style={dialogStyle}>
+                                    <div className="modal-content" onMouseDown={this.handleContentMouseDown}
+                                         onMouseUp={this.handleContentMouseUp}>
                                         {header}
                                         {
                                             isLoading &&
