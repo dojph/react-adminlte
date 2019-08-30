@@ -344,7 +344,7 @@ class Input extends React.Component {
             if(position <= 9) {
                 const [newValue, offset] = this.dateReplaceAtPosition(value, position, insertion, 0);
                 // return [newValue, offset];
-                if(position + offset === 10 && offset >= 1) {
+                if(position + offset === 10 && offset >= 1 && timePicker) {
                     return [newValue.substring(0, 10) + ' ' + newValue.substring(11), offset + 1]
                 } else {
                     return [newValue, offset];
