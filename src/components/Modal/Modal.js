@@ -76,6 +76,7 @@ class Modal extends React.Component {
         if(closeOnBackdropClick && !this.isMouseDownOnContent) {
             onCloseClick();
         }
+        this.isMouseDownOnContent = false;
     };
 
     handleBackdropMouseDown = event => {
@@ -83,8 +84,10 @@ class Modal extends React.Component {
     };
 
     handleContentMouseDown = event => {
-        event.stopPropagation();
-        this.isMouseDownOnContent = true;
+        const clickedElement = event.target;
+        if(this.contentRef && this.contentRef.contains(clickedElement)) {
+            this.isMouseDownOnContent = true;
+        }
     };
 
     handleEscapeKeypress = event => {
@@ -104,6 +107,8 @@ class Modal extends React.Component {
     handleEnter = () => {
         const scrollbarWidth = Modal.getScrollbarWidth();
         document.body.classList.add('modal-open');
+
+        document.addEventListener('mousedown', this.handleContentMouseDown);
         if(scrollbarWidth) {
             document.body.style.paddingRight = scrollbarWidth + 'px';
         }
@@ -119,6 +124,7 @@ class Modal extends React.Component {
     };
 
     handleExited = () => {
+        document.removeEventListener('mousedown', this.handleContentMouseDown);
         document.body.classList.remove('modal-open');
         document.body.style.paddingRight = null;
         this.setState({exited: true});
@@ -185,7 +191,7 @@ class Modal extends React.Component {
                                 unmountOnExit
                             >
                                 <div className={`modal-dialog ${dialogClass} ` + (this.props.dialogClassName || '')}
-                                     style={dialogStyle} ref={this.setContentRef} onMouseDown={this.handleContentMouseDown}>
+                                     style={dialogStyle} ref={this.setContentRef}>
                                     <div className="modal-content">
                                         {header}
                                         {
