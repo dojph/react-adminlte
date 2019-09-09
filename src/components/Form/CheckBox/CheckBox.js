@@ -40,11 +40,25 @@ CheckBox.defaultProps = {
 };
 
 CheckBox.propTypes = {
+    /** Sets the checked state of the component. */
     checked: PropTypes.bool,
+
+    /** Enables/disables user interaction with the component.*/
     disabled: PropTypes.bool,
+
+    /** Set to true if you want the checkboxes to appear on the same line.*/
     inline: PropTypes.bool,
+
+    /** Specifies the text to use as the label*/
     label: PropTypes.node.isRequired,
+
+    /** Specifies the name of the component.
+     * It is used to distinguish elements
+     * when a single form change handler is used*/
     name: PropTypes.string.isRequired,
+
+    /** Callback fired when component value changes.
+     * Accepts a function with two parameters, namely field and value*/
     onChange: PropTypes.func,
 };
 
