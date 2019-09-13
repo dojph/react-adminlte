@@ -11,6 +11,10 @@ const excludedComponents = [
     'Form'
 ];
 
+const excludedFormComponents = [
+    'Radio'
+];
+
 const paths = {
     componentDocs: path.join(__dirname, '../src', 'docs', 'components'),
     formDocs: path.join(__dirname, '../src', 'docs', 'forms'),
@@ -53,6 +57,7 @@ function generate(paths) {
             props: info.props,
             examples: getFormUsageExampleData(paths.formDocs),
             components: getDirectories(paths.form)
+                .filter(componentName => excludedFormComponents.indexOf(componentName) === -1)
                 .map(function(componentName) {
                     try {
                         return getFormComponentData(paths, componentName);
