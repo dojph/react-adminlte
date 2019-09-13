@@ -58,19 +58,48 @@ RadioGroup.defaultProps = {
     inline: false,
     onChange: () => {},
     valueKey: "value",
-    labelKey: "label"
+    labelKey: "label",
+    simpleValue: false
 };
 
 RadioGroup.propTypes = {
+    /** If true, interaction with the component is disabled */
     disabled: PropTypes.bool,
+
+    /** If true, selects the first option by default upon loading of the list of options */
     firstDefault: PropTypes.bool,
+
+    /** Set to true to make the list of options appear on the same line */
     inline: PropTypes.bool,
+
+    /** Specifies the text to use as the label */
     label: PropTypes.node,
+
+    /** Property name of the items in the options list from which the option label to be displayed will be taken.
+     * Defaults to "label" */
     labelKey: PropTypes.string,
+
+    /** Specifies the name of the component. It is used to distinguish elements when
+     a single form change handler is used */
     name: PropTypes.string.isRequired,
+
+    /** Callback fired when component value changes. Accepts a function with two parameters,
+     namely field and value */
     onChange: PropTypes.func,
+
+    /** Array of objects to be used as options. By default, uses the properties "label" and "value" for the labels and
+     * values of each of the options respectively. */
     options: PropTypes.array.isRequired,
+
+    /** If set to true, only the value property of the selected option is passed as value parameter in the
+     * onChange handler. Otherwise, the option object itself is passed. */
+    simpleValue: PropTypes.bool,
+
+    /** Specifies the currently selected option */
     value: PropTypes.any,
+
+    /** Property name of the items in the options list from which the value of the option will be taken.
+     * Defaults to "value" */
     valueKey: PropTypes.string,
 };
 
