@@ -37,13 +37,24 @@ FileInput.defaultProps = {
 };
 
 FileInput.propTypes = {
+    /** If true, interaction with the component is disabled */
     disabled: PropTypes.bool,
     errors: PropTypes.objectOf(
         PropTypes.arrayOf(PropTypes.string)
     ),
+    
+    /** Specifies a Bootstrap 3 grid class */
     gridClass: PropTypes.string,
+
+    /** Specifies the text to use as the label */
     label: PropTypes.node,
+
+    /** Specifies the name of the component. It is used to distinguish elements when
+     a single form change handler is used */
     name: PropTypes.string.isRequired,
+
+    /** Callback fired when component value changes. Accepts a function with two parameters,
+     namely field and value */
     onChange: PropTypes.func,
 };
 
