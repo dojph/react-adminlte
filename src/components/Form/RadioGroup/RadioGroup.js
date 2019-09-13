@@ -11,12 +11,14 @@ const labelStyle = {
 
 class RadioGroup extends React.Component {
     componentDidMount() {
+        const {simpleValue, valueKey} = this.props;
         if(this.props.firstDefault && !this.props.value && this.props.options.length) {
-            this.props.onChange(this.props.name, this.props.options[0]);
+            const firstOption = this.props.options[0];
+            this.props.onChange(this.props.name, simpleValue ? firstOption[valueKey] : firstOption);
         }
     }
 
-    handleChange = (nameUnused, value) => {
+    handleChange = (name, value) => {
         // TODO: Optimize this by directly using the value instead of using find
         const {options, valueKey, simpleValue} = this.props;
         value = options.find(o => o[valueKey] === value.value);
