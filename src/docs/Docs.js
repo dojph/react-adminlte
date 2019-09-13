@@ -76,7 +76,7 @@ export default class Docs extends React.Component {
                     </Switch>
                 </Layout.Body>
                 <Layout.Footer>
-                    <strong>Copyright &copy; 2018 <a href="">Department of Justice</a>.</strong> All rights reserved.
+                    <strong>Copyright &copy; 2018 - 2019 <a href="">Department of Justice</a>.</strong> All rights reserved.
                 </Layout.Footer>
             </Layout>
         );
