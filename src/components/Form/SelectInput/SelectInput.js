@@ -111,6 +111,12 @@ class SelectInput extends React.Component {
                                 minHeight: '34px',
                                 borderRadius: 0,
                                 boxShadow: 'none',
+                                ...(errors.length > 0) && {
+                                    borderColor: '#dd4b39',
+                                    "&:hover": {
+                                        borderColor: '#dd4b39'
+                                    }
+                                },
                                 ...state.isFocused && {
                                     borderColor: '#3c8dbc',
                                     "&:hover": {
