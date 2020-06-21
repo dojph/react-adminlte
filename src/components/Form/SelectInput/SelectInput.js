@@ -63,17 +63,13 @@ class SelectInput extends React.Component {
     };
 
     handleSelectOption = option => {
-        const {onChange, name, simpleValue} = this.props;
-        onChange(name, simpleValue ? (option && option.value) : option);
+        const {onChange, name, simpleValue, getOptionValue} = this.props;
+        onChange(name, simpleValue ? (option && (getOptionValue ? getOptionValue(option) : option.value)) : option);
     };
 
     resolveValueFromOptions = value => {
-        const {options, simpleValue} = this.props;
-        return simpleValue ? options.filter(o => o.value === value) : value;
-    };
-
-    handleClear = () => {
-        this.props.onChange(this.props.name, null);
+        const {options, simpleValue, getOptionValue} = this.props;
+        return simpleValue ? options.filter(o => (getOptionValue ? getOptionValue(o) : o.value) === value) : value;
     };
 
     render() {
