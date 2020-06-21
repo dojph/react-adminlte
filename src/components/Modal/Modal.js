@@ -192,14 +192,14 @@ class Modal extends React.Component {
                                          onMouseUp={this.handleContentMouseUp}>
                                         {header}
                                         {
-                                            isLoading &&
-                                            <div className="modal-overlay" style={{height: this.state.bodyHeight}}>
-                                                <i className="fa fa-spinner fa-spin"/>
-                                            </div>
-                                        }
-                                        {
                                             body &&
                                             <div className="modal-body" style={bodyStyle} ref={this.setBodyRef}>
+                                                {
+                                                    isLoading &&
+                                                    <div className="modal-overlay">
+                                                        <i className="fa fa-spinner fa-spin"/>
+                                                    </div>
+                                                }
                                                 {body}
                                             </div>
                                         }

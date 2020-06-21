@@ -18,14 +18,13 @@ export default class ExampleModal extends React.Component {
     };
 
     render() {
-        const {isLoading} = this.props;
         return (
             <div className='row'>
                 <div className='col-xs-4'>
                     <button className="btn btn-default" type="button" onClick={this.handleClick}>
                         Open Modal
                     </button>
-                    <Modal isLoading={isLoading} className="modal modal-default" show={this.state.show}
+                    <Modal className="modal modal-default" show={this.state.show}
                            onCloseClick={this.handleCloseClick} fixedScroll>
                         <Modal.Header>
                             Default Modal
