@@ -60,18 +60,29 @@ TextArea.defaultProps = {
 };
 
 TextArea.propTypes = {
+    /** Set to true to disable the TextArea*/
     disabled: PropTypes.bool,
+    /** Bind the error message' object in this prop that will be executed when the validation failed*/
     errors: PropTypes.objectOf(
         PropTypes.arrayOf(PropTypes.string)
     ),
+    /** This prop shows the maximum length available in the TextArea*/
     showCounter: PropTypes.bool,
+    /** Specifies a Bootstrap 3 grid class*/
     gridClass: PropTypes.string,
+    /** Specifies the text to use as the label of the TextArea*/
     label: PropTypes.node,
+    /** This prop is used to set the maximum length of the TextArea*/
     maxLength: PropTypes.number,
+    /** Specifies the name of the component*/
     name: PropTypes.string.isRequired,
+    /** Callback fired when component value changes. This accepts a function with two parameters, namely field and value*/
     onChange: PropTypes.func,
+    /** Serves as a hint that describes the expected value of a TextArea*/
     placeholder: PropTypes.string,
+    /** Set to true to keep a user from changing the value until some other conditions have been met*/
     readOnly: PropTypes.bool,
+    /** This prop specifies the initial value of a particular TextArea*/
     value: PropTypes.string
 };
 
