@@ -70,6 +70,3 @@ launch.json
 
 # Webstorm
 .idea
-
-# Webpack config for WebStorm
-webpack*
