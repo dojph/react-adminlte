@@ -20,8 +20,8 @@ const paths = {
     formDocs: path.join(__dirname, '../src', 'docs', 'forms'),
     components: path.join(__dirname, '../src', 'components'),
     form: path.join(__dirname, '../src', 'components', 'Form'),
-    componentDataOutput: path.join(__dirname, '../', 'componentData.js'),
-    formDataOutput: path.join(__dirname, '../', 'formData.js')
+    componentDataOutput: path.join(__dirname, '../src', 'componentData.js'),
+    formDataOutput: path.join(__dirname, '../src', 'formData.js')
 };
 
 const enableWatchMode = process.argv.slice(2) == '--watch';

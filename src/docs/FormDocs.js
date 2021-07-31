@@ -2,7 +2,7 @@ import React from 'react';
 import {Redirect} from 'react-router-dom';
 
 import ComponentPage from './ComponentPage';
-import formData from '../../formData';
+import formData from '../formData';
 
 const toCamelCase = (string) => {
     return string.replace(/(-\w)/g, function(m){return m[1].toUpperCase();})

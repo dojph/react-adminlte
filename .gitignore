@@ -62,8 +62,8 @@ yarn-error.log*
 /docs
 
 # Generated component data
-/componentData.js
-/formData.js
+/src/componentData.js
+/src/formData.js
 
 # VSCode launch configuration
 launch.json
