@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SyntaxHighlighter from 'react-syntax-highlighter/prism';
-import {prism} from 'react-syntax-highlighter/styles/prism';
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
+import {prism} from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const customStyle = {
     border: "none",
