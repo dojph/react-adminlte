@@ -96,12 +96,24 @@ class DropdownButton extends React.Component {
                 {
                     this.state.show && menuItemCount > 0 &&
                     ReactDOM.createPortal(
-                        <Popper placement={this.props.menuAlignment === 'left' ? 'bottom-start' : 'bottom-end'}>
+                        <Popper placement={this.props.menuAlignment === 'left' ? 'bottom-start' : 'bottom-end'}
+                                modifiers={[
+                                    {
+                                        name: 'offset',
+                                        options: {
+                                            offset: [0, 2]
+                                        }
+                                    }
+                                ]}>
                             {
                                 ({ref, style, placement}) =>
                                     <div ref={this.setMenuRef}>
                                         <ul className="dropdown-menu"
-                                            ref={ref} style={{...style, display: 'block'}} data-placement={placement}>
+                                            ref={ref} style={{
+                                                ...style,
+                                                display: 'block',
+                                                margin: 0
+                                            }} data-placement={placement}>
                                             {
                                                 menuItems
                                             }

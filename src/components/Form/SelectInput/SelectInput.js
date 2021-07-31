@@ -16,10 +16,20 @@ const Menu = getInputRef => {
 
         return ReactDOM.createPortal(
             <Popper referenceElement={inputRef} placement="bottom-start" positionFixed
-                    modifiers={{
-                        preventOverflow: {enabled: true, boundariesElement: 'viewport'},
-                        computeStyle: {enabled: true, gpuAcceleration: false}
-                    }}>
+                    modifiers={[{
+                        name: "preventOverflow",
+                        enabled: true,
+                        options: {
+                            boundariesElement: 'viewport'
+                        }
+                    }, {
+                        name: 'computeStyle',
+                        enabled: true,
+                        phase: 'beforeWrite',
+                        options: {
+                            gpuAcceleration: false
+                        }
+                    }]}>
                 {({ref, style, placement, scheduleUpdate}) => (
                     <div ref={ref} style={{...style, width, zIndex: 9999}} data-placement={placement}>
                         <ResizeAware onResize={scheduleUpdate}>

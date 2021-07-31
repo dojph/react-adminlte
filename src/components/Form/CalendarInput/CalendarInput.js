@@ -168,7 +168,13 @@ class CalendarInput extends React.Component {
                         {
                             ReactDOM.createPortal(
                                 <Popper placement="bottom-start" positionFixed innerRef={this.setPickerContainerRef}
-                                        modifiers={{preventOverflow: {enabled: true, boundariesElement: 'viewport'}}}>
+                                        modifiers={[{
+                                            name: 'preventOverflow',
+                                            enabled: true,
+                                            options: {
+                                                boundariesElement: 'viewport'
+                                            }
+                                        }]}>
                                     {
                                         ({ref, style, placement, scheduleUpdate}) => {
                                             if(this.state.currentView !== "none") {
