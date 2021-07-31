@@ -1,8 +1,8 @@
 import React from 'react';
 import ComponentDocs from "./ComponentDocs";
 
-import componentData from '../../componentData';
-import formData from '../../formData';
+import componentData from '../componentData';
+import formData from '../formData';
 
 import Layout from 'doj-react-adminlte/Layout';
 import SidebarTree from "doj-react-adminlte/Layout/SidebarTree";
