@@ -271,4 +271,5 @@ CalendarInput.propTypes = {
     value: PropTypes.any,
 };
 
+CalendarInput.isFormComponent = true;
 export default CalendarInput;

@@ -58,4 +58,5 @@ FileInput.propTypes = {
     onChange: PropTypes.func,
 };
 
+FileInput.isFormComponent = true;
 export default FileInput;

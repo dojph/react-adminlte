@@ -6,6 +6,11 @@ const componentPath = path.join(__dirname, '../src', 'components');
 const outPath = path.join(__dirname, '../lib');
 generateFromDirectory('/');
 
+const skipFiles = [
+    'asFormComponent.js',
+    'helpBlockStyle.js'
+];
+
 function generateFromDirectory(currentPath) {
     let sourcePath = path.join(componentPath, currentPath);
     let destPath = path.join(outPath, currentPath);
@@ -18,8 +23,8 @@ function generateFromDirectory(currentPath) {
         } else if (stat.isFile() && name.endsWith('.js')) {
             fs.mkdirSync(destPath, {recursive: true});
             const destFilePath = path.join(destPath, path.parse(name).name + ".d.ts");
-            // Skip helpBlockStyle
-            if (name === "helpBlockStyle.js") {
+            // Skip files
+            if (skipFiles.includes(name)) {
                 return;
             }
             

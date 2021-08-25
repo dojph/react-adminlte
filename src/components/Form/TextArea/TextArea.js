@@ -75,4 +75,5 @@ TextArea.propTypes = {
     value: PropTypes.string
 };
 
+TextArea.isFormComponent = true;
 export default TextArea;

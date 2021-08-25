@@ -183,4 +183,5 @@ SelectInput.propTypes = {
     value: PropTypes.any
 };
 
+SelectInput.isFormComponent = true;
 export default SelectInput;

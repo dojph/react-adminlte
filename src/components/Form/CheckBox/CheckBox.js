@@ -62,4 +62,5 @@ CheckBox.propTypes = {
     onChange: PropTypes.func,
 };
 
+CheckBox.isFormComponent = true;
 export default CheckBox;

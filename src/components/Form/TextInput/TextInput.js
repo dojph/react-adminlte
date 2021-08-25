@@ -109,4 +109,5 @@ TextInput.propTypes = {
     value: PropTypes.string
 };
 
+TextInput.isFormComponent = true;
 export default TextInput;

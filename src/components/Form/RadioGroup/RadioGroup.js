@@ -103,4 +103,5 @@ RadioGroup.propTypes = {
     valueKey: PropTypes.string,
 };
 
+RadioGroup.isFormComponent = true;
 export default RadioGroup;

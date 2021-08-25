@@ -75,4 +75,5 @@ Radio.propTypes = {
     ]).isRequired
 };
 
+Radio.isFormComponent = true;
 export default Radio;
