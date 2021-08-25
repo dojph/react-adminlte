@@ -1,15 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import CalendarInput from "./CalendarInput";
-import CheckBox from "./CheckBox";
-import FileInput from "./FileInput";
-import Radio from "./Radio";
-import RadioGroup from "./RadioGroup";
-import SelectInput from "./SelectInput";
-import TextArea from "./TextArea";
-import TextInput from "./TextInput";
-
 class Form extends React.Component {
     handleChange = (field, value) => {
         if(field) {
@@ -18,8 +9,7 @@ class Form extends React.Component {
     };
 
     isFormElement = childType => {
-        return [TextInput, TextArea, CalendarInput, SelectInput, Radio, RadioGroup,
-            CheckBox, FileInput].includes(childType);
+        return !!childType.isFormComponent;
     };
 
     recursiveCloneChildren = children => {
@@ -56,8 +46,14 @@ Form.defaultProps = {
 };
 
 Form.propTypes = {
+
+    /** Bind the error message' object in this prop that will be executed when the validation failed.*/
     errors: PropTypes.object,
+
+    /** The corresponding function that is binded in this prop will trigger when the value of an element has been changed.*/
     onChange: PropTypes.func,
+
+    /** The corresponding function that is binded in this prop will trigger when the enter key was pressed.*/
     onEnterKey: PropTypes.func
 };
 

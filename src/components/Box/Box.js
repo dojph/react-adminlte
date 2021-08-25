@@ -1,9 +1,10 @@
 import React from "react";
+import PropTypes from 'prop-types';
+
 import SmoothCollapse from 'react-smooth-collapse';
 import Header from './Header';
 import Body from './Body';
 import Footer from './Footer';
-import PropTypes from 'prop-types';
 
 /** AdminLTE Box component. */
 class Box extends React.Component {
@@ -34,22 +35,22 @@ class Box extends React.Component {
 
         return (
             <div>
-                <div className={"box " + this.props.theme }>
+                <div className={"box " + this.props.theme}>
                     {
                         header &&
                         <div className="box-header with-border">
-                            { header }
+                            {header}
                             {this.props.collapsible &&
                             <div className="box-tools pull-right">
                                 <button onClick={this.toggleCollapse} className="btn btn-box-tool" type="button"><i
-                                    className={"fa " + (expanded ? "fa-minus" : "fa-plus")} /></button>
+                                    className={"fa " + (expanded ? "fa-minus" : "fa-plus")}/></button>
                             </div>
                             }
                         </div>
                     }
                     <SmoothCollapse expanded={expanded}>
-                        { body }
-                        { footer }
+                        {body}
+                        {footer}
                     </SmoothCollapse>
                     {
                         this.props.isLoading &&
@@ -64,12 +65,13 @@ class Box extends React.Component {
 }
 
 Box.propTypes = {
+    /** Returns a boolean value for a postback or loading a content.*/
     isLoading: PropTypes.bool,
 
-    /** Box theme. See AdminLTE guide for a list of themes. */
+    /** This prop is set to style a box. See AdminLTE guide for a list of themes.*/
     theme: PropTypes.string,
 
-    /** Set to true if box should be collapsible. */
+    /** Set to true if box should be collapsible.*/
     collapsible: PropTypes.bool
 };
 

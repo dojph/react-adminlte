@@ -15,7 +15,14 @@ class Modal extends React.Component {
             exited: true,
             fixedWidth: 0,
             fixedHeight: 0,
-            fixedMaxWidth: 0
+            fixedMaxWidth: 0,
+            bodyHeight: 0
+        };
+
+        this.bodyRef = null;
+        this.isMouseDownOnBackdrop = false;
+        this.setBodyRef = element => {
+            this.bodyRef = element;
         };
     }
 
@@ -54,13 +61,32 @@ class Modal extends React.Component {
                 fixedMaxWidth: maxWidth
             });
         }
+
+        if(this.bodyRef) {
+            this.setState({bodyHeight: this.bodyRef.clientHeight});
+        }
     };
 
-    handleClickBackdrop = () => {
+    handleBackdropMouseUp = event => {
         const {closeOnBackdropClick, onCloseClick} = this.props;
-        if(closeOnBackdropClick) {
+        if(closeOnBackdropClick && this.isMouseDownOnBackdrop) {
             onCloseClick();
         }
+
+        this.isMouseDownOnBackdrop = false;
+    };
+
+    handleBackdropMouseDown = event => {
+        this.isMouseDownOnBackdrop = true;
+    };
+
+    handleContentMouseUp = event => {
+        event.stopPropagation();
+        this.isMouseDownOnBackdrop = false;
+    };
+
+    handleContentMouseDown = event => {
+        event.stopPropagation();
     };
 
     handleEscapeKeypress = event => {
@@ -77,13 +103,10 @@ class Modal extends React.Component {
         }
     };
 
-    handleInnerClick = event => {
-        event.stopPropagation();
-    };
-
     handleEnter = () => {
         const scrollbarWidth = Modal.getScrollbarWidth();
         document.body.classList.add('modal-open');
+
         if(scrollbarWidth) {
             document.body.style.paddingRight = scrollbarWidth + 'px';
         }
@@ -141,18 +164,22 @@ class Modal extends React.Component {
             };
         }
 
+        const {isLoading} = this.props;
+
         return (
             <CSSTransition
                 in={this.state.mounted && this.props.show}
                 timeout={150}
                 classNames="modal"
                 onEnter={this.handleEnter}
+                onEntering={this.updateDimensions}
                 onExited={this.handleExited}
                 unmountOnExit
             >
                 {
                     state => (
-                        <div className={"modal " + (this.props.className || '')} onClick={this.handleClickBackdrop}>
+                        <div className={"modal " + (this.props.className || '')} onMouseUp={this.handleBackdropMouseUp}
+                             onMouseDown={this.handleBackdropMouseDown}>
                             <CSSTransition
                                 in={(state === 'entering' || state === 'entered')}
                                 timeout={300}
@@ -160,12 +187,19 @@ class Modal extends React.Component {
                                 unmountOnExit
                             >
                                 <div className={`modal-dialog ${dialogClass} ` + (this.props.dialogClassName || '')}
-                                     style={dialogStyle} onClick={this.handleInnerClick}>
-                                    <div className="modal-content">
+                                     style={dialogStyle}>
+                                    <div className="modal-content" onMouseDown={this.handleContentMouseDown}
+                                         onMouseUp={this.handleContentMouseUp}>
                                         {header}
                                         {
                                             body &&
-                                            <div className="modal-body" style={bodyStyle}>
+                                            <div className="modal-body" style={bodyStyle} ref={this.setBodyRef}>
+                                                {
+                                                    isLoading &&
+                                                    <div className="modal-overlay">
+                                                        <i className="fa fa-spinner fa-spin"/>
+                                                    </div>
+                                                }
                                                 {body}
                                             </div>
                                         }
@@ -185,6 +219,7 @@ Modal.defaultProps = {
     closeOnBackdropClick: true,
     closeOnEscapeKey: true,
     fixedScroll: false,
+    isLoading: false,
     onCloseClick: () => {},
     onEnter: () => {},
     onExit: () => {},
@@ -193,15 +228,37 @@ Modal.defaultProps = {
 };
 
 Modal.propTypes = {
+    /** className gets and sets the value of the class attribute of the specified element. You can also add a CSS class in this prop to style a particular element.*/
     className: PropTypes.string,
+
+    /** Set to true to close the modal by just pressing the backdrop.*/
     closeOnBackdropClick: PropTypes.bool,
+
+    /** Set to true to close the modal by pressing Escape key.*/
     closeOnEscapeKey: PropTypes.bool,
+
+    /** dialogClassName is a css class to apply to the Modal Dialog.*/
     dialogClassName: PropTypes.string,
+
+    /** Set to true to show a scrollbar.*/
     fixedScroll: PropTypes.bool,
+
+    /** Returns a boolean value for a postback or loading a content.*/
+    isLoading: PropTypes.bool,
+
+    /** The onCloseClick prop allows passing a function that will be invoked when the close button is clicked.*/
     onCloseClick: PropTypes.func,
+
+    /** The onEnter prop allows binding a function that will be invoked when the Enter button is clicked.*/
     onEnter: PropTypes.func,
+
+    /** The function that is binded in this event will be invoked when the user exits the Modal.*/
     onExit: PropTypes.func,
+
+    /** Set to true to automatically show the modal.*/
     show: PropTypes.bool,
+
+    /** You can set the size of the Modal in this prop.*/
     size: PropTypes.oneOf(['default', 'large', 'small'])
 };
 

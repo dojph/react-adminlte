@@ -12,7 +12,6 @@ export {default as BreadcrumbItem} from './Content/BreadcrumbItem';
 
 export {default as TabContainer} from './TabContainer';
 export {default as Tab} from './TabContainer/Tab';
-export {default as TabUtilityButton} from './TabContainer/TabUtilityButton';
 
 export {default as Layout} from './Layout';
 export {default as SidebarHeader} from './Layout/SidebarHeader';

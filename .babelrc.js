@@ -86,6 +86,7 @@ module.exports = {
     classPropertiesProposalPlugin,
     objectRestSpreadProposalPlugin,
     removePropTypesPlugin,
-    syntaxDynamicImportPlugin
+    syntaxDynamicImportPlugin,
+    ["@babel/plugin-proposal-private-methods", { "loose": true }]
   ]
 };

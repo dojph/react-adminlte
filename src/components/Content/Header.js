@@ -8,7 +8,7 @@ class Header extends React.Component {
                 {this.props.title}
                 {
                     this.props.subtitle &&
-                    <small className="margin-r-5">{this.props.subheader}</small>
+                    <small className="margin-r-5">{this.props.subtitle}</small>
                 }
             </h1>
         );
@@ -17,7 +17,7 @@ class Header extends React.Component {
 
 Header.propTypes = {
     title: PropTypes.string.isRequired,
-    subtitle: PropTypes.string
+    subtitle: PropTypes.node
 };
 
 export default Header;

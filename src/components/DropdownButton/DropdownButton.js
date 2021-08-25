@@ -38,7 +38,7 @@ class DropdownButton extends React.Component {
     };
 
     handleClickOutside = event => {
-        if(this.state.show && !this.buttonRef.contains(event.target) && !this.menuRef.contains(event.target)) {
+        if (this.state.show && !this.buttonRef.contains(event.target) && !this.menuRef.contains(event.target)) {
             this.closeMenu();
         }
     };
@@ -50,7 +50,7 @@ class DropdownButton extends React.Component {
     renderButtonLabel = () => {
         const {renderButtonLabel} = this.props;
 
-        if(renderButtonLabel) {
+        if (renderButtonLabel) {
             return renderButtonLabel(this.props.label);
         }
 
@@ -67,7 +67,7 @@ class DropdownButton extends React.Component {
         let menuItemCount = 0;
         const menuItems = children.filter(child => child.type === MenuItem || child.type === Divider)
             .map(item => {
-                if(item.type === MenuItem) {
+                if (item.type === MenuItem) {
                     menuItemCount++;
                     return React.cloneElement(item, {
                         closeMenuCallback: this.closeMenu
@@ -96,12 +96,24 @@ class DropdownButton extends React.Component {
                 {
                     this.state.show && menuItemCount > 0 &&
                     ReactDOM.createPortal(
-                        <Popper placement={this.props.menuAlignment === 'left' ? 'bottom-start' : 'bottom-end'}>
+                        <Popper placement={this.props.menuAlignment === 'left' ? 'bottom-start' : 'bottom-end'}
+                                modifiers={[
+                                    {
+                                        name: 'offset',
+                                        options: {
+                                            offset: [0, 2]
+                                        }
+                                    }
+                                ]}>
                             {
                                 ({ref, style, placement}) =>
                                     <div ref={this.setMenuRef}>
                                         <ul className="dropdown-menu"
-                                            ref={ref} style={{...style, display: 'block'}} data-placement={placement}>
+                                            ref={ref} style={{
+                                                ...style,
+                                                display: 'block',
+                                                margin: 0
+                                            }} data-placement={placement}>
                                             {
                                                 menuItems
                                             }
@@ -123,12 +135,21 @@ DropdownButton.defaultProps = {
 };
 
 DropdownButton.propTypes = {
+    /** className gets and sets the value of the class attribute of the specified element. You can also add a CSS class in this prop to style a particular element.*/
     className: PropTypes.string,
+
+    /** Set to true to disable the button if empty.*/
     disabledIfEmpty: PropTypes.bool,
+
+    /** Label of the button.*/
     label: PropTypes.string,
+
+    /** You can set the alignment of the DropdownButton in this prop.*/
     menuAlignment: PropTypes.oneOf([
         'left', 'right'
     ]),
+
+    /** You can bind a complex function that will manipulate the label of the button.*/
     renderButtonLabel: PropTypes.func
 };
 
