@@ -59,7 +59,6 @@ TextInput.defaultProps = {
     errors: {},
     gridClass: "",
     feedbackIconLeft: false,
-    maxLength: 50,
     onChange: () => {},
     type: "text"
 };
