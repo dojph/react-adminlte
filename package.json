@@ -43,8 +43,9 @@
     "deploy:docs": "gh-pages -d build",
     "test": "craco test --env=jsdom",
     "prebuild:lib": "rimraf lib",
-    "build:lib": "npm-run-all build:commonjs build:css build:copy-files",
+    "build:lib": "npm-run-all build:commonjs build:gen-dts build:css build:copy-files",
     "build:commonjs": "cross-env NODE_ENV=production babel ./src/components --out-dir ./lib --ignore spec.js",
+    "build:gen-dts": "node scripts/gen-dts.js",
     "build:css": "copyfiles -u 2 \"./src/components/**/*.css\" ./lib",
     "build:copy-files": "node scripts/copy-build-files.js",
     "eject": "react-scripts eject"
@@ -71,6 +72,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "react-syntax-highlighter": "^15.4.4",
+    "react-to-typescript-definitions": "^3.0.1",
     "rimraf": "^3.0.2"
   },
   "browserslist": [
