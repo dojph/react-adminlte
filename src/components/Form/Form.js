@@ -24,6 +24,7 @@ class Form extends React.Component {
                         disabled: this.props.disabled || child.props.disabled,
                         onChange: this.handleChange
                     };
+                    return React.cloneElement(child, childProps);
                 }
                 if(child && child.props) {
                     childProps.children = this.recursiveCloneChildren(child.props.children);
