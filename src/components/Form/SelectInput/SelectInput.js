@@ -165,21 +165,44 @@ SelectInput.defaultProps = {
 };
 
 SelectInput.propTypes = {
+    /** When set to true, allows clearing of current selection */
     clearable: PropTypes.bool,
+    /** Setting to true disables interaction with component */
     disabled: PropTypes.bool,
+    /** Accepts an object of errors having the property key as the name of
+     *  the component and property value as an array of error messages. See
+     *  Forms > Usage page for example. */
     errors: PropTypes.objectOf(
         PropTypes.arrayOf(PropTypes.string)
     ),
+    /** Specifies a Bootstrap 3 grid class */
     gridClass: PropTypes.string,
+    /** Specifies the component label */
     label: PropTypes.node,
+    /** Specifies the component name. It is used to distinguish elements
+     *  for a single form change handler */
     name: PropTypes.string.isRequired,
+    /** Callback fired when the component value changes.
+     *  Accepts a function with two parameters, the first being the component name prop
+     *  and the second being the selected value */
     onChange: PropTypes.func,
+    /** Callback used to determine the label to display for each option in the options property */
     getOptionLabel: PropTypes.func,
+    /** Callback used to determine the determining value (such as a unique ID) for each option
+     *  in the options property
+     */
     getOptionValue: PropTypes.func,
+    /** Array of objects that populate the select menu */
     options: PropTypes.array,
+    /** Placeholder for the select component */
     placeholder: PropTypes.string,
+    /** Setting to true enables option search functionality */
     searchable: PropTypes.bool,
+    /** Setting to true sets the onChange second parameter to the value returned by getOptionValue
+     *  instead of the option object itself
+     */
     simpleValue: PropTypes.bool,
+    /** The currently selected value. */
     value: PropTypes.any
 };
 
