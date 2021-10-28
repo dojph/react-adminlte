@@ -23,7 +23,7 @@ const Menu = getInputRef => {
                             boundariesElement: 'viewport'
                         }
                     }, {
-                        name: 'computeStyle',
+                        name: 'computeStyles',
                         enabled: true,
                         phase: 'beforeWrite',
                         options: {
