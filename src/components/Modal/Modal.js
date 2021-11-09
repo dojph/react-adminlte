@@ -38,10 +38,6 @@ class Modal extends React.Component {
 
     componentWillUnmount() {
         window.removeEventListener('resize', this.updateDimensions);
-        if(!this.state.exited) {
-            // Force handleExited
-            this.handleExited();
-        }
     }
 
     updateDimensions = () => {
