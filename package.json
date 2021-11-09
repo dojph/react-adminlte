@@ -1,6 +1,6 @@
 {
   "name": "doj-react-adminlte-dev",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "main": "./lib/index.js",
   "license": "MIT",
   "repository": "dojph/react-adminlte",
