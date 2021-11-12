@@ -8,8 +8,8 @@ import ModalFooter from './ModalFooter';
 const ModalBody = ({children}) => children || null;
 
 class Modal extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             mounted: false,
             exited: true,
@@ -38,6 +38,7 @@ class Modal extends React.Component {
 
     componentWillUnmount() {
         window.removeEventListener('resize', this.updateDimensions);
+        this.cleanupOnExit();
     }
 
     updateDimensions = () => {
@@ -118,14 +119,17 @@ class Modal extends React.Component {
     };
 
     handleExited = () => {
+        this.setState({exited: true});
+        this.cleanupOnExit();
+        this.props.onExit();
+    };
+
+    cleanupOnExit = () => {
         document.body.classList.remove('modal-open');
         document.body.style.paddingRight = null;
-        this.setState({exited: true});
 
         // Remove escape key event listener
         window.removeEventListener('keyup', this.handleEscapeKeypress);
-
-        this.props.onExit();
     };
 
     render() {
