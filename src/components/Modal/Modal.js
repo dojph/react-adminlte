@@ -20,9 +20,12 @@ class Modal extends React.Component {
         };
 
         this.bodyRef = null;
-        this.isMouseDownOnBackdrop = false;
+        this.backdropRef = null;
         this.setBodyRef = element => {
             this.bodyRef = element;
+        };
+        this.setBackdropRef = element => {
+            this.backdropRef = element;
         };
     }
 
@@ -64,26 +67,11 @@ class Modal extends React.Component {
         }
     };
 
-    handleBackdropMouseUp = event => {
+    handleBackdropClick = event => {
         const {closeOnBackdropClick, onCloseClick} = this.props;
-        if(closeOnBackdropClick && this.isMouseDownOnBackdrop) {
+        if(closeOnBackdropClick && event.target === this.backdropRef) {
             onCloseClick();
         }
-
-        this.isMouseDownOnBackdrop = false;
-    };
-
-    handleBackdropMouseDown = event => {
-        this.isMouseDownOnBackdrop = true;
-    };
-
-    handleContentMouseUp = event => {
-        event.stopPropagation();
-        this.isMouseDownOnBackdrop = false;
-    };
-
-    handleContentMouseDown = event => {
-        event.stopPropagation();
     };
 
     handleEscapeKeypress = event => {
@@ -145,7 +133,7 @@ class Modal extends React.Component {
 
         let dialogClass = "default", dialogStyle = null, bodyStyle = null;
 
-        if(this.props.size === 'large') {
+        if (this.props.size === 'large') {
             dialogClass = 'modal-lg';
         } else if(this.props.size === 'small') {
             dialogClass = 'modal-sm';
@@ -178,8 +166,8 @@ class Modal extends React.Component {
             >
                 {
                     state => (
-                        <div className={"modal " + (this.props.className || '')} onMouseUp={this.handleBackdropMouseUp}
-                             onMouseDown={this.handleBackdropMouseDown}>
+                        <div className={"modal " + (this.props.className || '')} ref={this.setBackdropRef}
+                             onClick={this.handleBackdropClick}>
                             <CSSTransition
                                 in={(state === 'entering' || state === 'entered')}
                                 timeout={300}
@@ -188,8 +176,7 @@ class Modal extends React.Component {
                             >
                                 <div className={`modal-dialog ${dialogClass} ` + (this.props.dialogClassName || '')}
                                      style={dialogStyle}>
-                                    <div className="modal-content" onMouseDown={this.handleContentMouseDown}
-                                         onMouseUp={this.handleContentMouseUp}>
+                                    <div className="modal-content">
                                         {header}
                                         {
                                             body &&
