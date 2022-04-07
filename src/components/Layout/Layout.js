@@ -61,7 +61,10 @@ class Layout extends React.Component {
         const foot = children.find(item => item.type === Footer);
 
         // Check if mobile
-        const collapsedClass = window.innerWidth > 768 ? " sidebar-collapse" : " sidebar-open";
+        const collapsedClass =
+            (typeof window !== 'undefined' && window.innerWidth > 768)
+                ? " sidebar-collapse"
+                : " sidebar-open";
 
         const appName = this.props.appName || <span><b>Admin</b>LTE</span>;
         const appNameShort = this.props.appNameShort || <span><b>AL</b>T</span>;
