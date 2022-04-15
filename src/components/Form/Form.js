@@ -17,8 +17,7 @@ class Form extends React.Component {
             children,
             child => {
                 let childProps = {};
-                if(React.isValidElement(child) && React.Component.prototype.isPrototypeOf(child.type.prototype) &&
-                    this.isFormElement(child.type)) {
+                if (React.isValidElement(child) && this.isFormElement(child.type)) {
                     childProps = {
                         ...this.props,
                         disabled: this.props.disabled || child.props.disabled,
@@ -26,7 +25,7 @@ class Form extends React.Component {
                     };
                     return React.cloneElement(child, childProps);
                 }
-                if(child && child.props) {
+                if (child && child.props) {
                     childProps.children = this.recursiveCloneChildren(child.props.children);
                     return React.cloneElement(child, childProps);
                 }
